@@ -1,0 +1,7 @@
+.bgimage {
+  background-image: url("../imagenes/background_login.jpg");
+  background-size: 100%;
+}
+.bgimage-inside {
+  padding-top: 37.36%;
+}
