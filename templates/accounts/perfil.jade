@@ -1,0 +1,28 @@
+extends ../base
+block title
+    |Perfil
+
+block body_content
+    div(class="container-fluid banner")
+        div(class="row")
+            div(class="col-md-2 col-md-offset-1")
+                img(class="avatar-account img-responsive center-block",src="{{MEDIA_URL}}{{user.photo}}")
+            div(class="col-md-9")
+                p(class="text-text-left fullname-account") {{user.fullname}}
+                p(class="text-text-left username-account") Username: {{user.username}}
+                p(class="text-text-left username-account") Email: {{user.email}}
+                p(class="text-text-left username-account") Cuentas:
+                |{% for cuenta in asociadas %}
+                |{% if cuenta == "facebook" %}
+                span(class="fa fa-facebook-square fa-2x cuenta inline")
+                |{% endif %}
+                |{% if cuenta == "twitter" %}
+                span(class="fa fa-twitter-square fa-2x cuenta inline")
+                |{% endif %}
+                |{% if cuenta == "google-oauth2" %}
+                span(class="fa fa-google fa-2x cuenta inline")
+                |{% endif %}
+                |{% if cuenta == "linkedin-oauth2" %}
+                span(class="fa fa-linkedin-square fa-2x cuenta inline")
+                |{% endif %}
+                |{% endfor %}

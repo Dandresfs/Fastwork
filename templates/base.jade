@@ -11,31 +11,36 @@ html(lang="es")
             block titulo
         link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin="anonymous")
         link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css",integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r",crossorigin="anonymous")
+        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
         link(rel="stylesheet",href="{% static 'css/base.css' %}")
         block extra_style
     body
         | {% if user.is_authenticated %}
-        header
-            div(class="cd-logo")
-                a(href="#0")
-                    img(src="/static/imagenes/logo-footer.png")
-            nav(class="cd-main-nav-wrapper")
-                ul(class="cd-main-nav")
-                    block botones
-                    li
-                        a(href="#0",class="cd-subnav-trigger")
-                            span(style="text-transform: capitalize;") {{user}}
-                        ul
-                            li(class="go-back")
-                                a(href="#0")
-                            li
-                                a(href="#0") Cambiar Contraseña
-                            li
-                                a(href="/cerrar") Cerrar Sesión
-                            li
-                                a(href="#0",class="placeholder") Placeholder
-            a(href="#0",class="cd-nav-trigger") Menu
-                span
+        nav(class="navbar navbar-fastwork navbar-fixed-top",role="navigation")
+            div(class="container-fluid")
+                div(class="navbar-header")
+                    button(type="button",class="navbar-toggle collapsed",data-toggle="collapse",data-target="#fastwork-navbar",aria-expanded="false")
+                        span(class="sr-only") Menu
+                        span(class="fa fa-bars")
+                    a(class="navbar-brand",rel="home",href="#",title="Fast Work Colombia")
+                        img(src="{% static 'imagenes/logo-2.png' %}")
+                div(class="collapse navbar-collapse",id="fastwork-navbar")
+                    ul(class="nav navbar-nav navbar-right")
+                        li(class="dropdown avatar")
+                            a(href="#",class="dropdown-toggle",data-toggle="dropdown",role="button",aria-haspopup="true",aria-expanded="false")
+                                img(src='{{MEDIA_URL}}{{user.photo}}')
+                                span(class="caret")
+                            ul(class="dropdown-menu")
+                                li
+                                    a(href="/accounts/") Mi perfil ({{user.username}})
+                                        span(class="glyphicon glyphicon-user pull-left")
+                                li
+                                    a(href="#") Hojas de vida
+                                        span(class="glyphicon glyphicon-file pull-left")
+                                li
+                                    a(href="/logout/") Salir
+                                        span(class="glyphicon glyphicon-log-out pull-left")
+
         | {% endif %}
         block body_content
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")

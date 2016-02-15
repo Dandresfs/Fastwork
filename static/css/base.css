@@ -1,7 +1,96 @@
+body {
+  font-family: 'Lato', sans-serif;
+}
 .bgimage {
   background-image: url("../imagenes/background_login.jpg");
   background-size: 100%;
 }
 .bgimage-inside {
   padding-top: 37.36%;
+}
+.navbar-fastwork {
+  background-color: #273b47;
+  border-radius: 0;
+}
+.navbar-nav>li>a {
+  padding: 5px 15px;
+}
+.navbar-nav>li>a:hover {
+  background-color: #273b47;
+}
+.navbar-brand {
+  padding: 5px 15px;
+}
+.navbar-brand > img {
+  height: 40px;
+}
+.avatar img {
+  height: 40px;
+  border-radius: 50%;
+}
+.avatar a {
+  color: #fff;
+}
+.nav .open>a,
+.nav .open>a:focus,
+.nav .open>a:hover {
+  background-color: #273b47;
+}
+.dropdown-menu {
+  width: 320px !important;
+  margin-right: 20px;
+  background-color: #273b47;
+  padding: 0;
+}
+.dropdown-menu a {
+  white-space: normal;
+}
+.dropdown-menu > li {
+  position: relative;
+}
+.dropdown-menu > li > a >span {
+  padding: 0 5px;
+}
+.dropdown-menu li > a {
+  color: #fff;
+  padding: 10px;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  color: #fff;
+  background-image: none !important;
+  background-color: #ff4700;
+}
+.banner {
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("../imagenes/banner.jpg");
+  background: -moz-linear-gradient(top, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("../imagenes/banner.jpg");
+  background: -ms-linear-gradient(top, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("../imagenes/banner.jpg");
+  background: -o-linear-gradient(top, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("../imagenes/banner.jpg");
+  background: linear-gradient(top, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("../imagenes/banner.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 250px;
+  margin-top: 50px;
+}
+.banner > .row {
+  margin-top: 25px;
+}
+.avatar-account {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+.fullname-account {
+  color: #fff;
+  font-size: 3em;
+}
+.username-account {
+  color: #fff;
+  font-size: 16px;
+}
+.cuenta {
+  color: #fff;
+  padding: 0 5px;
 }

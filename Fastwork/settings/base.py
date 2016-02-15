@@ -7,12 +7,15 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+LOGIN_REDIRECT_URL = '/ofertas/'
+LOGIN_URL = '/ofertas/'
+LOGOUT_URL = '/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('FASTWORK_KEY')
+SECRET_KEY = 'wpytn67x61&8b&#yvb70r*6la@1i-57eii*bl+b7p9is3@(k&e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -68,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.media',
                 # Python Social Auth Context Processors
                 'social.apps.django_app.context_processors.backends',
                 'social.apps.django_app.context_processors.login_redirect',
@@ -187,6 +191,7 @@ SOCIAL_AUTH_FACEBOOK_KEY = os.getenv('FACEBOOK_KEY')
 SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv('FACEBOOK_SECRET')
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+  'locale': 'es_CO',
   'fields': 'id, name, email, age_range'
 }
 

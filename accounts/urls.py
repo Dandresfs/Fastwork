@@ -1,9 +1,10 @@
 from django.conf.urls import url
 
-from .views import RegistrationView
+from .views import RegistrationView, Perfil
 from django.contrib.auth import views
 
 urlpatterns = [
+    url(r'', Perfil.as_view()),
     url(r'^register/$', RegistrationView.as_view(), name='register'),
     url(r'^register/done/$', views.password_reset_done, {
         'template_name': 'registration/initial_done.html',

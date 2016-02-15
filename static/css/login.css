@@ -1,15 +1,19 @@
 body {
-  background-image: url("../imagenes/background_login.jpg");
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("../imagenes/background_login.jpg");
+  background: -moz-linear-gradient(top, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("../imagenes/background_login.jpg");
+  background: -ms-linear-gradient(top, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("../imagenes/background_login.jpg");
+  background: -o-linear-gradient(top, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("../imagenes/background_login.jpg");
+  background: linear-gradient(top, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("../imagenes/background_login.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
 .login {
-  margin-top: 40px;
-  padding: 30px;
+  margin-top: 50px;
+  padding: 40px;
   border-radius: 20px;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.7);
 }
 .facebook {
   background-color: #3b5998;
@@ -60,7 +64,7 @@ body {
   visibility: visible;
 }
 .linkedin {
-  background-color: #3f729b;
+  background-color: #0077b5;
   height: 45px;
   color: #fff;
   transition: height 0.5s;
@@ -84,7 +88,7 @@ body {
   visibility: visible;
 }
 .google {
-  background-color: #d34836;
+  background-color: #c71610;
   height: 45px;
   color: #fff;
   transition: height 0.5s;
@@ -107,7 +111,7 @@ body {
 .google:hover > .nombre-google {
   visibility: visible;
 }
-.login-form > input[type="text"],
+.login-form > input[type="email"],
 .login-form > input[type="password"] {
   width: 100%;
   margin: 10px 0;
@@ -115,9 +119,12 @@ body {
   border-style: solid;
   border-color: #4fa7ff;
 }
-.font-18 {
-  font-size: 18px;
-  margin: 15px 0;
+.font-title {
+  font-size: 30px;
+}
+.font-title-2 {
+  font-size: 20px;
+  margin: 10px 0;
 }
 .iniciar {
   color: #fff;
@@ -146,6 +153,11 @@ body {
 .botones {
   margin-top: 10px;
 }
-.copyrigth {
-  margin-top: 10px;
+.inline {
+  margin: 0 auto;
+  display: -webkit-inline-box;
+}
+.inline p,
+.inline a {
+  margin: 0 3px;
 }

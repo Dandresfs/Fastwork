@@ -1,5 +1,14 @@
+background-linear-gradient(direction,color-stop1,color-stop2,url-image)
+  background -webkit-linear-gradient(direction,color-stop1,color-stop1),url-image
+  background -moz-linear-gradient(direction,color-stop1,color-stop1),url-image
+  background -ms-linear-gradient(direction,color-stop1,color-stop1),url-image
+  background -o-linear-gradient(direction,color-stop1,color-stop1),url-image
+  background linear-gradient(direction,color-stop1,color-stop1),url-image
+
+
+
 body
-  background-image url("../imagenes/background_login.jpg")
+  background-linear-gradient(top,rgba(0,0,0,0.7),rgba(0,0,0,9),url("../imagenes/background_login.jpg"))
   background-position center center
   background-repeat no-repeat
   background-attachment fixed
@@ -8,10 +17,10 @@ body
 
 
 .login
-  margin-top 40px
-  padding 30px
+  margin-top 50px
+  padding 40px
   border-radius 20px
-  background-color rgba(255,255,255,0.5)
+  background-color rgba(255,255,255,0.7)
 
 
 .facebook
@@ -64,7 +73,7 @@ body
   visibility visible
 
 .linkedin
-  background-color #3f729b
+  background-color #0077B5
   height 45px
   color white
   transition height 0.5s
@@ -89,7 +98,7 @@ body
   visibility visible
 
 .google
-  background-color #d34836
+  background-color #C71610
   height 45px
   color white
   transition height 0.5s
@@ -112,16 +121,19 @@ body
 .google:hover > .nombre-google
   visibility visible
 
-.login-form > input[type="text"],.login-form > input[type="password"]
+.login-form > input[type="email"],.login-form > input[type="password"]
   width 100%
   margin 10px 0
   padding 5px
   border-style solid
   border-color #4fa7ff
 
-.font-18
-  font-size 18px
-  margin 15px 0
+.font-title
+  font-size 30px
+
+.font-title-2
+  font-size 20px
+  margin 10px 0
 
 .iniciar
   color white
@@ -150,5 +162,9 @@ body
 .botones
   margin-top 10px
 
-.copyrigth
-  margin-top 10px
+.inline
+  margin 0 auto
+  display -webkit-inline-box
+
+.inline p, .inline a
+  margin 0 3px
