@@ -47,6 +47,20 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
 
+    tipo_identificacion = models.CharField(max_length=100,blank=True)
+    identificacion = models.BigIntegerField(blank=True,null=True)
+    fecha_nacimiento = models.DateField(blank=True,null=True)
+    genero = models.CharField(max_length=100,blank=True)
+    estado_civil = models.CharField(max_length=100,blank=True)
+    telefono_1 = models.IntegerField(blank=True,null=True)
+    telefono_2 = models.IntegerField(blank=True,null=True)
+    pais = models.CharField(max_length=100,blank=True)
+    departamento = models.CharField(max_length=100,blank=True)
+    ciudad = models.CharField(max_length=100,blank=True)
+    direccion = models.CharField(max_length=100,blank=True)
+    nacionalidad = models.CharField(max_length=100,blank=True)
+
+
     def get_full_name(self):
         return self.email
     def get_short_name(self):

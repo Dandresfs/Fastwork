@@ -12,6 +12,7 @@ html(lang="es")
         link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin="anonymous")
         link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css",integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r",crossorigin="anonymous")
         link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
+        link(rel="stylesheet",href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css")
         link(rel="stylesheet",href="{% static 'css/base.css' %}")
         block extra_style
     body
@@ -30,7 +31,7 @@ html(lang="es")
                             a(href="#",class="dropdown-toggle",data-toggle="dropdown",role="button",aria-haspopup="true",aria-expanded="false")
                                 img(src='{{MEDIA_URL}}{{user.photo}}')
                                 span(class="caret")
-                            ul(class="dropdown-menu")
+                            ul(class="dropdown-menu user-options")
                                 li
                                     a(href="/accounts/") Mi perfil ({{user.username}})
                                         span(class="glyphicon glyphicon-user pull-left")
@@ -44,6 +45,9 @@ html(lang="es")
         | {% endif %}
         block body_content
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js")
+        script(src="{% static 'js/moment.es.js' %}")
         script(src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js",integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS",crossorigin="anonymous")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js")
         block extra_script

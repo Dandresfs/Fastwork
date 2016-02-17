@@ -1,13 +1,16 @@
 extends ../base
+
+block filters
+    |{% load crispy_forms_tags %}
 block title
     |Perfil
 
 block body_content
     div(class="container-fluid banner")
         div(class="row")
-            div(class="col-md-2 col-md-offset-1")
+            div(class="col-md-3 col-md-offset-1")
                 img(class="avatar-account img-responsive center-block",src="{{MEDIA_URL}}{{user.photo}}")
-            div(class="col-md-9")
+            div(class="col-md-8")
                 p(class="text-text-left fullname-account") {{user.fullname}}
                 p(class="text-text-left username-account") Username: {{user.username}}
                 p(class="text-text-left username-account") Email: {{user.email}}
@@ -26,3 +29,19 @@ block body_content
                 span(class="fa fa-linkedin-square fa-2x cuenta inline")
                 |{% endif %}
                 |{% endfor %}
+    div(class="container-fluid")
+        div(class="row")
+            div(class="col-md-8 col-md-offset-2")
+                form(action="",method="POST",class="form-perfil")
+                    |{% csrf_token %}
+                    |{% crispy form %}
+
+block extra_script
+    script
+        |$(document).ready(function(){
+        |$('#id_fecha_nacimiento').datetimepicker({
+        |viewMode: 'years',
+        |format: 'DD/MM/YYYY',
+        |locale: 'es'
+        |});
+        |});

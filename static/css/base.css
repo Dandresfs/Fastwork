@@ -36,27 +36,27 @@ body {
 .nav .open>a:hover {
   background-color: #273b47;
 }
-.dropdown-menu {
+.user-options {
   width: 320px !important;
   margin-right: 20px;
   background-color: #273b47;
   padding: 0;
 }
-.dropdown-menu a {
+.user-options a {
   white-space: normal;
 }
-.dropdown-menu > li {
+.user-options > li {
   position: relative;
 }
-.dropdown-menu > li > a >span {
+.user-options > li > a >span {
   padding: 0 5px;
 }
-.dropdown-menu li > a {
+.user-options li > a {
   color: #fff;
   padding: 10px;
 }
-.dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus {
+.user-options > li > a:hover,
+.user-options > li > a:focus {
   color: #fff;
   background-image: none !important;
   background-color: #ff4700;
@@ -93,4 +93,11 @@ body {
 .cuenta {
   color: #fff;
   padding: 0 5px;
+}
+legend {
+  padding: 10px 0;
+  font-size: 4rem;
+}
+.form-perfil {
+  margin-bottom: 20px;
 }

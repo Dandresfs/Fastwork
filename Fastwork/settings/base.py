@@ -41,7 +41,10 @@ LOCAL_APPS = [
 THIRD_PARTY_APPS = [
     'django_cleanup',
     'social.apps.django_app.default',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 

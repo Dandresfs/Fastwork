@@ -1,9 +1,11 @@
 from django.contrib.auth.forms import PasswordResetForm
 from django.shortcuts import redirect
-from django.views.generic import CreateView, TemplateView
+from django.views.generic.edit import BaseUpdateView
+from django.views.generic import CreateView, UpdateView
 from social.apps.django_app.default.models import UserSocialAuth
+from django.http import HttpResponseRedirect
 
-from .forms import RegistrationForm
+from .forms import RegistrationForm, AccountForm
 from .models import User
 
 class RegistrationView(CreateView):
@@ -31,8 +33,14 @@ class RegistrationView(CreateView):
 
         return redirect('accounts:register-done')
 
-class Perfil(TemplateView):
+class Perfil(UpdateView):
+    model = User
     template_name = 'accounts/perfil.html'
+    form_class = AccountForm
+    success_url = '/ofertas/'
+
+    def get_object(self):
+        return User.objects.get(email=self.request.user.email)
 
     def get_context_data(self, **kwargs):
         kwargs['asociadas'] = UserSocialAuth.objects.filter(user=self.request.user).values_list('provider',flat=True)
