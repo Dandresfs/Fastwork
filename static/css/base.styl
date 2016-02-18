@@ -1,3 +1,7 @@
+medium = 'screen and (max-width: 767px)'
+large = 'screen and (max-width: 991px)'
+xlarge = 'screen and (max-width: 1200px)'
+
 body
   font-family: 'Lato', sans-serif;
 //**************************************** LOGIN ****************************************************
@@ -60,12 +64,14 @@ body
   background-color #ff4700
 
 //**************************************** BANNER **********************************************************************
+
 background-linear-gradient(direction,color-stop1,color-stop2,url-image)
   background -webkit-linear-gradient(direction,color-stop1,color-stop1),url-image
   background -moz-linear-gradient(direction,color-stop1,color-stop1),url-image
   background -ms-linear-gradient(direction,color-stop1,color-stop1),url-image
   background -o-linear-gradient(direction,color-stop1,color-stop1),url-image
   background linear-gradient(direction,color-stop1,color-stop1),url-image
+
 
 .banner
   background-linear-gradient(top,rgba(0,0,0,0.6),rgba(0,0,0,8),url("../imagenes/banner.jpg"))
@@ -74,7 +80,16 @@ background-linear-gradient(direction,color-stop1,color-stop2,url-image)
   background-attachment fixed
   background-size cover
   height 250px
+  @media large
+    height 300px
+  @media medium
+    height 450px
   margin-top 50px
+
+@media medium
+  .information-user
+    text-align center
+
 
 .banner > .row
   margin-top 25px

@@ -36,12 +36,14 @@ DJANGO_APPS = [
 
 LOCAL_APPS = [
     'accounts',
+    'rest',
 ]
 
 THIRD_PARTY_APPS = [
     'django_cleanup',
     'social.apps.django_app.default',
     'crispy_forms',
+    'rest_framework',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

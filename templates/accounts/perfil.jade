@@ -8,9 +8,9 @@ block title
 block body_content
     div(class="container-fluid banner")
         div(class="row")
-            div(class="col-md-3 col-md-offset-1")
+            div(class="col-sm-4")
                 img(class="avatar-account img-responsive center-block",src="{{MEDIA_URL}}{{user.photo}}")
-            div(class="col-md-8")
+            div(class="col-sm-8 information-user")
                 p(class="text-text-left fullname-account") {{user.fullname}}
                 p(class="text-text-left username-account") Username: {{user.username}}
                 p(class="text-text-left username-account") Email: {{user.email}}
@@ -31,7 +31,7 @@ block body_content
                 |{% endfor %}
     div(class="container-fluid")
         div(class="row")
-            div(class="col-md-8 col-md-offset-2")
+            div(class="col-sm-10 col-sm-offset-1")
                 form(action="",method="POST",class="form-perfil")
                     |{% csrf_token %}
                     |{% crispy form %}
@@ -43,5 +43,9 @@ block extra_script
         |viewMode: 'years',
         |format: 'DD/MM/YYYY',
         |locale: 'es'
+        |});
+        |$("#id_ciudad").remoteChained({
+        |        parents : "#id_departamento",
+        |        url : "/rest/"
         |});
         |});

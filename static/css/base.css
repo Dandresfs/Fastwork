@@ -74,6 +74,21 @@ body {
   height: 250px;
   margin-top: 50px;
 }
+@media screen and (max-width: 991px) {
+  .banner {
+    height: 300px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .banner {
+    height: 450px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .information-user {
+    text-align: center;
+  }
+}
 .banner > .row {
   margin-top: 25px;
 }

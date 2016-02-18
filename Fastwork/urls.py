@@ -16,6 +16,7 @@ urlpatterns = [
 
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^ofertas/', include('ofertas.urls', namespace='ofertas')),
+    url(r'^rest/', include('rest.urls', namespace='rest')),
 ]
 
 if settings.DEBUG:
