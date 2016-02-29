@@ -1,0 +1,463 @@
+extends ../base
+block filters
+    | {% load crispy_forms_tags %}
+block title
+    |Hv
+
+block extra_style
+    link(rel="stylesheet",href="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css")
+
+block body_content
+    div(class="container-fluid banner-hv")
+        div(class="row")
+            div(class="col-sm-4")
+                img(class="avatar-account img-responsive center-block",src="{{MEDIA_URL}}{{user.photo}}")
+            div(class="col-sm-8 information-user")
+                p(class="text-text-left fullname-account") {{user.fullname}}
+                p(class="text-text-left username-account") Username: {{user.username}}
+                p(class="text-text-left username-account") Email: {{user.email}}
+                p(class="text-text-left username-account") Cuentas:
+                | {% for cuenta in asociadas %}
+                | {% if cuenta == "facebook" %}
+                span(class="fa fa-facebook-square fa-2x cuenta inline")
+                | {% endif %}
+                | {% if cuenta == "twitter" %}
+                span(class="fa fa-twitter-square fa-2x cuenta inline")
+                | {% endif %}
+                | {% if cuenta == "google-oauth2" %}
+                span(class="fa fa-google fa-2x cuenta inline")
+                | {% endif %}
+                | {% if cuenta == "linkedin-oauth2" %}
+                span(class="fa fa-linkedin-square fa-2x cuenta inline")
+                | {% endif %}
+                | {% endfor %}
+    div(class="container-fluid")
+        div(class="row")
+            div(class="col-sm-10 col-sm-offset-1")
+                form(action="",method="POST",class="form-perfil")
+                    |{% csrf_token %}
+                    |{% crispy form %}
+            div(class="col-sm-10 col-sm-offset-1")
+    div(class="modal fade",id="ExperienciaModal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+        div(class="modal-dialog modal-lg",role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title",id="myModalLabel") Experiencia profesional
+                div(class="modal-body")
+                    form(role="form",id="experienciaForm",method="POST")
+                        input(type="hidden",class="form-control",id="user",name="user",value="{{user.id}}")
+                        div(class="form-group")
+                            div(class="container-fluid")
+                                div(class="row")
+                                    div(class="col-sm-6")
+                                        label(for="empresa") Empresa*
+                                        input(type="text",class="form-control",id="empresa",name="empresa",data-validation="required",data-validation-error-msg="Escribe el nombre de la empresa")
+                                    div(class="col-sm-6")
+                                        label(for="sector") Sector de la Empresa*
+                                        select(class="form-control",id="sector",name="sector",data-validation="required",data-validation-error-msg="Selecciona el sector de la empresa")
+                                            option(value="") ----------
+                                            option Publicidad / RRPP
+                                            option Agricultura / Pesca / Ganadería
+                                            option Informática / Hardware
+                                            option Informática / Software
+                                            option Construcción / Obras
+                                            option Venta al consumidor
+                                            option Educación
+                                            option Energía
+                                            option Entretenimiento / Deportes
+                                            option Finanzas / Banca
+                                            option Salud / Medicina
+                                            option Hostelería / Turismo
+                                            option Internet
+                                            option Medios de Comunicación
+                                            option Fabricación
+                                            option Gobierno / No Lucro
+                                            option Servicios Profesionales
+                                            option Materias Primas
+                                            option RRHH / Personal
+                                            option Venta al por mayor
+                                            option Telecomunicaciones
+                                            option Transporte
+                                            option Legal / Asesoría
+
+                                div(class="row")
+                                    div(class="col-sm-6")
+                                        label(for="departamento") Departamento*
+                                        select(class="form-control",id="departamento",name="departamento",data-validation="required",data-validation-error-msg="Selecciona el departamento")
+                                            option(value="") ----------
+                                            option Amazonas
+                                            option Antioquia
+                                            option Arauca
+                                            option Atlántico
+                                            option Bolívar
+                                            option Boyacá
+                                            option Caldas
+                                            option Caquetá
+                                            option Casanare
+                                            option Cauca
+                                            option Cesar
+                                            option Chocó
+                                            option Córdoba
+                                            option Cundinamarca
+                                            option Guainía
+                                            option Guaviare
+                                            option Huila
+                                            option La Guajira
+                                            option Magdalena
+                                            option Meta
+                                            option Nariño
+                                            option Norte de Santander
+                                            option Putumayo
+                                            option Quindío
+                                            option Risaralda
+                                            option San Andrés y Providencia
+                                            option Santander
+                                            option Sucre
+                                            option Tolima
+                                            option Valle del Cauca
+                                            option Vaupés
+                                            option Vichada
+
+                                    div(class="col-sm-6")
+                                        label(for="Cargo") Cargo*
+                                        input(type="text",class="form-control",id="cargo",name="cargo",data-validation="required",data-validation-error-msg="Escribe el cargo que desempeñaste")
+
+                                div(class="row")
+                                    div(class="col-sm-6")
+                                        label(for="periodo") Periodo*
+                                        input(type="text",class="form-control",id="periodo",name="periodo",data-validation="required",data-validation-error-msg="Selecciona el periodo")
+
+                                    div(class="col-sm-6")
+                                        label(for="area") Area*
+                                        select(class="form-control",id="area",name="area",data-validation="required",data-validation-error-msg="Selecciona el area de labor")
+                                            option(value="") ----------
+                                            option Administración / Oficina
+                                            option Almacén / Logística
+                                            option Atención a clientes
+                                            option CallCenter / Telemercadeo
+                                            option Compras / Comercio Exterior
+                                            option Construccion y Obra
+                                            option Contabilidad / Finanzas
+                                            option Dirección / Gerencia
+                                            option Diseño / Artes gráficas
+                                            option Docencia
+                                            option Hostelería / Turismo
+                                            option Informática / Telecomunicaciones
+                                            option Ingeniería
+                                            option Investigación y Calidad
+                                            option Legal / Asesoría
+                                            option Mantenimiento y Reparaciones Técnicas
+                                            option Márketing / Ventas
+                                            option Medicina / Salud
+                                            option Mercadeo / Publicidad / Comunicación
+                                            option Producción / Operaciones
+                                            option Recursos Humanos
+                                            option Servicios Generales, Aseo y Seguridad
+                                div(class="row")
+                                    div(class="col-sm-12")
+                                        label(for="funciones_logros") Funciones y logros del cargo
+                                        textarea(class="textarea form-control",id="funciones_logros",cols="40",maxlength="500",rows="5",name="funciones_logros")
+
+                        div(class="modal-footer")
+                            button(type="button",class="btn btn-default",data-dismiss="modal",id="closeExperienciaModal") Cerrar
+                            input(type="submit",class="btn btn-primary",value="Guardar",id="guardarExperienciaModal")
+
+
+    div(class="modal fade",id="FormacionModal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+        div(class="modal-dialog modal-lg",role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title",id="myModalLabel") Formación
+                div(class="modal-body")
+                    form(role="form",id="formacionForm",method="POST")
+                        input(type="hidden",class="form-control",id="user",name="user",value="{{user.id}}")
+                        div(class="form-group")
+                            div(class="container-fluid")
+                                div(class="row")
+                                    div(class="col-sm-6")
+                                        label(for="institucion") Institución*
+                                        input(type="text",class="form-control",id="institucion",name="institucion",data-validation="required",data-validation-error-msg="Escribe el nombre de la institución donde estudiaste")
+                                    div(class="col-sm-6")
+                                        label(for="nivel") Nivel de estudios*
+                                        select(class="form-control",id="nivel",name="nivel",data-validation="required",data-validation-error-msg="Selecciona el nivel de estudios que alcanzaste")
+                                            option(value="") ----------
+                                            option Educación Básica Primaria
+                                            option Educación Básica Secundaria
+                                            option Bachillerato / Educación Media
+                                            option Universidad / Carrera técnica
+                                            option Universidad / Carrera tennológica
+                                            option Universidad / Carrera Profesional
+                                            option Postgrado / Especialización
+                                            option Postgrado / Maestría
+                                            option Postgrado / Doctorado
+
+                                div(class="row")
+                                    div(class="col-sm-6")
+                                        label(for="area") Titulo obtenido o Área de estudio*
+                                        input(type="text",class="form-control",id="area",name="area",data-validation="required",data-validation-error-msg="Escribe el Titulo obtenido o Área de estudio")
+
+                                    div(class="col-sm-6")
+                                        label(for="estado") Estado*
+                                        select(class="form-control",id="estado",name="estado",data-validation="required",data-validation-error-msg="Selecciona el estado de la formación.")
+                                            option(value="") ----------
+                                            option Culminado
+                                            option Cursando
+                                            option Abandonado / Aplazado
+
+                                div(class="row")
+                                    div(class="col-sm-6")
+                                        label(for="periodo") Periodo*
+                                        input(type="text",class="form-control",id="periodo_formacion",name="periodo",data-validation="required",data-validation-error-msg="Selecciona el periodo")
+
+
+                        div(class="modal-footer")
+                            button(type="button",class="btn btn-default",data-dismiss="modal",id="closeFormacionModal") Cerrar
+                            input(type="submit",class="btn btn-primary",value="Guardar",id="guardarFormacionModal")
+
+
+    div(class="modal fade",id="updateExperienciaModal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+        div(class="modal-dialog modal-lg",role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title",id="myModalLabel") Editar experiencia profesional
+                div(class="modal-body")
+                    form(role="form",id="experienciaUpdateForm",method="POST")
+                        input(type="hidden",class="form-control",id="user",name="user",value="{{user.id}}")
+                        input(type="hidden",class="form-control",id="update_id",name="id")
+                        div(class="form-group")
+                            div(class="container-fluid")
+                                div(class="row")
+                                    div(class="col-sm-6")
+                                        label(for="empresa") Empresa*
+                                        input(type="text",class="form-control",id="u_empresa",name="empresa",data-validation="required",data-validation-error-msg="Escribe el nombre de la empresa")
+                                    div(class="col-sm-6")
+                                        label(for="sector") Sector de la Empresa*
+                                        select(class="form-control",id="u_sector",name="sector",data-validation="required",data-validation-error-msg="Selecciona el sector de la empresa")
+                                            option(value="") ----------
+                                            option Publicidad / RRPP
+                                            option Agricultura / Pesca / Ganadería
+                                            option Informática / Hardware
+                                            option Informática / Software
+                                            option Construcción / Obras
+                                            option Venta al consumidor
+                                            option Educación
+                                            option Energía
+                                            option Entretenimiento / Deportes
+                                            option Finanzas / Banca
+                                            option Salud / Medicina
+                                            option Hostelería / Turismo
+                                            option Internet
+                                            option Medios de Comunicación
+                                            option Fabricación
+                                            option Gobierno / No Lucro
+                                            option Servicios Profesionales
+                                            option Materias Primas
+                                            option RRHH / Personal
+                                            option Venta al por mayor
+                                            option Telecomunicaciones
+                                            option Transporte
+                                            option Legal / Asesoría
+
+                                div(class="row")
+                                    div(class="col-sm-6")
+                                        label(for="departamento") Departamento*
+                                        select(class="form-control",id="u_departamento",name="departamento",data-validation="required",data-validation-error-msg="Selecciona el departamento")
+                                            option(value="") ----------
+                                            option Amazonas
+                                            option Antioquia
+                                            option Arauca
+                                            option Atlántico
+                                            option Bolívar
+                                            option Boyacá
+                                            option Caldas
+                                            option Caquetá
+                                            option Casanare
+                                            option Cauca
+                                            option Cesar
+                                            option Chocó
+                                            option Córdoba
+                                            option Cundinamarca
+                                            option Guainía
+                                            option Guaviare
+                                            option Huila
+                                            option La Guajira
+                                            option Magdalena
+                                            option Meta
+                                            option Nariño
+                                            option Norte de Santander
+                                            option Putumayo
+                                            option Quindío
+                                            option Risaralda
+                                            option San Andrés y Providencia
+                                            option Santander
+                                            option Sucre
+                                            option Tolima
+                                            option Valle del Cauca
+                                            option Vaupés
+                                            option Vichada
+
+                                    div(class="col-sm-6")
+                                        label(for="Cargo") Cargo*
+                                        input(type="text",class="form-control",id="u_cargo",name="cargo",data-validation="required",data-validation-error-msg="Escribe el cargo que desempeñaste")
+
+                                div(class="row")
+                                    div(class="col-sm-6")
+                                        label(for="periodo") Periodo*
+                                        input(type="text",class="form-control",id="u_periodo",name="periodo",data-validation="required",data-validation-error-msg="Selecciona el periodo")
+
+                                    div(class="col-sm-6")
+                                        label(for="area") Area*
+                                        select(class="form-control",id="u_area",name="area",data-validation="required",data-validation-error-msg="Selecciona el area de labor")
+                                            option(value="") ----------
+                                            option Administración / Oficina
+                                            option Almacén / Logística
+                                            option Atención a clientes
+                                            option CallCenter / Telemercadeo
+                                            option Compras / Comercio Exterior
+                                            option Construccion y Obra
+                                            option Contabilidad / Finanzas
+                                            option Dirección / Gerencia
+                                            option Diseño / Artes gráficas
+                                            option Docencia
+                                            option Hostelería / Turismo
+                                            option Informática / Telecomunicaciones
+                                            option Ingeniería
+                                            option Investigación y Calidad
+                                            option Legal / Asesoría
+                                            option Mantenimiento y Reparaciones Técnicas
+                                            option Márketing / Ventas
+                                            option Medicina / Salud
+                                            option Mercadeo / Publicidad / Comunicación
+                                            option Producción / Operaciones
+                                            option Recursos Humanos
+                                            option Servicios Generales, Aseo y Seguridad
+                                div(class="row")
+                                    div(class="col-sm-12")
+                                        label(for="funciones_logros") Funciones y logros del cargo
+                                        textarea(class="textarea form-control",id="u_funciones_logros",cols="40",maxlength="500",rows="5",name="funciones_logros")
+
+                        div(class="modal-footer")
+                            button(type="button",class="btn btn-default",data-dismiss="modal",id="closeExperienciaUpdateModal") Cerrar
+                            input(type="submit",class="btn btn-success",value="Actualizar",id="guardarExperienciaUpdateModal")
+
+    div(class="modal fade",id="updateFormacionModal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+        div(class="modal-dialog modal-lg",role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title",id="myModalLabel") Formación
+                div(class="modal-body")
+                    form(role="form",id="formacionUpdateForm",method="POST")
+                        input(type="hidden",class="form-control",id="update_id_formacion",value="{{user.id}}")
+                        input(type="hidden",class="form-control",id="user",name="user",value="{{user.id}}")
+                        div(class="form-group")
+                            div(class="container-fluid")
+                                div(class="row")
+                                    div(class="col-sm-6")
+                                        label(for="institucion") Institución*
+                                        input(type="text",class="form-control",id="u_institucion_formacion",name="institucion",data-validation="required",data-validation-error-msg="Escribe el nombre de la institución donde estudiaste")
+                                    div(class="col-sm-6")
+                                        label(for="nivel") Nivel de estudios*
+                                        select(class="form-control",id="u_nivel_formacion",name="nivel",data-validation="required",data-validation-error-msg="Selecciona el nivel de estudios que alcanzaste")
+                                            option(value="") ----------
+                                            option Educación Básica Primaria
+                                            option Educación Básica Secundaria
+                                            option Bachillerato / Educación Media
+                                            option Universidad / Carrera técnica
+                                            option Universidad / Carrera tennológica
+                                            option Universidad / Carrera Profesional
+                                            option Postgrado / Especialización
+                                            option Postgrado / Maestría
+                                            option Postgrado / Doctorado
+
+                                div(class="row")
+                                    div(class="col-sm-6")
+                                        label(for="area") Titulo obtenido o Área de estudio*
+                                        input(type="text",class="form-control",id="u_area_formacion",name="area",data-validation="required",data-validation-error-msg="Escribe el Titulo obtenido o Área de estudio")
+
+                                    div(class="col-sm-6")
+                                        label(for="estado") Estado*
+                                        select(class="form-control",id="u_estado_formacion",name="estado",data-validation="required",data-validation-error-msg="Selecciona el estado de la formación.")
+                                            option(value="") ----------
+                                            option Culminado
+                                            option Cursando
+                                            option Abandonado / Aplazado
+
+                                div(class="row")
+                                    div(class="col-sm-6")
+                                        label(for="periodo") Periodo*
+                                        input(type="text",class="form-control",id="u_periodo_formacion",name="periodo",data-validation="required",data-validation-error-msg="Selecciona el periodo")
+
+
+                        div(class="modal-footer")
+                            button(type="button",class="btn btn-default",data-dismiss="modal",id="closeUpdateFormacionModal") Cerrar
+                            input(type="submit",class="btn btn-primary",value="Guardar",id="guardarUpdateFormacionModal")
+
+
+
+    div(class="modal fade",id="ConfirmacionModal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+        div(class="modal-dialog",role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close",id="closeConfirmacionModal")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title",id="myModalLabel") Estas seguro?
+                div(class="modal-body confirmacion")
+
+                div(class="modal-footer")
+                    button(type="button",class="btn btn-default",data-dismiss="modal",id="cerrarConfirmacionModal") Cerrar
+                    input(type="submit",class="btn btn-danger",value="Eliminar",id="guardarConfirmacionModal")
+
+    div(class="modal fade",id="ConfirmacionFormacionModal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+        div(class="modal-dialog",role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close",id="closeFormacionConfirmacionModal")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title",id="myModalLabel") Estas seguro?
+                div(class="modal-body confirmacionFormacion")
+
+                div(class="modal-footer")
+                    button(type="button",class="btn btn-default",data-dismiss="modal",id="cerrarFormacionConfirmacionModal") Cerrar
+                    input(type="submit",class="btn btn-danger",value="Eliminar",id="guardarFormacionConfirmacionModal")
+
+
+
+block extra_script
+    script(src="{% static 'js/ajax_django.js' %}")
+    script(src="{% static 'js/experiencias.js' %}")
+    script(src="{% static 'js/formaciones.js' %}")
+    script(src="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/jquery.form-validator.min.js")
+    script
+        |$(document).ready(function(){
+        |$('#periodo').daterangepicker({autoUpdateInput: false,locale:{applyLabel: 'Guardar',cancelLabel: 'Cancelar',}});
+        |$('#periodo').on('apply.daterangepicker', function(ev, picker) {
+        |   $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
+        |});
+        |$('#periodo').on('cancel.daterangepicker', function(ev, picker) {
+        |   $(this).val('');
+        |});
+        |$('#u_periodo').daterangepicker({autoUpdateInput: false,locale:{applyLabel: 'Guardar',cancelLabel: 'Cancelar',}});
+        |$('#u_periodo').on('apply.daterangepicker', function(ev, picker) {
+        |   $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
+        |});
+        |$('#u_periodo').on('cancel.daterangepicker', function(ev, picker) {
+        |   $(this).val('');
+        |});
+        |$('#periodo_formacion').daterangepicker({autoUpdateInput: false,locale:{applyLabel: 'Guardar',cancelLabel: 'Cancelar',}});
+        |$('#periodo_formacion').on('apply.daterangepicker', function(ev, picker) {
+        |   $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
+        |});
+        |$('#periodo_formacion').on('cancel.daterangepicker', function(ev, picker) {
+        |   $(this).val('');
+        |});
+        |$.validate({modules : 'date, security',validateOnBlur : false});
+        |});

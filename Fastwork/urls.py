@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^logout/$', views_django_auth.logout, {'next_page': '/'}, name="user-logout"),
 
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
+    url(r'^hv/', include('hv.urls', namespace='hv')),
     url(r'^ofertas/', include('ofertas.urls', namespace='ofertas')),
     url(r'^rest/', include('rest.urls', namespace='rest')),
 ]

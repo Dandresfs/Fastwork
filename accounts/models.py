@@ -54,11 +54,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     estado_civil = models.CharField(max_length=100,blank=True)
     telefono_1 = models.IntegerField(blank=True,null=True)
     telefono_2 = models.IntegerField(blank=True,null=True)
-    pais = models.CharField(max_length=100,blank=True)
     departamento = models.CharField(max_length=100,blank=True)
     ciudad = models.CharField(max_length=100,blank=True)
     direccion = models.CharField(max_length=100,blank=True)
-    nacionalidad = models.CharField(max_length=100,blank=True)
+
+    titulo = models.CharField(max_length=100,blank=True)
+    perfil = models.TextField(max_length=500,blank=True)
 
 
     def get_full_name(self):

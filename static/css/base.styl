@@ -65,6 +65,9 @@ body
 
 //**************************************** BANNER **********************************************************************
 
+.actualizar p, .actualizar strong
+  display -webkit-inline-box
+
 background-linear-gradient(direction,color-stop1,color-stop2,url-image)
   background -webkit-linear-gradient(direction,color-stop1,color-stop1),url-image
   background -moz-linear-gradient(direction,color-stop1,color-stop1),url-image
@@ -84,14 +87,26 @@ background-linear-gradient(direction,color-stop1,color-stop2,url-image)
     height 300px
   @media medium
     height 450px
-  margin-top 50px
+
+
+.banner-hv
+  background-linear-gradient(top,rgba(0,0,0,0.6),rgba(0,0,0,8),url("../imagenes/banner-hv.jpg"))
+  background-position center center
+  background-repeat no-repeat
+  background-attachment fixed
+  background-size cover
+  height 250px
+  @media large
+    height 300px
+  @media medium
+    height 450px
 
 @media medium
   .information-user
     text-align center
 
 
-.banner > .row
+.banner > .row, .banner-hv > .row
   margin-top 25px
 
 .avatar-account
@@ -117,3 +132,37 @@ legend
 
 .form-perfil
   margin-bottom 20px
+
+.margin-div
+  margin 10px 0px
+
+.experiencias-none, .formaciones-none
+  height 50px
+  border-radius 10px
+  background-color #f2dede
+  margin 10px 0
+
+.experiencias-none p, .formaciones-none p
+  padding 15px
+
+.registro
+  background-color #d9edf7
+  border-radius 10px
+  padding 10px
+  margin 10px
+
+.registro p
+  margin 0
+  padding 0
+
+.experiencia
+  margin 10px 0
+  padding 0px 10px
+
+.title-empresa
+  font-size 20px
+
+.fa-times, .fa-pencil
+  float right
+  display inline-block
+  padding 5px

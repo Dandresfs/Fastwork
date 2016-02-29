@@ -61,6 +61,10 @@ body {
   background-image: none !important;
   background-color: #ff4700;
 }
+.actualizar p,
+.actualizar strong {
+  display: -webkit-inline-box;
+}
 .banner {
   background: -webkit-linear-gradient(top, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("../imagenes/banner.jpg");
   background: -moz-linear-gradient(top, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("../imagenes/banner.jpg");
@@ -72,7 +76,6 @@ body {
   background-attachment: fixed;
   background-size: cover;
   height: 250px;
-  margin-top: 50px;
 }
 @media screen and (max-width: 991px) {
   .banner {
@@ -84,12 +87,35 @@ body {
     height: 450px;
   }
 }
+.banner-hv {
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("../imagenes/banner-hv.jpg");
+  background: -moz-linear-gradient(top, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("../imagenes/banner-hv.jpg");
+  background: -ms-linear-gradient(top, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("../imagenes/banner-hv.jpg");
+  background: -o-linear-gradient(top, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("../imagenes/banner-hv.jpg");
+  background: linear-gradient(top, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("../imagenes/banner-hv.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 250px;
+}
+@media screen and (max-width: 991px) {
+  .banner-hv {
+    height: 300px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .banner-hv {
+    height: 450px;
+  }
+}
 @media screen and (max-width: 767px) {
   .information-user {
     text-align: center;
   }
 }
-.banner > .row {
+.banner > .row,
+.banner-hv > .row {
   margin-top: 25px;
 }
 .avatar-account {
@@ -115,4 +141,41 @@ legend {
 }
 .form-perfil {
   margin-bottom: 20px;
+}
+.margin-div {
+  margin: 10px 0px;
+}
+.experiencias-none,
+.formaciones-none {
+  height: 50px;
+  border-radius: 10px;
+  background-color: #f2dede;
+  margin: 10px 0;
+}
+.experiencias-none p,
+.formaciones-none p {
+  padding: 15px;
+}
+.registro {
+  background-color: #d9edf7;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}
+.registro p {
+  margin: 0;
+  padding: 0;
+}
+.experiencia {
+  margin: 10px 0;
+  padding: 0px 10px;
+}
+.title-empresa {
+  font-size: 20px;
+}
+.fa-times,
+.fa-pencil {
+  float: right;
+  display: inline-block;
+  padding: 5px;
 }

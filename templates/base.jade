@@ -13,6 +13,7 @@ html(lang="es")
         link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css",integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r",crossorigin="anonymous")
         link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
         link(rel="stylesheet",href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css")
+        link(rel="stylesheet",href="https://cdn.jsdelivr.net/animatecss/3.5.1/animate.min.css")
         link(rel="stylesheet",href="{% static 'css/base.css' %}")
         block extra_style
     body
@@ -33,15 +34,19 @@ html(lang="es")
                                 span(class="caret")
                             ul(class="dropdown-menu user-options")
                                 li
+                                    a(href="/ofertas/") Ofertas
+                                        span(class="glyphicon glyphicon-star pull-left")
+                                li
                                     a(href="/accounts/") Mi perfil ({{user.username}})
                                         span(class="glyphicon glyphicon-user pull-left")
                                 li
-                                    a(href="#") Hojas de vida
+                                    a(href="/hv/") Hoja de vida
                                         span(class="glyphicon glyphicon-file pull-left")
                                 li
                                     a(href="/logout/") Salir
                                         span(class="glyphicon glyphicon-log-out pull-left")
-
+        div(style="margin-top:50px;")
+        button(value="{{user.identificacion}}",style="display:none;",id="identificacion")
         | {% endif %}
         block body_content
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
@@ -51,4 +56,6 @@ html(lang="es")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js",integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS",crossorigin="anonymous")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js")
         script(src="https://cdn.jsdelivr.net/jquery.chained/0.9.9/jquery.chained.remote.js")
+        script(src="{% static 'js/bootstrap-notify.min.js' %}")
+
         block extra_script
