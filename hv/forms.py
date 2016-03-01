@@ -24,8 +24,8 @@ class ProfesionalForm(forms.ModelForm):
                 ),
                 Div(
                     HTML("""
-                        <button type="button" class="btn btn-success margin-div" data-toggle="modal" data-target="#ExperienciaModal">
-                          Agregar
+                        <button type="button" class="btn btn-success pull-right margin-div" data-toggle="modal" data-target="#ExperienciaModal">
+                          Añadir Experiencia
                         </button>
                     """),
                 )
@@ -36,7 +36,20 @@ class ProfesionalForm(forms.ModelForm):
                 ),
                 Div(
                     HTML("""
-                        <button type="button" class="btn btn-success margin-div" data-toggle="modal" data-target="#FormacionModal">
+                        <button type="button" class="btn btn-success pull-right margin-div" data-toggle="modal" data-target="#FormacionModal">
+                          Agregar
+                        </button>
+                    """),
+                )
+            ),
+
+            Fieldset(
+                'Idiomas',
+                Div(css_class='idiomas row',
+                ),
+                Div(
+                    HTML("""
+                        <button type="button" class="btn btn-success pull-right margin-div" data-toggle="modal" data-target="#IdiomasModal">
                           Agregar
                         </button>
                     """),
