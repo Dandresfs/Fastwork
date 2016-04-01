@@ -1,7 +1,8 @@
 from django.conf.urls import url
-from .views import ExperienciaApiView, ExperienciaDetailApiView, FormacionApiView, FormacionDetailApiView
+from .views import ExperienciaApiView, ExperienciaDetailApiView, FormacionApiView, FormacionDetailApiView, departamentos
 
 urlpatterns = [
+    url(r'^departamentos/$', departamentos),
     url(r'^experiencia/$', ExperienciaApiView.as_view()),
     url(r'^experiencia/detail/(?P<pk>\d+)/$', ExperienciaDetailApiView.as_view()),
     url(r'^experiencia/update/(?P<pk>\d+)/$', ExperienciaDetailApiView.as_view()),

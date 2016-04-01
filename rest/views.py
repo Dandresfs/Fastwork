@@ -4,6 +4,23 @@ from hv.models import Experiencia, Formacion
 from .serializers import ExperienciaSerializer, FormacionSerializer
 from rest_framework import mixins
 from rest_framework import generics
+import json
+from django.http import HttpResponse
+import Fastwork.settings.base as settings
+from collections import OrderedDict
+
+def departamentos(request):
+    if request.method == 'GET':
+        departamentos = json.load(open(settings.STATICFILES_DIRS[0]+"/json/municipios.json"))
+        dict = {'':'----------'}
+        try:
+            departamento = departamentos[request.GET['departamento']]
+        except KeyError:
+            pass
+        else:
+            for municipio in departamento:
+                dict[municipio] = municipio
+        return HttpResponse(json.dumps(dict,sort_keys=True), content_type="application/json")
 
 class ExperienciaApiView(mixins.ListModelMixin,
                          mixins.CreateModelMixin,
