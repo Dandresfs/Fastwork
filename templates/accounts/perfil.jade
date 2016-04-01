@@ -9,7 +9,7 @@ block body_content
     div(class="container-fluid banner")
         div(class="row")
             div(class="col-sm-4")
-                img(class="avatar-account img-responsive center-block",src="{{MEDIA_URL}}{{user.photo}}")
+                img(class="avatar-account img-responsive center-block",src="{{user.photo}}")
             div(class="col-sm-8 information-user")
                 p(class="text-text-left fullname-account") {{user.fullname}}
                 p(class="text-text-left username-account") Username: {{user.username}}

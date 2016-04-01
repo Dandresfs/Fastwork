@@ -14,17 +14,13 @@ def save_profile_picture(backend, user, response, details, is_new=False, *args, 
 
     if isinstance(backend, FacebookOAuth2):
         url = 'http://graph.facebook.com/{0}/picture?width=1000'.format(response['id'])
-        response = urllib2.urlopen(url)
-        io = BytesIO(response.read())
-        user.photo.save('profile_pic_{}.jpg'.format(user.pk), File(io))
+        user.photo = url
         user.save()
 
     if isinstance(backend, TwitterOAuth):
         if response.get('profile_image_url'):
             url = response.get('profile_image_url').replace('_normal','')
-            response = urllib2.urlopen(url)
-            io = BytesIO(response.read())
-            user.photo.save('profile_pic_{}.jpg'.format(user.pk), File(io))
+            user.photo = url
             user.save()
 
     if isinstance(backend, GoogleOAuth2):
@@ -35,15 +31,11 @@ def save_profile_picture(backend, user, response, details, is_new=False, *args, 
             query.pop('sz', None)
             u = u._replace(query=urlencode(query, True))
             url = urlunparse(u)
-            response = urllib2.urlopen(url)
-            io = BytesIO(response.read())
-            user.photo.save('profile_pic_{}.jpg'.format(user.pk), File(io))
+            user.photo = url
             user.save()
 
     if isinstance(backend, LinkedinOAuth2):
         if response.get('pictureUrls') and response['pictureUrls'].get('values') and response['pictureUrls']['values'][0]:
             url = response['pictureUrls']['values'][0]
-            response = urllib2.urlopen(url)
-            io = BytesIO(response.read())
-            user.photo.save('profile_pic_{}.jpg'.format(user.pk), File(io))
+            user.photo = url
             user.save()
