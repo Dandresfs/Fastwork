@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('#closeExperienciaModal').click(function(){
+    $('.closeExperienciaModal').click(function(){
         $('#experienciaForm')[0].reset();
     });
 
@@ -88,13 +88,13 @@ function delete_experience(pk){
                $( ".confirmacion" ).append( "<div>" +
                             "<p id='advertencia'>Vas a eliminar el siguiente registro de tu hoja de vida:</p>"+
                             "<p id='empresa' style='font-size:20px;font-weight:bold;'>"+data.empresa+"</p>"+
-                            "<p id='cargo'>"+data.cargo+" - "+data.meses+" "+mes+"</p>"+
-                            "<p id='sector'>"+data.sector+"</p>"+
-                            "<p id='departamento'>"+data.departamento+"</p>"+
+                            "<p id='cargo'><b>Cargo:</b> "+data.cargo+" - "+data.meses+" "+mes+"</p>"+
+                            "<p id='sector'><b>Sector:</b> "+data.sector+"</p>"+
+                            "<p id='departamento'><b>Departamento:</b> "+data.departamento+"</p>"+
 
-                            "<p id='periodo'>"+data.periodo+" - "+data.meses+" "+mes+"</p>"+
-                            "<p id='area'>"+data.area+"</p>"+
-                            "<p id='funciones_logros'>"+data.funciones_logros+"</p>"+
+                            "<p id='periodo'><b>Periodo:</b> "+data.periodo+"</p>"+
+                            "<p id='area'><b>Area:</b> "+data.area+"</p>"+
+                            "<p id='funciones_logros'><b>Logros:</b> "+data.funciones_logros+"</p>"+
                             "<input type='hidden' id='experiencia_delete' value='"+pk+"'></input>"+
                            "</div>" );
            }

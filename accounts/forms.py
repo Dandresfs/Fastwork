@@ -37,7 +37,7 @@ class AccountForm(forms.ModelForm):
         self.fields['ciudad'].widget.choices = choices
         self.helper.layout = Layout(
             Fieldset(
-                'Cuenta de usuario',
+                'Cuenta de Usuario',
                 Div(
                     Div('fullname',css_class='col-sm-6'),
                     Div('username',css_class='col-sm-6'),
@@ -59,7 +59,10 @@ class AccountForm(forms.ModelForm):
                     Div('estado_civil',css_class='col-md-3 col-sm-6'),
                     Div('telefono_1',css_class='col-md-3 col-sm-6'),
                     Div('telefono_2',css_class='col-md-3 col-sm-6'),
-                ),
+                )
+            ),
+            Fieldset(
+                'Residencia',
                 Div(
                     Div('departamento',css_class='col-md-4 col-sm-6'),
                     Div('ciudad',css_class='col-md-4 col-sm-6'),
@@ -76,7 +79,7 @@ class AccountForm(forms.ModelForm):
         fields = ['tipo_identificacion','fullname','username','first_name','last_name','identificacion','fecha_nacimiento',
                   'genero','estado_civil','telefono_1','telefono_2','departamento','ciudad','direccion']
         labels = {
-            'first_name': 'Nombre',
+            'first_name': 'Nombre(s)',
             'last_name': 'Apellidos',
             'fullname': 'Nombre completo',
             'tipo_identificacion': 'Tipo de identificación*',

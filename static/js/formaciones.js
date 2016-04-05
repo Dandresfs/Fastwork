@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     $('#closeFormacionModal').click(function(){
         $('#formacionForm')[0].reset();
     });

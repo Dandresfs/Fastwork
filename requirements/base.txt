@@ -1,7 +1,6 @@
 Django==1.9.2
 django-cleanup==0.4.2
 django-crispy-forms==1.6.0
-django-debug-toolbar==1.4
 djangorestframework==3.3.2
 freeze==1.0.9
 oauthlib==1.0.3

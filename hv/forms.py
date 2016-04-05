@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django import forms
 from accounts.models import User
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Div, ButtonHolder, Submit, Button, HTML
+from crispy_forms.layout import Layout, Fieldset, Div, ButtonHolder, Submit, HTML
+
 
 class ProfesionalForm(forms.ModelForm):
 
@@ -31,29 +33,21 @@ class ProfesionalForm(forms.ModelForm):
                 )
             ),
             Fieldset(
-                'Formacion',
+                'Formación',
                 Div(css_class='formaciones row',
                 ),
                 Div(
                     HTML("""
                         <button type="button" class="btn btn-success pull-right margin-div" data-toggle="modal" data-target="#FormacionModal">
-                          Agregar
+                          Añadir Formación
                         </button>
                     """),
                 )
             ),
 
             Fieldset(
-                'Idiomas',
-                Div(css_class='idiomas row',
-                ),
-                Div(
-                    HTML("""
-                        <button type="button" class="btn btn-success pull-right margin-div" data-toggle="modal" data-target="#IdiomasModal">
-                          Agregar
-                        </button>
-                    """),
-                )
+                'Hoja de Vida',
+                'hv'
             ),
 
             ButtonHolder(
@@ -63,8 +57,9 @@ class ProfesionalForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['titulo','perfil']
+        fields = ['titulo','perfil','hv']
         labels = {
             'titulo': 'Titulo*',
-            'perfil': 'Descripción breve de su perfil profesional*'
+            'perfil': 'Descripción breve de su perfil profesional*',
+            'hv': 'Hoja de vida.'
         }

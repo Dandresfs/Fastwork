@@ -11,7 +11,7 @@ block body_content
     div(class="container-fluid banner-hv")
         div(class="row")
             div(class="col-sm-4")
-                img(class="avatar-account img-responsive center-block",src="{{MEDIA_URL}}{{user.photo}}")
+                img(class="avatar-account img-responsive center-block",src="{{user.photo}}")
             div(class="col-sm-8 information-user")
                 p(class="text-text-left fullname-account") {{user.fullname}}
                 p(class="text-text-left username-account") Username: {{user.username}}
@@ -34,7 +34,7 @@ block body_content
     div(class="container-fluid")
         div(class="row")
             div(class="col-sm-10 col-sm-offset-1")
-                form(action="",method="POST",class="form-perfil")
+                form(action="",enctype="multipart/form-data",method="POST",class="form-perfil")
                     |{% csrf_token %}
                     |{% crispy form %}
             div(class="col-sm-10 col-sm-offset-1")
@@ -42,7 +42,7 @@ block body_content
         div(class="modal-dialog modal-lg",role="document")
             div(class="modal-content")
                 div(class="modal-header")
-                    button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                    button(type="button",class="close closeExperienciaModal",data-dismiss="modal",aria-label="Close")
                         span(aria-hidden="true") &times;
                     h4(class="modal-title",id="myModalLabel") Experiencia profesional
                 div(class="modal-body")
@@ -159,9 +159,11 @@ block body_content
                                     div(class="col-sm-12")
                                         label(for="funciones_logros") Funciones y logros del cargo
                                         textarea(class="textarea form-control",id="funciones_logros",cols="40",maxlength="500",rows="5",name="funciones_logros")
-
+                                div(class="row")
+                                    div(class="col-sm-12")
+                                        p Los campos con (*) son obligatorios.
                         div(class="modal-footer")
-                            button(type="button",class="btn btn-default",data-dismiss="modal",id="closeExperienciaModal") Cerrar
+                            button(type="button",class="btn btn-default closeExperienciaModal",data-dismiss="modal") Cerrar
                             input(type="submit",class="btn btn-primary",value="Guardar",id="guardarExperienciaModal")
 
 
@@ -341,7 +343,9 @@ block body_content
                                     div(class="col-sm-12")
                                         label(for="funciones_logros") Funciones y logros del cargo
                                         textarea(class="textarea form-control",id="u_funciones_logros",cols="40",maxlength="500",rows="5",name="funciones_logros")
-
+                                div(class="row")
+                                    div(class="col-sm-12")
+                                        p Los campos con (*) son obligatorios.
                         div(class="modal-footer")
                             button(type="button",class="btn btn-default",data-dismiss="modal",id="closeExperienciaUpdateModal") Cerrar
                             input(type="submit",class="btn btn-success",value="Actualizar",id="guardarExperienciaUpdateModal")
@@ -434,6 +438,7 @@ block extra_script
     script(src="{% static 'js/ajax_django.js' %}")
     script(src="{% static 'js/experiencias.js' %}")
     script(src="{% static 'js/formaciones.js' %}")
+    script(src="{% static 'js/drop.js' %}")
     script(src="https://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/jquery.form-validator.min.js")
     script

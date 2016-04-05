@@ -61,6 +61,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     titulo = models.CharField(max_length=100,blank=True)
     perfil = models.TextField(max_length=500,blank=True)
 
+    hv = models.FileField(upload_to='Accounts/Hv',blank=True,null=True)
+
 
     def get_full_name(self):
         return self.email
