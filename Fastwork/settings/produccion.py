@@ -2,7 +2,7 @@ from Fastwork.settings.base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = 'staticfiles'
 
@@ -16,6 +16,6 @@ DATABASES = {
             'USER': os.getenv('FASTWORK_DB_USER'),
             'PASSWORD': os.getenv('FASTWORK_DB_PASSWORD'),
             'HOST': os.getenv('FASTWORK_DB_HOST'),
-            'PORT': os.getenv('FASTWORK_DB_PASSWORD'),
+            'PORT': os.getenv('FASTWORK_DB_PORT'),
         }
 }
