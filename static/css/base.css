@@ -1,5 +1,9 @@
 body {
   font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  color: #273b47;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 .bgimage {
   background-image: url("../imagenes/background_login.jpg");
@@ -86,6 +90,18 @@ body {
   .banner {
     height: 450px;
   }
+}
+.banner-white {
+  background: -webkit-linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("../imagenes/banner.jpg");
+  background: -moz-linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("../imagenes/banner.jpg");
+  background: -ms-linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("../imagenes/banner.jpg");
+  background: -o-linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("../imagenes/banner.jpg");
+  background: linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("../imagenes/banner.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 300px;
 }
 .banner-hv {
   background: -webkit-linear-gradient(top, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("../imagenes/banner-hv.jpg");
@@ -185,4 +201,45 @@ label {
 .ezdz-dropzone {
   width: 50%;
   height: 100px;
+}
+.footer-content {
+  height: 50px;
+  background-color: #273b47;
+}
+.footer-contact-info a {
+  color: #fff;
+  font-weight: 28px;
+}
+.row-home {
+  position: relative;
+  height: 300px;
+}
+.vcenter {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 0;
+  right: 0;
+}
+.title-A {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 30px;
+}
+.title-A-p p {
+  text-align: center;
+}
+.login-info {
+  font-size: 22px;
+  font-weight: bold;
+}
+.footer-content p {
+  color: #fff;
+}
+.body-content {
+  margin-bottom: 20px;
+}
+.loginForm input {
+  margin-top: 13px;
 }

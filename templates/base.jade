@@ -6,7 +6,7 @@ html(lang="es")
         meta(charset="UTF-8")
         meta(name="viewport",content="width=device-width, initial-scale=1")
         link(rel='shortcut icon',href="{% static 'imagenes/icon.png' %}")
-        link(href='https://fonts.googleapis.com/css?family=Lato',rel='stylesheet',type='text/css')
+        link(href='https://fonts.googleapis.com/css?family=Lato:300,400,700&subset=latin',rel='stylesheet',media="all")
         title
             block titulo
         link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin="anonymous")
@@ -17,7 +17,6 @@ html(lang="es")
         link(rel="stylesheet",href="{% static 'css/base.css' %}")
         block extra_style
     body
-        | {% if user.is_authenticated %}
         nav(class="navbar navbar-fastwork navbar-fixed-top",role="navigation")
             div(class="container-fluid")
                 div(class="navbar-header")
@@ -28,6 +27,7 @@ html(lang="es")
                         img(src="{% static 'imagenes/logo-2.png' %}")
                 div(class="collapse navbar-collapse",id="fastwork-navbar")
                     ul(class="nav navbar-nav navbar-right")
+                        | {% if user.is_authenticated %}
                         li(class="dropdown avatar")
                             a(href="#",class="dropdown-toggle",data-toggle="dropdown",role="button",aria-haspopup="true",aria-expanded="false")
                                 img(src='{{user.photo}}')
@@ -45,10 +45,17 @@ html(lang="es")
                                 li
                                     a(href="/logout/") Salir
                                         span(class="glyphicon glyphicon-log-out pull-left")
+                        |{% else %}
+                        button(type="button",class="btn btn-success navbar-btn",style="margin-right:10px;",data-toggle="modal",data-target="#login-social") Iniciar Sesión
+                        | {% endif %}
         div(style="margin-top:50px;")
         button(value="{{user.identificacion}}",style="display:none;",id="identificacion")
-        | {% endif %}
         block body_content
+        footer(class="footer-content")
+            div(class="container-fluid")
+                div(class="row")
+                    div(class="col-md-12 text-center",style="margin-top:15px;")
+                        p &copy2016
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js")
         script(src="{% static 'js/moment.es.js' %}")

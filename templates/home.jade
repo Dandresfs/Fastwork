@@ -1,71 +1,97 @@
-| {% load staticfiles %}
-doctype html
-html(lang="es")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport",content="width=device-width, initial-scale=1")
-        link(rel='shortcut icon',href="{% static 'imagenes/icon.png' %}")
-        link(href='https://fonts.googleapis.com/css?family=Lato',rel='stylesheet',type='text/css')
-        title Login
-        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin="anonymous")
-        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css",integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r",crossorigin="anonymous")
-        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
-        link(rel="stylesheet",href="{% static 'css/login.css' %}")
-    body
-        div(class="conainer-fluid")
-            div(class="col-xs-8 col-xs-offset-2 login")
-                div(class="col-lg-12")
-                    div(class="row")
-                        div(class="col-lg-8 col-lg-offset-2")
-                            img(src="{% static 'imagenes/logo.png'%}",class="img-responsive center-block")
+extends base
 
-                    div(class="row")
-                        div(class="col-lg-10 col-lg-offset-1")
-                            p(class="text-center font-title") Inicia sesión con
-                            div(class="redes")
-                                a(href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}")
-                                    div(class="col-md-3 facebook text-center")
-                                        i(class="fa fa-facebook fa-2x")
-                                        p(class="nombre-facebook") Facebook
-                                a(href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}")
-                                    div(class="col-md-3 twitter text-center")
-                                        i(class="fa fa-twitter fa-2x")
-                                        p(class="nombre-twitter") Twitter
-                                a(href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}")
-                                    div(class="col-md-3 google text-center")
-                                        i(class="fa fa-google fa-2x")
-                                        p(class="nombre-google") Google
-                                a(href="{% url 'social:begin' 'linkedin-oauth2' %}?next={{ request.path }}")
-                                    div(class="col-md-3 linkedin text-center")
-                                        i(class="fa fa-linkedin fa-2x")
-                                        p(class="nombre-linkedin") LinkedIn
-                    div(class="row")
-                        div(class="col-lg-12 text-center font-title-2")
-                            p(class="inline") Prefieres iniciar sesión de manera tradicional?&nbsp
-                            a(href="#",class="inline") Registrate&nbsp
-                            p(class="inline") o&nbsp
-                            a(href="#",class="inline") Inicia sesión
-                    div(class="row text-center")
-                        div(class="col-lg-10 col-lg-offset-1 text-text-justify")
-                            p
-                                |Fastwork Colombia solamente utiliza las cuentas de &regFacebook, &regTwitter, &regGoogle y &regLinkedIn
-                                | para generar usuarios a fin de acceder a la plataforma. Facilitamos tu registro y es una
-                                | cuenta menos para recordar.
-                    div(class="row text-center")
-                        div(class="col-lg-10 col-lg-offset-1 text-text-justify")
-                            p(class="inline") Valoramos tu&nbsp
-                            a(href="#") privacidad&nbsp
-                            p(class="inline") como si fuera la nuestra y te invitamos a conocer los&nbsp
-                            a(class="inline") Términos de Servicio.
+block title
+    |Inicio
 
-        | {% if user.is_authenticated %}
-        script
-            | window.location.href = "/ofertas/";
-        |{% endif %}
-        script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
-        script(src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js")
-        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js",integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS",crossorigin="anonymous")
-        script
-            |$(document).ready(function(){
-            |$('[data-toggle="tooltip"]').tooltip();
-            |});
+block extra_style
+    link(rel="stylesheet",href="{% static 'css/social.css' %}")
+
+block body_content
+    div(class="body-header")
+        div(class="container-fluid banner-white")
+            div(class="row row-home")
+                img(class="img-responsive center-block vcenter",src="{% static 'imagenes/logo.png' %}")
+    div(class="body-content")
+        div(class="container")
+            div(class="row")
+                div(class="col-md-12")
+                    h2(class="title-A text-center") ¿Cómo funciona Fastwork?
+            div(class="row")
+                div(class="col-md-6 title-A-p")
+                    h3(class="login-info text-center") Suscribete o inicia sesión, es gratuito
+                    p.
+                        Puedes suscribirte o iniciar sesión usando tu cuenta de &copyFacebook, &copyTwitter o &copyGmail,
+                        solo usamos estas cuentas para generar tu usuario y conocer tu correo electrónico,
+                        de ninguna manera compartiremos tu información con terceros, si lo prefieres tambien puedes registrarte de manera
+                        tradicional confirmando tu correo electrónico.
+
+                div(class="col-md-6 title-A-p")
+                    h3(class="login-info text-center") Personaliza tu perfil
+                    p.
+                        Personaliza tu cuenta de usuario y registra tus datos personales, contacto y residencia, mantenlos
+                        actualizados para que los empleadores se puedan comunicar contigo rapidamente.
+            div(class="row")
+                div(class="col-md-6 title-A-p")
+                    h3(class="login-info text-center") Registra tu experiencia y formación
+                    p.
+                        Dale a conocer toda tu experiencia laboral y tu formación academica a los empleadores, tambien ayudanos
+                        a sugerirte las ofertas mas acordes a tu perfil laboral.
+                div(class="col-md-6 title-A-p")
+                    h3(class="login-info text-center") Aplica a ofertas de empleo
+                    p.
+                        Filtra las ofertas de empleo con palabras clave, categorias, ubicación, salario, tipo de contratación
+                        y mucho mas, aplica a las ofertas y observa tu comparativa con los demas aspirantes.
+
+    div(class="modal fade",id="login-social",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+        div(class="modal-dialog modal-lg",role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h3 Iniciar Sesión
+                div(class="modal-body")
+                        div(class="row")
+                            div(class="col-md-6")
+                                h4(class="text-center") Redes sociales:
+                                div(class="row",style="margin-top:30px;")
+                                    div(class="col-md-4")
+                                        div(class="text-center")
+                                            a(href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}",class="icon-button facebook")
+                                                i(class="fa fa-facebook icon-facebook")
+                                                span
+
+                                    div(class="col-md-4")
+                                        div(class="text-center")
+                                            a(href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}",class="icon-button twitter")
+                                                i(class="fa fa-twitter icon-twitter")
+                                                span
+
+                                    div(class="col-md-4")
+                                        div(class="text-center")
+                                            a(href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}",class="icon-button google")
+                                                i(class="fa fa-google icon-google")
+                                                span
+
+
+                            div(class="col-md-6")
+                                h4(class="text-center") Correo electrónico:
+                                form(role="form",class="loginForm",method="POST")
+                                    div(class="form-group")
+                                        div(class="container-fluid")
+                                            div(class="row")
+                                                div(class="col-md-12")
+                                                    input(type="email",class="form-control",id="email",name="email",placeholder="Email")
+                                                div(class="col-md-12")
+                                                    input(type="password",class="form-control",id="password",name="password",placeholder="Contraseña")
+                                    input(type="submit",class="btn btn-success pull-right",value="Iniciar Sesión",id="guardarFormacionModal")
+
+
+
+
+
+                div(class="modal-footer")
+                    button(type="button",class="btn btn-default",data-dismiss="modal",id="cerrarFormacionConfirmacionModal") Cerrar
+    | {% if user.is_authenticated %}
+    script
+        | window.location.href = "/ofertas/";
+    |{% endif %}
