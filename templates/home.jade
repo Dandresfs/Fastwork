@@ -1,6 +1,6 @@
 extends base
 
-block title
+block titulo
     |Inicio
 
 block extra_style
@@ -17,30 +17,42 @@ block body_content
                 div(class="col-md-12")
                     h2(class="title-A text-center") ¿Cómo funciona Fastwork?
             div(class="row")
-                div(class="col-md-6 title-A-p")
-                    h3(class="login-info text-center") Suscribete o inicia sesión, es gratuito
-                    p.
-                        Puedes suscribirte o iniciar sesión usando tu cuenta de &copyFacebook, &copyTwitter o &copyGmail,
-                        solo usamos estas cuentas para generar tu usuario y conocer tu correo electrónico,
-                        de ninguna manera compartiremos tu información con terceros, si lo prefieres tambien puedes registrarte de manera
-                        tradicional confirmando tu correo electrónico.
+                div(class="col-md-6")
+                    div(class="title-A-p")
+                        div(class="circle-home")
+                            span(class="glyphicon glyphicon-log-in center-block",aria-hidden="true",style="background:#C43F3B;")
+                        h3(class="login-info text-center") Suscribete o inicia sesión, es gratuito
+                        p.
+                            Puedes suscribirte o iniciar sesión usando tu cuenta de &copyFacebook, &copyTwitter o &copyGmail,
+                            solo usamos estas cuentas para generar tu usuario y conocer tu correo electrónico,
+                            de ninguna manera compartiremos tu información con terceros, si lo prefieres tambien puedes registrarte de manera
+                            tradicional confirmando tu correo electrónico.
 
-                div(class="col-md-6 title-A-p")
-                    h3(class="login-info text-center") Personaliza tu perfil
-                    p.
-                        Personaliza tu cuenta de usuario y registra tus datos personales, contacto y residencia, mantenlos
-                        actualizados para que los empleadores se puedan comunicar contigo rapidamente.
+                div(class="col-md-6")
+                    div(class="title-A-p")
+                        div(class="circle-home")
+                            span(class="glyphicon glyphicon-user center-block",style="background:#188F38;")
+                        h3(class="login-info text-center") Personaliza tu perfil
+                        p.
+                            Personaliza tu cuenta de usuario y registra tus datos personales, contacto y residencia, mantenlos
+                            actualizados para que los empleadores se puedan comunicar contigo rapidamente.
             div(class="row")
-                div(class="col-md-6 title-A-p")
-                    h3(class="login-info text-center") Registra tu experiencia y formación
-                    p.
-                        Dale a conocer toda tu experiencia laboral y tu formación academica a los empleadores, tambien ayudanos
-                        a sugerirte las ofertas mas acordes a tu perfil laboral.
-                div(class="col-md-6 title-A-p")
-                    h3(class="login-info text-center") Aplica a ofertas de empleo
-                    p.
-                        Filtra las ofertas de empleo con palabras clave, categorias, ubicación, salario, tipo de contratación
-                        y mucho mas, aplica a las ofertas y observa tu comparativa con los demas aspirantes.
+                div(class="col-md-6")
+                    div(class="title-A-p")
+                        div(class="circle-home")
+                            span(class="glyphicon glyphicon-pencil center-block",style="background:#36658C;")
+                        h3(class="login-info text-center") Registra tu experiencia y formación
+                        p.
+                            Dale a conocer toda tu experiencia laboral y tu formación academica a los empleadores, tambien ayudanos
+                            a sugerirte las ofertas mas acordes a tu perfil laboral.
+                div(class="col-md-6")
+                    div(class="title-A-p")
+                        div(class="circle-home")
+                            span(class="glyphicon glyphicon-ok center-block",style="background:#CFB537;")
+                        h3(class="login-info text-center") Aplica a ofertas de empleo
+                        p.
+                            Filtra las ofertas de empleo con palabras clave, categorias, ubicación, salario, tipo de contratación
+                            y mucho mas, aplica a las ofertas y observa tu comparativa con los demas aspirantes.
 
     div(class="modal fade",id="login-social",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
         div(class="modal-dialog modal-lg",role="document")
@@ -52,7 +64,7 @@ block body_content
                 div(class="modal-body")
                         div(class="row")
                             div(class="col-md-6")
-                                h4(class="text-center") Redes sociales:
+                                h4(class="text-center") Con redes sociales:
                                 div(class="row",style="margin-top:30px;")
                                     div(class="col-md-4")
                                         div(class="text-center")
@@ -74,7 +86,7 @@ block body_content
 
 
                             div(class="col-md-6")
-                                h4(class="text-center") Correo electrónico:
+                                h4(class="text-center") Con correo electrónico:
                                 form(role="form",class="loginForm",method="POST")
                                     div(class="form-group")
                                         div(class="container-fluid")

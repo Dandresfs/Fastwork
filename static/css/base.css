@@ -92,11 +92,11 @@ body {
   }
 }
 .banner-white {
-  background: -webkit-linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("../imagenes/banner.jpg");
-  background: -moz-linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("../imagenes/banner.jpg");
-  background: -ms-linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("../imagenes/banner.jpg");
-  background: -o-linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("../imagenes/banner.jpg");
-  background: linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("../imagenes/banner.jpg");
+  background: -webkit-linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("../imagenes/banner.jpg");
+  background: -moz-linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("../imagenes/banner.jpg");
+  background: -ms-linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("../imagenes/banner.jpg");
+  background: -o-linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("../imagenes/banner.jpg");
+  background: linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("../imagenes/banner.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -227,6 +227,10 @@ label {
   font-weight: 700;
   margin: 30px;
 }
+.title-A-p {
+  padding: 20px;
+  background: #fff;
+}
 .title-A-p p {
   text-align: center;
 }
@@ -239,6 +243,14 @@ label {
 }
 .body-content {
   margin-bottom: 20px;
+}
+.circle-home span {
+  height: 130px;
+  width: 130px;
+  border-radius: 50%;
+  font-size: 70px;
+  padding: 30px;
+  color: #fff;
 }
 .loginForm input {
   margin-top: 13px;
