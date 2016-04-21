@@ -97,7 +97,7 @@ Bienvenido!!
                       <table class="buttonwrapper" bgcolor="#6a9ad0" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                           <td class="button" height="45" style="text-align: center; font-size: 18px; font-family: sans-serif; font-weight: bold; padding: 0 30px 0 30px;">
-                            <a href="#" style="color: #ffffff; text-decoration: none;">Iniciar Sesión</a>
+                            <a href="http://www.fastworkcolombia.com/" style="color: #ffffff; text-decoration: none;">Iniciar Sesión</a>
                           </td>
                         </tr>
                       </table>
