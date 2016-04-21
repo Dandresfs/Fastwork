@@ -22,6 +22,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_HOST_USER = os.getenv('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+DEFAULT_FROM_EMAIL = 'Fast Work Colombia<no-responder@fastworkcolombia.com>'
+EMAIL_USE_TLS = True
+
 
 # Application definition
 
@@ -45,6 +52,7 @@ THIRD_PARTY_APPS = [
     'social.apps.django_app.default',
     'crispy_forms',
     'rest_framework',
+    'mail_templated'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
