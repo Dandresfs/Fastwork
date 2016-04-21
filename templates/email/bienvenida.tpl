@@ -73,7 +73,7 @@ Bienvenido!!
           <table width="115" align="left" border="0" cellpadding="0" cellspacing="0">
             <tr>
               <td height="115" style="padding: 0 20px 20px 0;">
-                <img style="height: auto;" class="fix" src="http://localhost/static/imagenes/cuenta.png" width="115" height="115" border="0" alt="" />
+                <img style="height: auto;" class="fix" src="http://www.fastworkcolombia.com/static/imagenes/cuenta.PNG" width="115" height="115" border="0" alt="" />
               </td>
             </tr>
           </table>
