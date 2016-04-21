@@ -12,22 +12,6 @@ Bienvenido!!
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>A Simple Responsive HTML Email</title>
   <style type="text/css">
-  body {margin: 0; padding: 0; min-width: 100%!important;}
-  img {height: auto;}
-  .content {width: 100%; max-width: 600px;}
-  .header {padding: 40px 30px 20px 30px;}
-  .innerpadding {padding: 30px 30px 30px 30px;}
-  .borderbottom {border-bottom: 1px solid #f2eeed;}
-  .subhead {font-size: 15px; color: #ffffff; font-family: sans-serif; letter-spacing: 10px;}
-  .h1, .h2, .bodycopy {color: #153643; font-family: sans-serif;}
-  .h1 {font-size: 33px; line-height: 38px; font-weight: bold;}
-  .h2 {padding: 0 0 15px 0; font-size: 24px; line-height: 28px; font-weight: bold;}
-  .bodycopy {font-size: 16px; line-height: 22px;}
-  .button {text-align: center; font-size: 18px; font-family: sans-serif; font-weight: bold; padding: 0 30px 0 30px;}
-  .button a {color: #ffffff; text-decoration: none;}
-  .footer {padding: 20px 30px 15px 30px;}
-  .footercopy {font-family: sans-serif; font-size: 14px; color: #ffffff;}
-  .footercopy a {color: #ffffff; text-decoration: underline;}
 
   @media only screen and (max-width: 550px), screen and (max-device-width: 550px) {
   body[yahoo] .hide {display: none!important;}
@@ -46,7 +30,7 @@ Bienvenido!!
   </style>
 </head>
 
-<body yahoo bgcolor="#f6f8f1">
+<body yahoo bgcolor="#f6f8f1",style="margin: 0; padding: 0; min-width: 100%!important;">
 <table width="100%" bgcolor="#f6f8f1" border="0" cellpadding="0" cellspacing="0">
 <tr>
   <td>
@@ -55,13 +39,13 @@ Bienvenido!!
         <tr>
           <td>
     <![endif]-->
-    <table bgcolor="#ffffff" class="content" align="center" cellpadding="0" cellspacing="0" border="0">
+    <table bgcolor="#ffffff" class="content" align="center" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 600px;">
       <tr>
-        <td bgcolor="#273b47" class="header">
+        <td bgcolor="#273b47" class="header" style="padding: 40px 30px 20px 30px;">
           <table width="70" align="left" border="0" cellpadding="0" cellspacing="0">
             <tr>
               <td height="70" style="padding: 0 20px 20px 0;">
-                <img style="margin-left: 70px;" class="fix" src="http://www.fastworkcolombia.com/static/imagenes/logo.png" width="400" height="350" border="0" alt="" />
+                <img style="margin-left: 70px;height: auto;" class="fix" src="http://www.fastworkcolombia.com/static/imagenes/logo.png" width="400" border="0" alt="" />
               </td>
             </tr>
           </table>
@@ -69,15 +53,15 @@ Bienvenido!!
         </td>
       </tr>
       <tr>
-        <td class="innerpadding borderbottom">
+        <td class="innerpadding borderbottom" style="padding: 30px 30px 30px 30px;border-bottom: 1px solid #f2eeed;">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td class="h2">
+              <td class="h2" style="color: #153643; font-family: sans-serif;padding: 0 0 15px 0; font-size: 24px; line-height: 28px; font-weight: bold;">
                 Hola
               </td>
             </tr>
             <tr>
-              <td class="bodycopy">
+              <td class="bodycopy" style="color: #153643; font-family: sans-serif;font-size: 16px; line-height: 22px;">
                 ¡Gracias por unirte! Aquí tienes la información de tu cuenta:
               </td>
             </tr>
@@ -85,11 +69,11 @@ Bienvenido!!
         </td>
       </tr>
       <tr>
-        <td class="innerpadding borderbottom">
+        <td class="innerpadding borderbottom" style="padding: 30px 30px 30px 30px;border-bottom: 1px solid #f2eeed;">
           <table width="115" align="left" border="0" cellpadding="0" cellspacing="0">
             <tr>
               <td height="115" style="padding: 0 20px 20px 0;">
-                <img class="fix" src="http://localhost/static/imagenes/cuenta.png" width="115" height="115" border="0" alt="" />
+                <img style="height: auto;" class="fix" src="http://localhost/static/imagenes/cuenta.png" width="115" height="115" border="0" alt="" />
               </td>
             </tr>
           </table>
@@ -103,7 +87,7 @@ Bienvenido!!
               <td>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td class="bodycopy">
+                    <td class="bodycopy" style="color: #153643; font-family: sans-serif;font-size: 16px; line-height: 22px;">
                         <p>Username: <b>{{ username }}</b></p>
                         <p>Email: <b>{{ email }}</b></p>
                     </td>
@@ -112,8 +96,8 @@ Bienvenido!!
                     <td style="padding: 20px 0 0 0;">
                       <table class="buttonwrapper" bgcolor="#6a9ad0" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                          <td class="button" height="45">
-                            <a href="#">Iniciar Sesión</a>
+                          <td class="button" height="45" style="text-align: center; font-size: 18px; font-family: sans-serif; font-weight: bold; padding: 0 30px 0 30px;">
+                            <a href="#" style="color: #ffffff; text-decoration: none;">Iniciar Sesión</a>
                           </td>
                         </tr>
                       </table>
@@ -136,7 +120,7 @@ Bienvenido!!
       </tr>
 
       <tr>
-        <td class="innerpadding bodycopy">
+        <td class="innerpadding bodycopy" style="padding: 30px 30px 30px 30px;color: #153643; font-family: sans-serif;font-size: 16px; line-height: 22px;">
            <h3>Recuerda!</h3>
            <p>1. Personaliza tu cuenta de usuario y registra tus datos personales, contacto y residencia, mantenlos actualizados para que los empleadores se puedan comunicar contigo rapidamente.</p>
             <p>2. Dale a conocer toda tu experiencia laboral y tu formación academica a los empleadores, tambien ayudanos a sugerirte las ofertas mas acordes a tu perfil laboral.</p>
@@ -144,10 +128,10 @@ Bienvenido!!
         </td>
       </tr>
       <tr>
-        <td class="footer" bgcolor="#273b47">
+        <td class="footer" bgcolor="#273b47" style="padding: 20px 30px 15px 30px;">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td align="center" class="footercopy">
+              <td align="center" class="footercopy" style="font-family: sans-serif; font-size: 14px; color: #ffffff;">
                 &reg; 2016, Fast Work Colombia<br/>
               </td>
             </tr>
