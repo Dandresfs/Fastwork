@@ -5,217 +5,169 @@ Bienvenido!!
 {% endblock %}
 
 {% block html %}
-<!doctype html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Really Simple HTML Email Template</title>
-<style>
-/* -------------------------------------
-    GLOBAL
-------------------------------------- */
-* {
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-size: 100%;
-  line-height: 1.6em;
-  margin: 0;
-  padding: 0;
-}
-img {
-  max-width: 600px;
-  width: auto;
-}
-body {
-  -webkit-font-smoothing: antialiased;
-  height: 100%;
-  -webkit-text-size-adjust: none;
-  width: 100% !important;
-  color: #ffffff;
-}
-/* -------------------------------------
-    ELEMENTS
-------------------------------------- */
-a {
-  color: #348eda;
-}
-.btn-primary {
-  Margin-bottom: 10px;
-  width: auto !important;
-}
-.btn-primary td {
-  background-color: #348eda;
-  border-radius: 25px;
-  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-size: 14px;
-  text-align: center;
-  vertical-align: top;
-}
-.btn-primary td a {
-  background-color: #348eda;
-  border: solid 1px #348eda;
-  border-radius: 25px;
-  border-width: 10px 20px;
-  display: inline-block;
-  color: #ffffff;
-  cursor: pointer;
-  font-weight: bold;
-  line-height: 2;
-  text-decoration: none;
-}
-.last {
-  margin-bottom: 0;
-}
-.first {
-  margin-top: 0;
-}
-.padding {
-  padding: 10px 0;
-}
-/* -------------------------------------
-    BODY
-------------------------------------- */
-table.body-wrap {
-  padding: 20px;
-  width: 100%;
-}
-table.body-wrap .container {
-  border: 1px solid #f0f0f0;
-}
-/* -------------------------------------
-    FOOTER
-------------------------------------- */
-table.footer-wrap {
-  clear: both !important;
-  width: 100%;
-}
-.footer-wrap .container p {
-  color: #666666;
-  font-size: 12px;
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-}
-table.footer-wrap a {
-  color: #999999;
-}
-/* -------------------------------------
-    TYPOGRAPHY
-------------------------------------- */
-h1,
-h2,
-h3 {
-  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 200;
-  line-height: 1.2em;
-  margin: 20px 0 10px;
-  color: #ffffff;
-}
-h1 {
-  font-size: 32px;
-  color: #ffffff;
-}
-h2 {
-  font-size: 24px;
-}
-h3 {
-  font-size: 18px;
-}
-p,
-ul,
-ol {
-  font-size: 14px;
-  font-weight: normal;
-  margin-bottom: 10px;
-}
-ul li,
-ol li {
-  margin-left: 5px;
-  list-style-position: inside;
-}
-/* ---------------------------------------------------
-    RESPONSIVENESS
------------------------------------------------------- */
-/* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
-.container {
-  clear: both !important;
-  display: block !important;
-  Margin: 0 auto !important;
-  max-width: 600px !important;
-}
-/* Set the padding on the td rather than the div for Outlook compatibility */
-.body-wrap .container {
-  padding: 20px;
-}
-/* This should also be a block element, so that it will fill 100% of the .container */
-.content {
-  display: block;
-  margin: 0 auto;
-  max-width: 600px;
-}
-/* Let's make sure tables in the content area are 100% wide */
-.content table {
-  width: 100%;
-}
-</style>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>A Simple Responsive HTML Email</title>
+  <style type="text/css">
+  body {margin: 0; padding: 0; min-width: 100%!important;}
+  img {height: auto;}
+  .content {width: 100%; max-width: 600px;}
+  .header {padding: 40px 30px 20px 30px;}
+  .innerpadding {padding: 30px 30px 30px 30px;}
+  .borderbottom {border-bottom: 1px solid #f2eeed;}
+  .subhead {font-size: 15px; color: #ffffff; font-family: sans-serif; letter-spacing: 10px;}
+  .h1, .h2, .bodycopy {color: #153643; font-family: sans-serif;}
+  .h1 {font-size: 33px; line-height: 38px; font-weight: bold;}
+  .h2 {padding: 0 0 15px 0; font-size: 24px; line-height: 28px; font-weight: bold;}
+  .bodycopy {font-size: 16px; line-height: 22px;}
+  .button {text-align: center; font-size: 18px; font-family: sans-serif; font-weight: bold; padding: 0 30px 0 30px;}
+  .button a {color: #ffffff; text-decoration: none;}
+  .footer {padding: 20px 30px 15px 30px;}
+  .footercopy {font-family: sans-serif; font-size: 14px; color: #ffffff;}
+  .footercopy a {color: #ffffff; text-decoration: underline;}
+
+  @media only screen and (max-width: 550px), screen and (max-device-width: 550px) {
+  body[yahoo] .hide {display: none!important;}
+  body[yahoo] .buttonwrapper {background-color: transparent!important;}
+  body[yahoo] .button {padding: 0px!important;}
+  body[yahoo] .button a {background-color: #6a9ad0; padding: 15px 15px 13px!important;}
+  body[yahoo] .unsubscribe {display: block; margin-top: 20px; padding: 10px 50px; background: #2f3942; border-radius: 5px; text-decoration: none!important; font-weight: bold;}
+  }
+
+  /*@media only screen and (min-device-width: 601px) {
+    .content {width: 600px !important;}
+    .col425 {width: 425px!important;}
+    .col380 {width: 380px!important;}
+    }*/
+
+  </style>
 </head>
 
-<body bgcolor="#f6f6f6">
-
-<!-- body -->
-<table class="body-wrap" bgcolor="#f6f6f6">
-  <tr>
-    <td></td>
-    <td class="container" bgcolor="#273b47">
-
-      <!-- content -->
-      <div class="content">
-      <table>
+<body yahoo bgcolor="#f6f8f1">
+<table width="100%" bgcolor="#f6f8f1" border="0" cellpadding="0" cellspacing="0">
+<tr>
+  <td>
+    <!--[if (gte mso 9)|(IE)]>
+      <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td>
-            <img src="http://www.fastworkcolombia.com/static/imagenes/logo.png">
-            <h1>¡Hola!</h1>
-            <h3>¡Gracias por unirte! Aquí tienes la información de tu cuenta:</h3>
+    <![endif]-->
+    <table bgcolor="#ffffff" class="content" align="center" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td bgcolor="#273b47" class="header">
+          <table width="70" align="left" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td height="70" style="padding: 0 20px 20px 0;">
+                <img style="margin-left: 70px;" class="fix" src="http://www.fastworkcolombia.com/static/imagenes/logo.png" width="400" height="350" border="0" alt="" />
+              </td>
+            </tr>
+          </table>
 
-            <p>Username: {{ username }}</p>
-            <p>Email: {{ email }}</p>
-
-
-            <p>Recuerda:</p>
-            <p>1. Personaliza tu perfil: Personaliza tu cuenta de usuario y registra tus datos personales, contacto y residencia, mantenlos actualizados para que los empleadores se puedan comunicar contigo rapidamente.</p>
-            <p>2. Registra tu experiencia y formación: Dale a conocer toda tu experiencia laboral y tu formación academica a los empleadores, tambien ayudanos a sugerirte las ofertas mas acordes a tu perfil laboral.</p>
-            <p>3. Aplica a ofertas de empleo: Filtra las ofertas de empleo con palabras clave, categorias, ubicación, salario, tipo de contratación y mucho mas, aplica a las ofertas y observa tu comparativa con los demas aspirantes.</p>
-
-            <!-- button -->
-            <table class="btn-primary" cellpadding="0" cellspacing="0" border="0">
+        </td>
+      </tr>
+      <tr>
+        <td class="innerpadding borderbottom">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="h2">
+                Hola
+              </td>
+            </tr>
+            <tr>
+              <td class="bodycopy">
+                ¡Gracias por unirte! Aquí tienes la información de tu cuenta:
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td class="innerpadding borderbottom">
+          <table width="115" align="left" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td height="115" style="padding: 0 20px 20px 0;">
+                <img class="fix" src="http://localhost/static/imagenes/cuenta.png" width="115" height="115" border="0" alt="" />
+              </td>
+            </tr>
+          </table>
+          <!--[if (gte mso 9)|(IE)]>
+            <table width="380" align="left" cellpadding="0" cellspacing="0" border="0">
               <tr>
                 <td>
-                  <a href="http://www.fastworkcolombia.com/">Iniciar sesión en Fast Work Colombia</a>
+          <![endif]-->
+          <table class="col380" align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 380px;">
+            <tr>
+              <td>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td class="bodycopy">
+                        <p>Username: <b>{{ username }}</b></p>
+                        <p>Email: <b>{{ email }}</b></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 20px 0 0 0;">
+                      <table class="buttonwrapper" bgcolor="#6a9ad0" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td class="button" height="45">
+                            <a href="#">Iniciar Sesión</a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <!--[if (gte mso 9)|(IE)]>
                 </td>
               </tr>
-            </table>
-            <!-- /button -->
+          </table>
+          <![endif]-->
+        </td>
 
-            <table>
-          <tr>
-            <td align="center">
-              <p>&copy 2016</p>
-            </td>
-          </tr>
-        </table>
 
+
+
+      </tr>
+
+      <tr>
+        <td class="innerpadding bodycopy">
+           <h3>Recuerda!</h3>
+           <p>1. Personaliza tu cuenta de usuario y registra tus datos personales, contacto y residencia, mantenlos actualizados para que los empleadores se puedan comunicar contigo rapidamente.</p>
+            <p>2. Dale a conocer toda tu experiencia laboral y tu formación academica a los empleadores, tambien ayudanos a sugerirte las ofertas mas acordes a tu perfil laboral.</p>
+            <p>3. Filtra las ofertas de empleo con palabras clave, categorias, ubicación, salario, tipo de contratación y mucho mas, aplica a las ofertas y observa tu comparativa con los demas aspirantes.</p>
+        </td>
+      </tr>
+      <tr>
+        <td class="footer" bgcolor="#273b47">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td align="center" class="footercopy">
+                &reg; 2016, Fast Work Colombia<br/>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!--[if (gte mso 9)|(IE)]>
           </td>
         </tr>
-      </table>
-      </div>
-      <!-- /content -->
-
+    </table>
+    <![endif]-->
     </td>
-    <td></td>
   </tr>
 </table>
-<!-- /body -->
 
-
-
+<!--analytics-->
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://tutsplus.github.io/github-analytics/ga-tracking.min.js"></script>
 </body>
 </html>
 {% endblock %}
