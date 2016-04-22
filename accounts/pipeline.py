@@ -25,7 +25,10 @@ def user_details(strategy, details, user=None, *args, **kwargs):
                 if not current_value or name not in protected:
                     changed |= current_value != value
                     setattr(user, name, value)
-        send_mail('email/bienvenida.tpl', {'email': user.email,'username':user.username,'fullname':user.fullname}, DEFAULT_FROM_EMAIL, [user.email])
+        if user.is_new == True:
+            send_mail('email/bienvenida.tpl', {'email': user.email,'username':user.username,'fullname':user.fullname}, DEFAULT_FROM_EMAIL, [user.email])
+            user.is_new = False
+            user.save()
         if changed:
             strategy.storage.user.changed(user)
 

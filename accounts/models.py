@@ -47,6 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     photo = models.URLField(max_length=200)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
+    is_new = models.BooleanField(default=True)
 
     tipo_identificacion = models.CharField(max_length=100,blank=True)
     identificacion = models.BigIntegerField(blank=True,null=True)
