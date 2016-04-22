@@ -2,8 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-from mail_templated import send_mail
-from Fastwork.settings.base import DEFAULT_FROM_EMAIL
+
 
 class UserManager(BaseUserManager):
     def _create_user(self, email, password, **extra_fields):
@@ -22,7 +21,6 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
         extra_fields.setdefault('is_active', True)
-        send_mail('email/bienvenida.tpl', {'email': email,'username':extra_fields['username']}, DEFAULT_FROM_EMAIL, [email])
         return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password, **extra_fields):

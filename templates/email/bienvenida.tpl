@@ -1,7 +1,7 @@
 {% extends "mail_templated/base.tpl" %}
 
 {% block subject %}
-Bienvenido!!
+Bienvenido(a) {{ fullname }}!!
 {% endblock %}
 
 {% block html %}
@@ -57,7 +57,7 @@ Bienvenido!!
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td class="h2" style="color: #153643; font-family: sans-serif;padding: 0 0 15px 0; font-size: 24px; line-height: 28px; font-weight: bold;">
-                Hola
+                Hola {{ fullname }}
               </td>
             </tr>
             <tr>

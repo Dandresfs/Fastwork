@@ -198,7 +198,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.load_extra_data',
 
     # Update the user record with any changed info from the auth service.
-    'social.pipeline.user.user_details',
+    'accounts.pipeline.user_details',
     'accounts.pipeline.save_profile_picture',
 )
 
