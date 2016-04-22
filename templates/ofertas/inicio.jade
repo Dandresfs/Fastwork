@@ -2,6 +2,64 @@ extends ../base
 block titulo
     |Ofertas
 
+block body_content
+    div(class="container-fluid ofertas")
+        div(class="row")
+            div(class="col-sm-3")
+
+                div(class="filtros text-center")
+                    p Filtros
+                div(class="palabras")
+                    span(class="glyphicon glyphicon-search")
+                    p Palabras Clave
+
+                div(class="formulario-filtro text-center")
+                    input(type="text",class="input-100",placeholder="Ej:Ingeniero")
+                    button(type="button",class="btn btn-success input-70") Filtrar
+
+                div(class="palabras")
+                    span(class="glyphicon glyphicon-th-large")
+                    p Categoría
+
+                div(class="categoria")
+
+                div(class="palabras")
+                    span(class="glyphicon glyphicon-map-marker")
+                    p Departamento
+
+                div(class="categoria")
+
+
+                div(class="palabras")
+                    span(class="glyphicon glyphicon-map-marker")
+                    p Ciudad
+
+                div(class="categoria")
+
+
+                div(class="palabras")
+                    span(class="glyphicon glyphicon-usd")
+                    p Salario
+
+                div(class="categoria")
+
+                div(class="palabras")
+                    span(class="glyphicon glyphicon-calendar")
+                    p Fecha de publicación
+
+                div(class="categoria")
+
+                div(class="palabras")
+                    span(class="glyphicon glyphicon-list-alt")
+                    p Tipo de contrato
+
+                div(class="categoria")
+
+
+
+
+            div(class="col-sm-9")
+
 block extra_script
     script
             |$(document).ready(function() {
