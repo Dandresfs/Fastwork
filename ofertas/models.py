@@ -4,8 +4,17 @@ from django.db import models
 from empresa.models import Empresa
 
 # Create your models here.
+
+class Categoria(models.Model):
+    nombre = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.nombre
+
 class Oferta(models.Model):
     empresa = models.ForeignKey(Empresa)
+    categoria = models.ForeignKey(Categoria)
+    titulo = models.CharField(max_length=100)
     descripcion = models.TextField(max_length=10000)
     fecha_contratacion = models.DateField(blank=True)
     vacantes = models.IntegerField()
@@ -21,4 +30,4 @@ class Oferta(models.Model):
     cierre = models.DateTimeField(blank=True)
 
     def __unicode__(self):
-        return self.empresa
+        return self.empresa.nombre_comercial

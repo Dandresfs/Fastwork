@@ -57,6 +57,11 @@ THIRD_PARTY_APPS = [
     'mail_templated'
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
+
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

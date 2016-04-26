@@ -1,4 +1,5 @@
 body {
+  background: #f7f5f5;
   font-family: 'Lato', sans-serif;
   font-size: 16px;
   color: #273b47;
@@ -91,6 +92,11 @@ body {
     height: 450px;
   }
 }
+@media screen and (max-width: 620px) {
+  .banner {
+    height: 550px;
+  }
+}
 .banner-white {
   background: -webkit-linear-gradient(top, rgba(39,59,71,0.5), rgba(39,59,71,0.5)), url("../imagenes/banner.jpg");
   background: -moz-linear-gradient(top, rgba(39,59,71,0.5), rgba(39,59,71,0.5)), url("../imagenes/banner.jpg");
@@ -123,6 +129,11 @@ body {
 @media screen and (max-width: 767px) {
   .banner-hv {
     height: 450px;
+  }
+}
+@media screen and (max-width: 620px) {
+  .banner-hv {
+    height: 550px;
   }
 }
 @media screen and (max-width: 767px) {
@@ -241,7 +252,6 @@ label {
 }
 .title-A-p {
   padding: 20px;
-  background: #fff;
 }
 .title-A-p p {
   text-align: center;
@@ -288,8 +298,9 @@ label {
   color: #fff;
 }
 .palabras {
-  background: #d9d9d9;
+  background: #6a9ad0;
   padding: 7px;
+  color: #fff;
 }
 .palabras p {
   display: inline;
@@ -313,11 +324,20 @@ label {
 .formulario-filtro {
   display: block;
   padding: 10px;
-  border: solid 1px #d9d9d9;
+  border: solid 1px #6a9ad0;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 5px 20px;
+}
+ul li {
+  margin-bottom: 7px;
 }
 .categoria {
   height: 200px;
-  border: solid 1px #d9d9d9;
+  border: solid 1px #6a9ad0;
+  overflow: scroll;
 }
 .categoria div {
   margin: 10px;
@@ -325,4 +345,58 @@ label {
 .departamento {
   height: 200px;
   border: solid 1px #d9d9d9;
+}
+.card {
+  background: #fff;
+  padding: 20px;
+  min-height: 150px;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px #d9d9d9;
+  margin-bottom: 10px;
+}
+.inline {
+  display: inline;
+}
+.propiedad {
+  margin: 7px;
+}
+.propiedad span {
+  margin-right: 10px;
+}
+.title-oferta {
+  font-size: 21px;
+  font-weight: 700;
+  margin: 0;
+}
+.disable_link {
+  pointer-events: none;
+  cursor: default;
+  color: #273b47;
+}
+.disable_link:hover {
+  text-decoration: none;
+  color: #273b47;
+}
+.verificada {
+  color: #25944d;
+  margin-right: 5px;
+}
+.time-icon {
+  color: #bd1915;
+}
+.gps-icon {
+  color: #25944d;
+}
+.categoria-icon {
+  color: #009eb2;
+}
+#palabra {
+  margin-left: 12px;
+}
+.close-link {
+  color: #f00;
+}
+.close-link:hover {
+  color: #9b0000;
 }

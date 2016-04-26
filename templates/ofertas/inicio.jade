@@ -6,28 +6,45 @@ block body_content
     div(class="container-fluid ofertas")
         div(class="row")
             div(class="col-sm-3")
-
                 div(class="filtros text-center")
                     p Filtros
+
+
                 div(class="palabras")
                     span(class="glyphicon glyphicon-search")
                     p Palabras Clave
 
-                div(class="formulario-filtro text-center")
-                    input(type="text",class="input-100",placeholder="Ej:Ingeniero")
-                    button(type="button",class="btn btn-success input-70") Filtrar
+                div(class="formulario-filtro")
+                    div(id="palabra")
+                    div(class="text-center")
+                        input(type="text",class="input-100",placeholder="Ej:Ingeniero",id="clave")
+                        button(type="button",class="btn btn-success input-70",onclick="palabra_clave()") Filtrar
 
                 div(class="palabras")
                     span(class="glyphicon glyphicon-th-large")
                     p Categoría
 
                 div(class="categoria")
+                    ul
+                        a(href="#",class="categoria_link disable_link",id='todo',onclick='clickAndDisableCategoria(this);')
+                            li Todas ({{total_ofertas}})
+                        |{% for categoria in categorias %}
+                        a(href="#",class="categoria_link",id='{{categoria.id}}',onclick='clickAndDisableCategoria(this);')
+                            li {{categoria.nombre}} ({{categoria.cantidad}})
+                        |{% endfor %}
 
                 div(class="palabras")
                     span(class="glyphicon glyphicon-map-marker")
                     p Departamento
 
                 div(class="categoria")
+                    ul
+                        a(href="#",class="departamento_link disable_link",id='todo',onclick='clickAndDisableDepartamento(this);')
+                            li Todos ({{total_departamentos}})
+                        |{% for departamento in departamentos %}
+                        a(href="#",class="departamento_link",id='{{departamento.nombre}}',onclick='clickAndDisableDepartamento(this);')
+                            li {{departamento.nombre}} ({{departamento.cantidad}})
+                        |{% endfor %}
 
 
                 div(class="palabras")
@@ -35,32 +52,37 @@ block body_content
                     p Ciudad
 
                 div(class="categoria")
+                    ul
+                        a(href="#",class="ciudad_link disable_link",id='todo',onclick='clickAndDisableCiudad(this);')
+                            li Todas ({{total_ciudades}})
+                        |{% for ciudad in ciudades %}
+                        a(href="#",class="ciudad_link",id='{{ciudad.nombre}}',onclick='clickAndDisableCiudad(this);')
+                            li {{ciudad.nombre}} ({{ciudad.cantidad}})
+                        |{% endfor %}
 
 
-                div(class="palabras")
-                    span(class="glyphicon glyphicon-usd")
-                    p Salario
 
-                div(class="categoria")
-
-                div(class="palabras")
-                    span(class="glyphicon glyphicon-calendar")
-                    p Fecha de publicación
-
-                div(class="categoria")
-
-                div(class="palabras")
-                    span(class="glyphicon glyphicon-list-alt")
-                    p Tipo de contrato
-
-                div(class="categoria")
 
 
 
 
             div(class="col-sm-9")
+                div(class="ofertas_render")
+                nav
+                    ul(class="pager")
+                        li(class="previous")
+                            a(href="#",onclick='update_prev();')
+                                span &larr;
+                                | Anterior
+                        li(class="next")
+                            a(href="#",onclick='update_next();')
+                                | Siguiente
+                                span &rarr;
+
+
 
 block extra_script
+    script(src="{% static 'js/ofertas.js' %}")
     script
             |$(document).ready(function() {
             |if ($('#identificacion').val() == "None"){
