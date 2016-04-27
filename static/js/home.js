@@ -12,6 +12,18 @@ $(document).ready(function(){
         $('#confirmation_modal').modal('show');
     }
 
+    $('#show_password').click(function(){
+        if($('#show_password').attr('aria-pressed') == "false"){
+            $('#eye').removeClass('glyphicon-eye-close');
+            $('#eye').addClass('glyphicon-eye-open');
+            $('#id_password').attr('type','text')
+        }
+        else{
+            $('#eye').removeClass('glyphicon-eye-open');
+            $('#eye').addClass('glyphicon-eye-close');
+            $('#id_password').attr('type','password')
+        }
+    });
 
     $('#registerButton').click(function(){
         $('#login-social').modal('hide');

@@ -125,7 +125,12 @@ block body_content
                                             div(class="col-md-12")
                                                 input(type="email",class="form-control",id="id_email",name="email",placeholder="Email",maxlength="254")
                                             div(class="col-md-12")
-                                                input(type="password",class="form-control",id="id_password",name="password",placeholder="Contraseña")
+                                                div(class="input-group")
+                                                    input(type="password",class="form-control",id="id_password",name="password",placeholder="Contraseña")
+                                                    span(class="input-group-btn")
+                                                        button(type = "button",class="btn btn-default",id="show_password",data-toggle="button",aria-pressed="false",autocomplete="off",style="margin-top:13px;")
+                                                            span(id="eye",class="glyphicon glyphicon-eye-close")
+
                                             div(class="col-md-12")
                                                 input(type="text",class="form-control",id="id_username",name="username",placeholder="Username")
                                             div(class="col-md-12")

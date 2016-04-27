@@ -416,3 +416,9 @@ ul li {
     border-bottom: solid 1px #c8c8c8;
   }
 }
+.pass {
+  width: 90%;
+}
+.eye {
+  width: 10%;
+}
