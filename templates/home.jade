@@ -7,7 +7,8 @@ block extra_style
     link(rel="stylesheet",href="{% static 'css/social.css' %}")
 
 block navbar_options
-    button(type="button",class="btn btn-success navbar-btn",data-toggle="modal",data-target="#login-social") Iniciar Sesión
+    button(type="button",class="btn btn-success navbar-btn-left",data-toggle="modal",data-target="#login-social") Iniciar Sesión
+    button(type="button",class="btn btn-primary navbar-btn-right",id="registerButton") Registrarme
 
 block body_content
     div(class="body-header")
@@ -102,7 +103,7 @@ block body_content
                                                 div(class="col-md-12")
                                                     p(id="error-login") {{error}}
                                     button(type="submit",class="btn btn-success btn-modal",id="guardarFormacionModal") Iniciar Sesión
-                                    button(type="button",class="btn btn-primary btn-modal",id="registerButton") Registrarme
+
                 div(class="modal-footer")
                     button(type="button",class="btn btn-default",data-dismiss="modal",id="cerrarFormacionConfirmacionModal") Cerrar
 
@@ -133,7 +134,6 @@ block body_content
                                                 input(type="text",class="form-control",id="id_last_name",name="last_name",placeholder="Apellidos")
                                             div(class="col-md-12")
                                                 p(id="error-register") {{error_register}}
-                                button(type="submit",class="btn btn-danger btn-modal") Volver
                                 button(type="submit",class="btn btn-success btn-modal") Aceptar
                 div(class="modal-footer")
                     button(type="button",class="btn btn-default",data-dismiss="modal",id="cerrarFormacionConfirmacionModal") Cerrar
