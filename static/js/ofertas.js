@@ -1,4 +1,8 @@
 $(document).ready(function(){
+
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
+
     localStorage.setItem("categoria","todo");
     localStorage.setItem("departamento","todo");
     localStorage.setItem("ciudad","todo");
@@ -149,16 +153,18 @@ function render_ofertas(){
                        var descripcion = data[i].descripcion;
                        var publicacion = jQuery.timeago(data[i].publicacion);
                        var verificada = '';
+                       var card_class = 'no-verificada-border';
 
                        if(data[i].empresa.verificada == true){
-                           verificada = "<span class='fa fa-check-circle verificada'></span>"
+                           verificada = '<a href="#" data-toggle = "tooltip" title = "Empresa verificada por Fast Work Colombia" data-placement="top"><span class="fa fa-check-circle verificada"></span></a>'
+                           card_class = 'verificada-border';
                        }
 
                        if(descripcion.length > 200){
                            descripcion = descripcion.substr(0,199) + "...";
                        }
 
-                       $( ".ofertas_render" ).append( "<div class='row card'><div class='col-sm-8'>" +
+                       $( ".ofertas_render" ).append( "<div class='row card "+card_class+"'><div class='col-sm-8'>" +
                            "<p class='title-oferta'><a href='#'>"+data[i].titulo+"</a></p>"+
                            verificada+"<p class='oferta-empresa inline'>"+data[i].empresa.nombre_comercial+"</p>"+
                            "<p class='oferta-descripcion'>"+descripcion+"</p>"+

@@ -331,7 +331,7 @@ label {
 .formulario-filtro {
   display: block;
   padding: 10px;
-  border: solid 1px #273b47;
+  border: solid 1px #d9d9d9;
 }
 ul {
   list-style: none;
@@ -343,7 +343,7 @@ ul li {
 }
 .categoria {
   height: 200px;
-  border: solid 1px #273b47;
+  border: solid 1px #d9d9d9;
   overflow: scroll;
 }
 .categoria div {
@@ -361,6 +361,14 @@ ul li {
   border-radius: 10px;
   box-shadow: 2px 2px 2px #d9d9d9;
   margin-bottom: 10px;
+  margin-right: 0;
+  width: 100%;
+}
+.verificada-border {
+  border-left: solid 10px #25944d;
+}
+.no-verificada-border {
+  border-left: solid 10px #cc8514;
 }
 .inline {
   display: inline;
@@ -379,11 +387,12 @@ ul li {
 .disable_link {
   pointer-events: none;
   cursor: default;
-  color: #273b47;
+  color: #25944d;
 }
-.disable_link:hover {
+.disable_link:hover,
+.disable_link:focus {
   text-decoration: none;
-  color: #273b47;
+  color: #25944d;
 }
 .verificada {
   color: #25944d;
@@ -416,9 +425,33 @@ ul li {
     border-bottom: solid 1px #c8c8c8;
   }
 }
+.border-box-register {
+  border-left: solid 1px #c8c8c8;
+}
+@media screen and (max-width: 991px) {
+  .border-box-register {
+    border-left: none;
+    border-top: solid 1px #c8c8c8;
+  }
+}
 .pass {
   width: 90%;
 }
 .eye {
   width: 10%;
+}
+#error-register,
+#error-login {
+  padding: 2px;
+  color: #a94442;
+}
+@media screen and (max-width: 767px) {
+  .margin-sm {
+    margin-bottom: 20px;
+  }
+}
+.tooltip-inner {
+  background: #25944d;
+  font-size: 14px;
+  max-width: 800px;
 }

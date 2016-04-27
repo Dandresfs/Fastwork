@@ -49,7 +49,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_new = models.BooleanField(default=True)
 
     photo = models.URLField(max_length=200,blank=True,null=True)
-    photo_email = models.ImageField(upload_to="Accounts/Foto",blank=True,null=True)
+    photo_email = models.FileField(upload_to="Accounts/Foto",blank=True,null=True)
     tipo_identificacion = models.CharField(max_length=100,blank=True)
     identificacion = models.BigIntegerField(blank=True,null=True)
     fecha_nacimiento = models.DateField(blank=True,null=True)

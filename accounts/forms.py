@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django import forms
-from .models import User, PreUser
+from .models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Div, ButtonHolder, Submit
 import json
@@ -23,7 +24,7 @@ class AccountForm(forms.ModelForm):
             return response
         else:
             for item in list:
-                response.append(tuple([item.encode('utf-8'),item.encode('utf-8')]))
+                response.append(tuple([item,item]))
             response = sorted(response, key=lambda x: x[0])
             return response
 
@@ -41,6 +42,7 @@ class AccountForm(forms.ModelForm):
                 Div(
                     Div('fullname',css_class='col-sm-6'),
                     Div('username',css_class='col-sm-6'),
+                    Div('photo_email',css_class='col-sm-12'),
                 ),
             ),
             Fieldset(
@@ -76,7 +78,7 @@ class AccountForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['tipo_identificacion','fullname','username','first_name','last_name','identificacion','fecha_nacimiento',
+        fields = ['tipo_identificacion','fullname','username','photo_email','first_name','last_name','identificacion','fecha_nacimiento',
                   'genero','estado_civil','telefono_1','telefono_2','departamento','ciudad','direccion']
         labels = {
             'first_name': 'Nombre(s)',
@@ -92,6 +94,7 @@ class AccountForm(forms.ModelForm):
             'direccion': 'Dirección',
             'genero': 'Genero*',
             'estado_civil': 'Estado civil*',
+            'photo_email': 'Foto de perfil',
         }
         widgets = {
             'first_name': forms.TextInput(attrs={'required':'required'}),

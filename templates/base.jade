@@ -30,7 +30,9 @@ html(lang="es")
                         | {% if user.is_authenticated %}
                         li(class="dropdown avatar")
                             a(href="#",class="dropdown-toggle",data-toggle="dropdown",role="button",aria-haspopup="true",aria-expanded="false")
-                                |{% if user.photo != None %}
+                                |{% if user.photo_email != "" %}
+                                img(src="{{user.photo_email}}")
+                                |{% elif user.photo != None %}
                                 img(src="{{user.photo}}")
                                 |{% else %}
                                 img(src="{% static 'imagenes/unknown_user.png' %}")
@@ -68,11 +70,11 @@ html(lang="es")
                             li(class="fa fa-skype fa-2x")
                     div(class="col-md-12 text-center creador")
                         p Desarrollado por Diego Andres Fonseca | &copy2016
-        script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js")
         script(src="{% static 'js/moment.es.js' %}")
         script(src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js")
-        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js",integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS",crossorigin="anonymous")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js")
         script(src="https://cdn.jsdelivr.net/jquery.chained/0.9.9/jquery.chained.remote.js")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.5.2/jquery.timeago.min.js")

@@ -108,7 +108,7 @@ block body_content
                     button(type="button",class="btn btn-default",data-dismiss="modal",id="cerrarFormacionConfirmacionModal") Cerrar
 
     div(class="modal fade",id="register_modal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
-        div(class="modal-dialog",role="document")
+        div(class="modal-dialog modal-lg",role="document")
             div(class="modal-content")
                 div(class="modal-header")
                     button(type="button",class="close",data-dismiss="modal",aria-label="Close")
@@ -116,7 +116,29 @@ block body_content
                     h3 Registro de nuevo usuario:
                 div(class="modal-body")
                     div(class="row")
-                        div(class="col-md-12")
+
+                        div(class="col-md-6",style="padding:20px;")
+                                h4(class="text-center") Con redes sociales:
+                                div(class="row",style="margin-top:30px;")
+                                    div(class="col-md-4")
+                                        div(class="text-center")
+                                            a(href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}",class="icon-button facebook")
+                                                i(class="fa fa-facebook icon-facebook")
+                                                span
+
+                                    div(class="col-md-4")
+                                        div(class="text-center")
+                                            a(href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}",class="icon-button twitter")
+                                                i(class="fa fa-twitter icon-twitter")
+                                                span
+
+                                    div(class="col-md-4")
+                                        div(class="text-center")
+                                            a(href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}",class="icon-button google")
+                                                i(class="fa fa-google icon-google")
+                                                span
+
+                        div(class="col-md-6 border-box-register")
                             form(role="form",class="loginForm",method="POST",action="/registration/")
                                 div(class="form-group")
                                     div(class="container-fluid")

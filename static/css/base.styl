@@ -314,7 +314,7 @@ label
 .formulario-filtro
   display block
   padding 10px
-  border solid 1px #273b47
+  border solid 1px #d9d9d9
 
 ul
   list-style none
@@ -326,7 +326,7 @@ ul
 
 .categoria
   height 200px
-  border solid 1px #273b47
+  border solid 1px #d9d9d9
   overflow scroll
 
   & div
@@ -344,6 +344,14 @@ ul
   border-radius 10px
   box-shadow 2px 2px 2px #d9d9d9
   margin-bottom 10px
+  margin-right 0
+  width 100%
+
+.verificada-border
+  border-left solid 10px #25944d
+
+.no-verificada-border
+  border-left solid 10px #CC8514
 
 .inline
   display inline
@@ -361,10 +369,10 @@ ul
 .disable_link
   pointer-events none
   cursor default
-  color #273b47
-  &:hover
+  color #25944D
+  &:hover,&:focus
     text-decoration none
-    color #273b47
+    color #25944D
 
 .verificada
   color #25944D
@@ -393,8 +401,28 @@ ul
     border-right none
     border-bottom solid 1px rgb(200,200,200)
 
+.border-box-register
+  border-left solid 1px rgb(200,200,200)
+  @media large
+    border-left none
+    border-top solid 1px rgb(200,200,200)
+
 .pass
   width 90%
 
 .eye
   width 10%
+
+#error-register, #error-login
+  padding 2px
+  color #a94442
+
+
+.margin-sm
+  @media medium
+    margin-bottom 20px
+
+.tooltip-inner
+  background #25944D
+  font-size 14px
+  max-width 800px

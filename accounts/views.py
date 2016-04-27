@@ -71,7 +71,7 @@ def registration(request):
                 return render(request, 'home.html', {'email':update.email})
 
             elif User.objects.filter(email=email).count() != 0:
-                return render(request, 'home.html', {'error_register':'EL correo electrónico que ingreso ya esta registrado'})
+                return render(request, 'home.html', {'error_register':'El correo electrónico que ingreso ya esta registrado.'})
 
     return render(request, 'home.html', {})
 
