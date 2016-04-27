@@ -6,6 +6,9 @@ block titulo
 block extra_style
     link(rel="stylesheet",href="{% static 'css/social.css' %}")
 
+block navbar_options
+    button(type="button",class="btn btn-success navbar-btn",data-toggle="modal",data-target="#login-social") Iniciar Sesión
+
 block body_content
     div(class="body-header")
         div(class="container-fluid banner-white")
@@ -63,7 +66,7 @@ block body_content
                     h3 Iniciar Sesión
                 div(class="modal-body")
                         div(class="row")
-                            div(class="col-md-6")
+                            div(class="col-md-6 border-box",style="padding:20px;")
                                 h4(class="text-center") Con redes sociales:
                                 div(class="row",style="margin-top:30px;")
                                     div(class="col-md-4")
@@ -85,26 +88,79 @@ block body_content
                                                 span
 
 
-                            div(class="col-md-6")
+                            div(class="col-md-6",style="padding:20px;")
                                 h4(class="text-center") Con correo electrónico:
-                                form(role="form",class="loginForm",method="POST")
+                                form(role="form",class="loginForm",method="POST",action="/login-email/")
                                     div(class="form-group")
                                         div(class="container-fluid")
                                             div(class="row")
+                                                |{% csrf_token %}
                                                 div(class="col-md-12")
-                                                    input(type="email",class="form-control",id="email",name="email",placeholder="Email")
+                                                    input(type="email",class="form-control",id="email_login",name="email",placeholder="Email")
                                                 div(class="col-md-12")
-                                                    input(type="password",class="form-control",id="password",name="password",placeholder="Contraseña")
+                                                    input(type="password",class="form-control",id="password_login",name="password",placeholder="Contraseña")
+                                                div(class="col-md-12")
+                                                    p(id="error-login") {{error}}
                                     button(type="submit",class="btn btn-success btn-modal",id="guardarFormacionModal") Iniciar Sesión
-                                    button(type="button",class="btn btn-info btn-modal") Registrarme
+                                    button(type="button",class="btn btn-primary btn-modal",id="registerButton") Registrarme
+                div(class="modal-footer")
+                    button(type="button",class="btn btn-default",data-dismiss="modal",id="cerrarFormacionConfirmacionModal") Cerrar
+
+    div(class="modal fade",id="register_modal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+        div(class="modal-dialog",role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h3 Registro de nuevo usuario:
+                div(class="modal-body")
+                    div(class="row")
+                        div(class="col-md-12")
+                            form(role="form",class="loginForm",method="POST",action="/registration/")
+                                div(class="form-group")
+                                    div(class="container-fluid")
+                                        div(class="row")
+                                            | {% csrf_token %}
+                                            div(class="col-md-12")
+                                                input(type="email",class="form-control",id="id_email",name="email",placeholder="Email",maxlength="254")
+                                            div(class="col-md-12")
+                                                input(type="password",class="form-control",id="id_password",name="password",placeholder="Contraseña")
+                                            div(class="col-md-12")
+                                                input(type="text",class="form-control",id="id_username",name="username",placeholder="Username")
+                                            div(class="col-md-12")
+                                                input(type="text",class="form-control",id="id_first_name",name="first_name",placeholder="Nombres")
+                                            div(class="col-md-12")
+                                                input(type="text",class="form-control",id="id_last_name",name="last_name",placeholder="Apellidos")
+                                            div(class="col-md-12")
+                                                p(id="error-register") {{error_register}}
+                                button(type="submit",class="btn btn-danger btn-modal") Volver
+                                button(type="submit",class="btn btn-success btn-modal") Aceptar
+                div(class="modal-footer")
+                    button(type="button",class="btn btn-default",data-dismiss="modal",id="cerrarFormacionConfirmacionModal") Cerrar
 
 
-
-
+    div(class="modal fade",id="confirmation_modal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+        div(class="modal-dialog",role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h3 Registro completo:
+                div(class="modal-body")
+                    div(class="row")
+                        div(class="col-md-12")
+                            p(class="inline") Se ha enviado un email a
+                            strong(class="inline",id="emailConfirmation",style="margin: 0 5px;") {{email}}
+                            p(class="inline") porfavor revisalo y confirma que es tu correo.
 
                 div(class="modal-footer")
                     button(type="button",class="btn btn-default",data-dismiss="modal",id="cerrarFormacionConfirmacionModal") Cerrar
+
+
     | {% if user.is_authenticated %}
     script
         | window.location.href = "/ofertas/";
     |{% endif %}
+
+block extra_script
+    script(src="{% static 'js/home.js' %}")

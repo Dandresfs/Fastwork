@@ -9,7 +9,11 @@ block body_content
     div(class="container-fluid banner")
         div(class="row")
             div(class="col-sm-4")
+                |{% if user.photo != None %}
                 img(class="avatar-account img-responsive center-block",src="{{user.photo}}")
+                |{% else %}
+                img(class="avatar-account img-responsive center-block",src="{% static 'imagenes/unknown_user.png' %}")
+                |{% endif %}
             div(class="col-sm-8 information-user")
                 p(class="text-text-left fullname-account") {{user.fullname}}
                 p(class="text-text-left username-account") Username: {{user.username}}

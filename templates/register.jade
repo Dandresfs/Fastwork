@@ -1,0 +1,87 @@
+extends base
+block titulo
+    | Inicio
+block extra_style
+    link(rel="stylesheet",href="{% static 'css/social.css' %}")
+
+block body_content
+    div(class="body-header")
+        div(class="container-fluid banner-white")
+            div(class="row row-home")
+                img(class="img-responsive center-block vcenter",src="{% static 'imagenes/logo.png' %}")
+    div(class="body-content")
+        div(class="container")
+            div(class="row")
+                div(class="col-md-12")
+                    h2(class="title-A text-center") ¿Cómo funciona Fastwork?
+            div(class="row")
+                div(class="col-md-6")
+                    div(class="title-A-p")
+                        div(class="circle-home")
+                            span(class="glyphicon glyphicon-log-in center-block",aria-hidden="true",style="background:#C43F3B;")
+                        h3(class="login-info text-center") Suscribete o inicia sesión, es gratuito
+                        p.
+                            Puedes suscribirte o iniciar sesión usando tu cuenta de &regFacebook, &regTwitter o &regGmail,
+                            solo usamos estas cuentas para generar tu usuario y conocer tu correo electrónico,
+                            de ninguna manera compartiremos tu información con terceros, si lo prefieres tambien puedes registrarte de manera
+                            tradicional confirmando tu correo electrónico.
+                div(class="col-md-6")
+                    div(class="title-A-p")
+                        div(class="circle-home")
+                            span(class="glyphicon glyphicon-user center-block",style="background:#188F38;")
+                        h3(class="login-info text-center") Personaliza tu perfil
+                        p.
+                            Personaliza tu cuenta de usuario y registra tus datos personales, contacto y residencia, mantenlos
+                            actualizados para que los empleadores se puedan comunicar contigo rapidamente.
+            div(class="row")
+                div(class="col-md-6")
+                    div(class="title-A-p")
+                        div(class="circle-home")
+                            span(class="glyphicon glyphicon-pencil center-block",style="background:#36658C;")
+                        h3(class="login-info text-center") Registra tu experiencia y formación
+                        p.
+                            Dale a conocer toda tu experiencia laboral y tu formación academica a los empleadores, tambien ayudanos
+                            a sugerirte las ofertas mas acordes a tu perfil laboral.
+                div(class="col-md-6")
+                    div(class="title-A-p")
+                        div(class="circle-home")
+                            span(class="glyphicon glyphicon-ok center-block",style="background:#CFB537;")
+                        h3(class="login-info text-center") Aplica a ofertas de empleo
+                        p.
+                            Filtra las ofertas de empleo con palabras clave, categorias, ubicación, salario, tipo de contratación
+                            y mucho mas, aplica a las ofertas y observa tu comparativa con los demas aspirantes.
+
+    div(class="modal fade",id="register_modal",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+        div(class="modal-dialog",role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h3 Registro de nuevo usuario:
+                div(class="modal-body")
+                    div(class="row")
+                        div(class="col-md-12")
+                            |{{form.as_p}}
+                            form(role="form",class="loginForm",method="POST")
+                                div(class="form-group")
+                                    div(class="container-fluid")
+                                        div(class="row")
+                                            | {% csrf_token %}
+                                            div(class="col-md-12")
+                                                input(type="email",class="form-control",id="id_email",name="email",placeholder="Email",maxlength="254")
+                                            div(class="col-md-12")
+                                                input(type="password",class="form-control",id="password",name="password",placeholder="Contraseña")
+                                            div(class="col-md-12")
+                                                input(type="text",class="form-control",id="username",name="username",placeholder="Username")
+                                            div(class="col-md-12")
+                                                input(type="text",class="form-control",id="first_name",name="first_name",placeholder="Nombres")
+                                            div(class="col-md-12")
+                                                input(type="text",class="form-control",id="last_name",name="last_name",placeholder="Apellidos")
+                                            div(class="col-md-12")
+                                                p(id="error-login") {{error}}
+                                button(type="submit",class="btn btn-danger btn-modal") Volver
+                                button(type="submit",class="btn btn-success btn-modal") Aceptar
+                div(class="modal-footer")
+                    button(type="button",class="btn btn-default",data-dismiss="modal",id="cerrarFormacionConfirmacionModal") Cerrar
+block extra_script
+    script(src="{% static 'js/register.js' %}")

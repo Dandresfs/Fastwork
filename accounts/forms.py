@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django import forms
-from .models import User
+from .models import User, PreUser
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Div, ButtonHolder, Submit
 import json

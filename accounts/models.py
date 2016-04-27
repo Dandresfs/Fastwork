@@ -44,11 +44,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     fullname = models.CharField(max_length=100)
-    photo = models.URLField(max_length=200)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_new = models.BooleanField(default=True)
 
+    photo = models.URLField(max_length=200,blank=True,null=True)
+    photo_email = models.ImageField(upload_to="Accounts/Foto",blank=True,null=True)
     tipo_identificacion = models.CharField(max_length=100,blank=True)
     identificacion = models.BigIntegerField(blank=True,null=True)
     fecha_nacimiento = models.DateField(blank=True,null=True)
@@ -70,3 +71,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
     def get_short_name(self):
         return self.email
+
+class PreUser(models.Model):
+    email = models.EmailField(unique=True)
+    username = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    fullname = models.CharField(max_length=100)
+    code = models.CharField(max_length=255)

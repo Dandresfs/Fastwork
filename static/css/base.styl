@@ -1,7 +1,7 @@
 small = 'screen and (max-width: 620px)'
 medium = 'screen and (max-width: 767px)'
 large = 'screen and (max-width: 991px)'
-xlarge = 'screen and (max-width: 1200px)'
+xlarge = 'screen and (max-width: 1600px)'
 
 body
   background #f7f5f5
@@ -10,6 +10,9 @@ body
   color #273b47
   text-rendering optimizeLegibility
   -webkit-font-smoothing antialiased
+
+a
+  color #273b47
 
 //**************************************** LOGIN ****************************************************
 .bgimage
@@ -275,12 +278,14 @@ label
 .ofertas
   padding 20px
 
+
 .filtros
   background #273b47
   color white
+  border-bottom solid 4px #6a9ad0
 
 .palabras
-  background #6a9ad0
+  background #273b47
   padding 7px
   color white
 
@@ -306,7 +311,7 @@ label
 .formulario-filtro
   display block
   padding 10px
-  border solid 1px #6a9ad0
+  border solid 1px #273b47
 
 ul
   list-style none
@@ -318,7 +323,7 @@ ul
 
 .categoria
   height 200px
-  border solid 1px #6a9ad0
+  border solid 1px #273b47
   overflow scroll
 
   & div
@@ -378,3 +383,9 @@ ul
   color rgb(255,0,0)
   &:hover
     color rgb(155,0,0)
+
+.border-box
+  border-right solid 1px rgb(200,200,200)
+  @media large
+    border-right none
+    border-bottom solid 1px rgb(200,200,200)

@@ -6,6 +6,9 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
+a {
+  color: #273b47;
+}
 .bgimage {
   background-image: url("../imagenes/background_login.jpg");
   background-size: 100%;
@@ -296,9 +299,10 @@ label {
 .filtros {
   background: #273b47;
   color: #fff;
+  border-bottom: solid 4px #6a9ad0;
 }
 .palabras {
-  background: #6a9ad0;
+  background: #273b47;
   padding: 7px;
   color: #fff;
 }
@@ -324,7 +328,7 @@ label {
 .formulario-filtro {
   display: block;
   padding: 10px;
-  border: solid 1px #6a9ad0;
+  border: solid 1px #273b47;
 }
 ul {
   list-style: none;
@@ -336,7 +340,7 @@ ul li {
 }
 .categoria {
   height: 200px;
-  border: solid 1px #6a9ad0;
+  border: solid 1px #273b47;
   overflow: scroll;
 }
 .categoria div {
@@ -399,4 +403,13 @@ ul li {
 }
 .close-link:hover {
   color: #9b0000;
+}
+.border-box {
+  border-right: solid 1px #c8c8c8;
+}
+@media screen and (max-width: 991px) {
+  .border-box {
+    border-right: none;
+    border-bottom: solid 1px #c8c8c8;
+  }
 }
