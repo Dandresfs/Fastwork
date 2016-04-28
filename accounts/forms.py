@@ -42,8 +42,11 @@ class AccountForm(forms.ModelForm):
                 Div(
                     Div('fullname',css_class='col-sm-6'),
                     Div('username',css_class='col-sm-6'),
-                    Div('photo_email',css_class='col-sm-12'),
                 ),
+            ),
+            Fieldset(
+                'Foto',
+                'photo_email'
             ),
             Fieldset(
                 'Datos Personales',

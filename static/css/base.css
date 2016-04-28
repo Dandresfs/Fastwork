@@ -151,7 +151,13 @@ a {
 .avatar-account {
   height: 200px;
   width: 200px;
+  overflow: hidden;
   border-radius: 50%;
+}
+.avatar-account img {
+  max-height: 100%;
+  -webkit-transform: translate(-50%);
+  margin-left: 100px;
 }
 .fullname-account {
   color: #fff;

@@ -31,7 +31,7 @@ html(lang="es")
                         li(class="dropdown avatar")
                             a(href="#",class="dropdown-toggle",data-toggle="dropdown",role="button",aria-haspopup="true",aria-expanded="false")
                                 |{% if user.photo_email != "" %}
-                                img(src="{{user.photo_email}}")
+                                img(src="{{MEDIA_URL}}{{user.photo_email}}")
                                 |{% elif user.photo != None %}
                                 img(src="{{user.photo}}")
                                 |{% else %}
