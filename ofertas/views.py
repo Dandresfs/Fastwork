@@ -32,3 +32,22 @@ class Ofertas(TemplateView):
         kwargs['total_ciudades'] = Oferta.objects.all().values_list('municipio',flat=True).count()
         kwargs['ciudades'] = ciudad_render
         return super(Ofertas,self).get_context_data(**kwargs)
+
+class OfertaDetail(TemplateView):
+    template_name = 'ofertas/detail.html'
+
+    def get_context_data(self, **kwargs):
+        oferta = Oferta.objects.get(id=self.kwargs['id_oferta'])
+        kwargs['nombre_empresa'] = oferta.empresa.nombre_comercial
+        kwargs['empresa_verificada'] = oferta.empresa.verificada
+        kwargs['empresa_descripcion'] = oferta.empresa.descripcion
+        kwargs['salario'] = '${:,.0f}'.format(int(oferta.salario))
+        kwargs['oferta'] = oferta.titulo
+        kwargs['descripcion'] = oferta.descripcion
+        kwargs['fecha_contratacion'] = oferta.fecha_contratacion
+        kwargs['vacantes'] = oferta.vacantes
+        kwargs['educacion'] = oferta.educacion
+        kwargs['experiencia'] = oferta.experiencia
+        kwargs['disponibilidad_viajar'] = "Si" if oferta.viajar == True else "No"
+        kwargs['disponibilidad_residencia'] = "Si" if oferta.residencia == True else "No"
+        return super(OfertaDetail, self).get_context_data(**kwargs)

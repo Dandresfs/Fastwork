@@ -165,7 +165,7 @@ function render_ofertas(){
                        }
 
                        $( ".ofertas_render" ).append( "<div class='row card "+card_class+"'><div class='col-sm-8'>" +
-                           "<p class='title-oferta'><a href='#'>"+data[i].titulo+"</a></p>"+
+                           "<p class='title-oferta'><a href='"+data[i].id+"'>"+data[i].titulo+"</a></p>"+
                            verificada+"<p class='oferta-empresa inline'>"+data[i].empresa.nombre_comercial+"</p>"+
                            "<p class='oferta-descripcion'>"+descripcion+"</p>"+
                            "</a></div><div class='col-sm-4'>"+

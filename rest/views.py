@@ -73,8 +73,8 @@ class FormacionDetailApiView(mixins.RetrieveModelMixin,
                                mixins.UpdateModelMixin,
                                mixins.DestroyModelMixin,
                                generics.GenericAPIView):
-    queryset = Oferta.objects.all()
-    serializer_class = OfertaSerializer
+    queryset = Formacion.objects.all()
+    serializer_class = FormacionSerializer
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)

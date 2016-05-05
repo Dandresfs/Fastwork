@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django import forms
 from .models import User
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Div, ButtonHolder, Submit
+from crispy_forms.layout import Layout, Fieldset, Div, ButtonHolder, Submit, HTML
 import json
 import os
 from Fastwork.settings import base as settings
@@ -74,6 +74,9 @@ class AccountForm(forms.ModelForm):
                     Div('direccion',css_class='col-md-4 col-sm-6'),
                 )
             ),
+
+            HTML("<p>Los campos marcados con (*) son obligatorios.</p>"),
+
             ButtonHolder(
                 Submit('submit', 'Guardar', css_class='button white')
             )

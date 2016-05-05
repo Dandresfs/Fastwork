@@ -1,0 +1,40 @@
+extends ../base
+block titulo
+    | Ofertas
+block body_content
+    div(class="container-fluid ofertas")
+        div(class="row")
+            div(class="col-sm-10 col-sm-offset-1 oferta-card")
+               h2(class="inline") {{nombre_empresa}}
+               |{% if empresa_verificada == True %}
+               a(href="#",class="inline",data-toggle = "tooltip",title = "Empresa verificada por Fast Work Colombia",data-placement="top")
+                  span(class="fa fa-check-circle fa-2x verificada",style="margin-left:5px;")
+               |{% endif %}
+               p(class="") {{empresa_descripcion}}
+               p(class="title-oferta-detail") Sobre la oferta
+               p(class="salario") Oferta:
+               ul(class="ul-style")
+                  li {{oferta}}
+               p(class="salario") Salario:
+               ul(class="ul-style")
+                  li {{salario}}
+               p(class="salario") Descripción:
+               ul(class="ul-style")
+                  li {{descripcion}}
+                  li Fecha de contratación: {{fecha_contratacion}}
+                  li Cantidad de vacantes: {{vacantes}}
+
+               p(class="salario") Requerimientos:
+               ul(class="ul-style")
+                  li Educación mínima: {{educacion}}
+                  li Años de experiencia: {{experiencia}}
+                  li Disponibilidad de viajar: {{disponibilidad_viajar}}
+                  li Disponibilidad de cambio de residencia: {{disponibilidad_residencia}}
+
+               div(class="text-center")
+                  button(type="button",class="btn btn-lg btn-success") Aplicar
+
+
+block extra_script
+   script
+      |$("body").tooltip({ selector: '[data-toggle=tooltip]' });

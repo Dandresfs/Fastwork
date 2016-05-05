@@ -133,19 +133,19 @@ function render_experiencia(){
           url: "/rest/experiencia/",
           success: function(data)
            {
-               if(data.length == 0){
+               if(data.count == 0){
                    $( ".experiencias" ).addClass("experiencias-none");
                    $( ".experiencias" ).append( "<p>No tienes experiencias registradas.</p>" );
                }
                else{
-                   for(i=0;i<data.length;i++){
+                   for(i=0;i<data.count;i++){
                        var mes = "";
-                       (data[i].meses < 2) ? mes = "Mes" : mes = "Meses";
+                       (data['results'][i].meses < 2) ? mes = "Mes" : mes = "Meses";
                        $( ".experiencias" ).append( "<div class='experiencia col-md-6'><div class='registro'>" +
-                           "<a class='delete-experience' onclick='delete_experience("+data[i].id+");'><span class='fa fa-times'></span></a>"+
-                           "<a class='update-experience' onclick='update_experience("+data[i].id+");'><span class='fa fa-pencil'></span></a>"+
-                           "<p class='title-empresa'>"+data[i].empresa+"</p>"+
-                           "<p>"+data[i].cargo+" - "+data[i].meses+" "+mes+"</p>"+
+                           "<a class='delete-experience' onclick='delete_experience("+data['results'][i].id+");'><span class='fa fa-times'></span></a>"+
+                           "<a class='update-experience' onclick='update_experience("+data['results'][i].id+");'><span class='fa fa-pencil'></span></a>"+
+                           "<p class='title-empresa'>"+data['results'][i].empresa+"</p>"+
+                           "<p>"+data['results'][i].cargo+" - "+data['results'][i].meses+" "+mes+"</p>"+
                            "</div></div>" );
                    }
                }
