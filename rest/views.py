@@ -31,6 +31,10 @@ class ExperienciaApiView(mixins.ListModelMixin,
     queryset = Experiencia.objects.all()
     serializer_class = ExperienciaSerializer
 
+    def get_queryset(self):
+        queryset = Experiencia.objects.filter(user=self.request.user)
+        return queryset
+
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
@@ -61,6 +65,10 @@ class FormacionApiView(mixins.ListModelMixin,
 
     queryset = Formacion.objects.all()
     serializer_class = FormacionSerializer
+
+    def get_queryset(self):
+        queryset = Formacion.objects.filter(user=self.request.user)
+        return queryset
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
