@@ -29,7 +29,7 @@ class Oferta(models.Model):
     publicacion = models.DateTimeField(auto_now_add=True, blank=True)
     actualizacion = models.BooleanField(default=False)
     cierre = models.DateTimeField(blank=True)
-    aplicacion = models.ManyToManyField(User)
+    aplicacion = models.ManyToManyField(User,blank=True)
 
     def __unicode__(self):
         return self.empresa.nombre_comercial
