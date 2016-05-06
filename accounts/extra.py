@@ -21,8 +21,15 @@ class ContentTypeRestrictedFileField(FileField):
             500MB - 429916160
     """
     def __init__(self, *args, **kwargs):
-        self.content_types = kwargs.pop("content_types")
-        self.max_upload_size = kwargs.pop("max_upload_size")
+        try:
+            self.content_types = kwargs.pop("content_types")
+        except KeyError:
+            self.content_types = None
+
+        try:
+            self.max_upload_size = kwargs.pop("max_upload_size")
+        except KeyError:
+            self.max_upload_size = None
 
         super(ContentTypeRestrictedFileField, self).__init__(*args, **kwargs)
 
