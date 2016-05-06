@@ -28,7 +28,7 @@ class Oferta(models.Model):
     residencia = models.BooleanField(default=False)
     publicacion = models.DateTimeField(auto_now_add=True, blank=True)
     actualizacion = models.BooleanField(default=False)
-    cierre = models.DateTimeField(blank=True)
+    cierre = models.DateTimeField(blank=True,null=True)
     aplicacion = models.ManyToManyField(User,blank=True)
 
     def __unicode__(self):

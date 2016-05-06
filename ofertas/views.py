@@ -42,7 +42,12 @@ class OfertaDetail(TemplateView):
         kwargs['nombre_empresa'] = oferta.empresa.nombre_comercial
         kwargs['empresa_verificada'] = oferta.empresa.verificada
         kwargs['empresa_descripcion'] = oferta.empresa.descripcion
-        kwargs['salario'] = '${:,.0f}'.format(int(oferta.salario))
+
+        try:
+            kwargs['salario'] = '${:,.0f}'.format(int(oferta.salario))
+        except:
+            kwargs['salario'] = oferta.salario
+
         kwargs['oferta'] = oferta.titulo
         kwargs['descripcion'] = oferta.descripcion
         kwargs['fecha_contratacion'] = oferta.fecha_contratacion
