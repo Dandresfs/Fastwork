@@ -50,7 +50,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_new = models.BooleanField(default=True)
 
     photo = models.URLField(max_length=200,blank=True,null=True)
-    photo_email = ContentTypeRestrictedFileField(upload_to='Accounts/Foto',blank=True,null=True,content_types=['image/jpg', 'image/jpeg', 'image/png'],max_upload_size=1048576)
+    #photo_email = ContentTypeRestrictedFileField(upload_to='Accounts/Foto',blank=True,null=True,content_types=['image/jpg', 'image/jpeg', 'image/png'],max_upload_size=1048576)
+    photo_email = models.ImageField(upload_to='Accounts/Foto',blank=True,null=True)
     tipo_identificacion = models.CharField(max_length=100,blank=True)
     identificacion = models.BigIntegerField(blank=True,null=True)
     fecha_nacimiento = models.DateField(blank=True,null=True)
@@ -65,8 +66,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     titulo = models.CharField(max_length=100,blank=True)
     perfil = models.TextField(max_length=500,blank=True)
 
-    hv = ContentTypeRestrictedFileField(upload_to='Accounts/Hv',blank=True,null=True,content_types=['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],max_upload_size=10485760)
-
+    #hv = ContentTypeRestrictedFileField(upload_to='Accounts/Hv',blank=True,null=True,content_types=['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],max_upload_size=10485760)
+    hv = models.FileField(upload_to='Accounts/Hv',blank=True,null=True)
 
     def get_full_name(self):
         return self.email
