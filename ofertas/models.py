@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from empresa.models import Empresa
+from accounts.models import User
 
 # Create your models here.
 
@@ -28,6 +29,7 @@ class Oferta(models.Model):
     publicacion = models.DateTimeField(auto_now_add=True, blank=True)
     actualizacion = models.BooleanField(default=False)
     cierre = models.DateTimeField(blank=True)
+    aplicacion = models.ManyToManyField(User)
 
     def __unicode__(self):
         return self.empresa.nombre_comercial

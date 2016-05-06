@@ -31,8 +31,25 @@ block body_content
                   li Disponibilidad de viajar: {{disponibilidad_viajar}}
                   li Disponibilidad de cambio de residencia: {{disponibilidad_residencia}}
 
+               |{% if aplicada == "No" %}
                div(class="text-center")
-                  button(type="button",class="btn btn-lg btn-success") Aplicar
+                  form(role="form",class="loginForm",method="POST",action="aplicar/")
+                     |{% csrf_token %}
+                     button(type="submit",class="btn btn-lg btn-success") Aplicar
+               |{% elif aplicada == "Si" %}
+               div(class="text-center")
+                  h4 Ya aplicaste a esta oferta!
+                  a(href="#")
+                     |{% if cantidad_aplicadas > 1 %}
+                     button(type="button",class="btn btn-lg btn-primary",disabled="disabled") {{cantidad_aplicadas}} Aspirantes - Ver comparativa
+                     |{% else %}
+                     button(type="button",class="btn btn-lg btn-primary",disabled="disabled") {{cantidad_aplicadas}} Aspirante - Ver comparativa
+                     |{% endif %}
+               |{% endif %}
+               div(class="text-center",style="margin-top:20px;")
+                  a(href="/ofertas/")
+                     button(type="button",class="btn btn-lg btn-success") Volver a Ofertas
+
 
 
 block extra_script

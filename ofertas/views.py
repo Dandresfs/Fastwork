@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from ofertas.models import Categoria, Oferta
+from django.shortcuts import redirect, render
 
 class Ofertas(TemplateView):
     template_name = 'ofertas/inicio.html'
@@ -50,4 +51,15 @@ class OfertaDetail(TemplateView):
         kwargs['experiencia'] = oferta.experiencia
         kwargs['disponibilidad_viajar'] = "Si" if oferta.viajar == True else "No"
         kwargs['disponibilidad_residencia'] = "Si" if oferta.residencia == True else "No"
+        kwargs['aplicada'] = "Si" if oferta.aplicacion.filter(id=self.request.user.id).count() == 1 else "No"
+        kwargs['cantidad_aplicadas'] = oferta.aplicacion.all().count()
         return super(OfertaDetail, self).get_context_data(**kwargs)
+
+def aplicarOferta(request,id_oferta):
+    if request.method == 'POST':
+        oferta = Oferta.objects.get(id=id_oferta)
+        oferta.aplicacion.add(request.user)
+        oferta.save()
+        return redirect('/ofertas/'+id_oferta+'/')
+    else:
+        return redirect('/ofertas/'+id_oferta+'/')
