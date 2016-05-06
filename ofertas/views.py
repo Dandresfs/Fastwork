@@ -15,13 +15,13 @@ class Ofertas(TemplateView):
                 categoria_render.append({'nombre':categoria.nombre,'cantidad':cantidad,'id':categoria.id})
 
         departamento_render = []
-        for departamento in Oferta.objects.all().values_list('departamento',flat=True):
+        for departamento in Oferta.objects.all().values_list('departamento',flat=True).distinct():
             cantidad = Oferta.objects.filter(departamento=departamento).count()
             if cantidad > 0:
                 departamento_render.append({'nombre':departamento,'cantidad':cantidad})
 
         ciudad_render = []
-        for ciudad in Oferta.objects.all().values_list('municipio',flat=True):
+        for ciudad in Oferta.objects.all().values_list('municipio',flat=True).distinct():
             cantidad = Oferta.objects.filter(municipio=ciudad).count()
             if cantidad > 0:
                 ciudad_render.append({'nombre':ciudad,'cantidad':cantidad})
