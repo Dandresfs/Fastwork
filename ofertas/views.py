@@ -2,9 +2,11 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from ofertas.models import Categoria, Oferta
 from django.shortcuts import redirect, render
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class Ofertas(TemplateView):
+class Ofertas(LoginRequiredMixin,TemplateView):
     template_name = 'ofertas/inicio.html'
+    login_url = '/'
 
     def get_context_data(self, **kwargs):
 
@@ -34,8 +36,9 @@ class Ofertas(TemplateView):
         kwargs['ciudades'] = ciudad_render
         return super(Ofertas,self).get_context_data(**kwargs)
 
-class OfertaDetail(TemplateView):
+class OfertaDetail(LoginRequiredMixin,TemplateView):
     template_name = 'ofertas/detail.html'
+    login_url = '/'
 
     def get_context_data(self, **kwargs):
         oferta = Oferta.objects.get(id=self.kwargs['id_oferta'])
@@ -60,7 +63,7 @@ class OfertaDetail(TemplateView):
         kwargs['cantidad_aplicadas'] = oferta.aplicacion.all().count()
         return super(OfertaDetail, self).get_context_data(**kwargs)
 
-def aplicarOferta(request,id_oferta):
+def aplicarOferta(LoginRequiredMixin,request,id_oferta):
     if request.method == 'POST':
         oferta = Oferta.objects.get(id=id_oferta)
         oferta.aplicacion.add(request.user)
