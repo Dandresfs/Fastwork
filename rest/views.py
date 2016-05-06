@@ -117,7 +117,7 @@ class OfertasApiView(mixins.ListModelMixin,
                          mixins.CreateModelMixin,
                          generics.GenericAPIView):
 
-    queryset = Oferta.objects.all()
+    queryset = Oferta.objects.all().order_by('-publicacion')
     serializer_class = OfertaSerializer
     pagination_class = OfertaPagination
 
