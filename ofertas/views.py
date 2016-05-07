@@ -63,7 +63,7 @@ class OfertaDetail(LoginRequiredMixin,TemplateView):
         kwargs['cantidad_aplicadas'] = oferta.aplicacion.all().count()
         return super(OfertaDetail, self).get_context_data(**kwargs)
 
-def aplicarOferta(LoginRequiredMixin,request,id_oferta):
+def aplicarOferta(request,id_oferta):
     if request.method == 'POST':
         oferta = Oferta.objects.get(id=id_oferta)
         oferta.aplicacion.add(request.user)
