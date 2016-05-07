@@ -160,6 +160,9 @@ a {
   -webkit-transform: translate(-50%);
   margin-left: 100px;
 }
+.json-cards {
+  padding: 0px 0px 0px 30px;
+}
 .fullname-account {
   color: #fff;
   font-size: 3em;
