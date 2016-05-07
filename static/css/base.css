@@ -153,6 +153,7 @@ a {
   width: 200px;
   overflow: hidden;
   border-radius: 50%;
+  background: #fff;
 }
 .avatar-account img {
   max-height: 100%;
