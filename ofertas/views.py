@@ -71,3 +71,14 @@ def aplicarOferta(request,id_oferta):
         return redirect('/ofertas/'+id_oferta+'/')
     else:
         return redirect('/ofertas/'+id_oferta+'/')
+
+class OfertaComparativa(LoginRequiredMixin,TemplateView):
+    template_name = 'ofertas/comparativa.html'
+    login_url = '/'
+
+    def get_context_data(self, **kwargs):
+        oferta = Oferta.objects.get(id=self.kwargs['id_oferta'])
+        kwargs['municipio_residencia'] = oferta.municipio
+        kwargs['pk'] = self.kwargs['id_oferta']
+        kwargs['total_aspirantes'] = oferta.aplicacion.all().count()
+        return super(OfertaComparativa,self).get_context_data(**kwargs)

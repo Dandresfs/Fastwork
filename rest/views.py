@@ -10,6 +10,10 @@ import Fastwork.settings.base as settings
 from ofertas.models import Oferta
 from django.db.models import Q
 import operator
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.http import Http404
+
 
 def departamentos(request):
     if request.method == 'GET':
@@ -155,3 +159,24 @@ class OfertasApiView(mixins.ListModelMixin,
             return self.queryset.filter(reduce(operator.and_,filtros))
         else:
             return self.queryset.all()
+
+
+class ComparativaApiView(APIView):
+
+    def get_object(self, pk):
+        try:
+            return Oferta.objects.get(pk=pk)
+        except Oferta.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        oferta = self.get_object(pk)
+
+        aplicados = oferta.aplicacion.all()
+        municipios = list(aplicados.values_list('ciudad',flat=True))
+
+        x = oferta.municipio
+        municipios_si = municipios.count(x)
+        municipios_no = len(municipios)-municipios_si
+
+        return Response({'residencia':{'total':aplicados.count(),'si':municipios_si,'no':municipios_no}})

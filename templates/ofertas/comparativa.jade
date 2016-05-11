@@ -1,0 +1,37 @@
+extends ../base
+block titulo
+    |Comparativa
+block body_content
+    div(class="container-fluid ofertas")
+        input(type="hidden",value="{{pk}}",id="id_oferta")
+        h3 Residentes en {{municipio_residencia}}:
+        div(class="row")
+            div(class="col-sm-8 border-comparativa")
+               canvas(id="residencia")
+            div(class="col-sm-4")
+               ul(style="list-style:disc")
+                  li
+                     h4(class="inline",id="residentes_total")
+                  li
+                     h4(class="inline",id="residentes_si")
+                  li
+                     h4(class="inline",id="residentes_no")
+        div(class="row")
+           div(class="col-sm-12")
+             div(class="text-center",style="margin-top:20px;")
+                a(href="../")
+                  button(type="button",class="btn btn-lg btn-success") Volver
+
+            //div(class="col-sm-6")
+               h3 Meses de experiencia:
+               canvas(id="experiencia")
+        //div(class="row")
+            div(class="col-sm-6")
+               h3 Edad:
+               canvas(id="edad")
+            div(class="col-sm-6")
+               h3 Nivel academico:
+               canvas(id="estudios")
+
+block extra_script
+    script(src="{% static 'js/comparativa.js' %}")

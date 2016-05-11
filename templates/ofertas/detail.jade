@@ -39,11 +39,11 @@ block body_content
                |{% elif aplicada == "Si" %}
                div(class="text-center")
                   h4 Ya aplicaste a esta oferta!
-                  a(href="#")
+                  a(href="comparativa")
                      |{% if cantidad_aplicadas > 1 %}
-                     button(type="button",class="btn btn-lg btn-primary",disabled="disabled") {{cantidad_aplicadas}} Aspirantes - Ver comparativa
+                     button(type="button",class="btn btn-lg btn-primary") {{cantidad_aplicadas}} Aspirantes - Ver comparativa
                      |{% else %}
-                     button(type="button",class="btn btn-lg btn-primary",disabled="disabled") {{cantidad_aplicadas}} Aspirante - Ver comparativa
+                     button(type="button",class="btn btn-lg btn-primary") {{cantidad_aplicadas}} Aspirante - Ver comparativa
                      |{% endif %}
                |{% endif %}
                div(class="text-center",style="margin-top:20px;")
