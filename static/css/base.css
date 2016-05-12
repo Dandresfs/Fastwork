@@ -32,6 +32,9 @@ a {
 .navbar-brand > img {
   height: 40px;
 }
+.avatar {
+  margin: 0px;
+}
 .avatar img {
   height: 40px;
   border-radius: 50%;
@@ -155,10 +158,24 @@ a {
   border-radius: 50%;
   background: #fff;
 }
+.img-avatar {
+  height: 40px;
+  width: 40px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #fff;
+  display: inline-block;
+}
 .avatar-account img {
   max-height: 100%;
   -webkit-transform: translate(-50%);
   margin-left: 100px;
+}
+.img-avatar img {
+  border-radius: 0;
+  max-height: 100%;
+  -webkit-transform: translate(-50%);
+  margin-left: 20px;
 }
 .json-cards {
   padding: 0px 0px 0px 30px;

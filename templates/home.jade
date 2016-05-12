@@ -72,19 +72,19 @@ block body_content
                                 div(class="row",style="margin-top:30px;")
                                     div(class="col-md-4")
                                         div(class="text-center")
-                                            a(href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}",class="icon-button facebook")
+                                            a(href="{% url 'social:begin' 'facebook' %}?next=/ofertas/",class="icon-button facebook")
                                                 i(class="fa fa-facebook icon-facebook")
                                                 span
 
                                     div(class="col-md-4")
                                         div(class="text-center")
-                                            a(href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}",class="icon-button twitter")
+                                            a(href="{% url 'social:begin' 'twitter' %}?next=next=/ofertas/",class="icon-button twitter")
                                                 i(class="fa fa-twitter icon-twitter")
                                                 span
 
                                     div(class="col-md-4")
                                         div(class="text-center")
-                                            a(href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}",class="icon-button google")
+                                            a(href="{% url 'social:begin' 'google-oauth2' %}?next=/ofertas/",class="icon-button google")
                                                 i(class="fa fa-google icon-google")
                                                 span
 
