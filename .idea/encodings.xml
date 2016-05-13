@@ -8,6 +8,7 @@
     <file url="file://$PROJECT_DIR$/templates/base.jade" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/templates/email/bienvenida.tpl" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/templates/email/confirmation.tpl" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/templates/ofertas/comparativa.jade" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/templates/ofertas/detail.jade" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/templates/register.jade" charset="UTF-8" />
   </component>

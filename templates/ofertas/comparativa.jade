@@ -4,18 +4,23 @@ block titulo
 block body_content
     div(class="container-fluid ofertas")
         input(type="hidden",value="{{pk}}",id="id_oferta")
-        h3 Residentes en {{municipio_residencia}}:
+        h2 Requerimientos de la oferta:
+
         div(class="row")
-            div(class="col-sm-8 border-comparativa")
+            div(class="col-md-4 border-comparativa")
+               h4(class="text-center margin-top-title") Ciudad de residencia:
                canvas(id="residencia")
-            div(class="col-sm-4")
-               ul(style="list-style:disc")
-                  li
-                     h4(class="inline",id="residentes_total")
-                  li
-                     h4(class="inline",id="residentes_si")
-                  li
-                     h4(class="inline",id="residentes_no")
+            div(class="col-md-2")
+               div(id="residencia_div",class="margin-top-desc")
+
+            div(class="col-md-4 border-comparativa")
+                h4(class="text-center margin-top-title") Edad:
+                canvas(id="edad")
+            div(class="col-md-2")
+               div(id="edad_div",class="margin-top-desc")
+        div(class="row-fin")
+
+
         div(class="row")
            div(class="col-sm-12")
              div(class="text-center",style="margin-top:20px;")
