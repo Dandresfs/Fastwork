@@ -177,9 +177,38 @@ class ComparativaApiView(APIView):
         aplicados = oferta.aplicacion.all()
         aplicado_request = oferta.aplicacion.get(id=request.user.id)
 
-        municipios = list(aplicados.values_list('ciudad',flat=True))
-        municipios_si = municipios.count(oferta.municipio)
-        municipios_no = len(municipios)-municipios_si
+
+
+        residencia = [{"municipio":"si","cantidad":0,"porcentaje":0,"user_request":""},
+                      {"municipio":"otro","cantidad":0,"porcentaje":0,"user_request":""},
+                      {"municipio":"ninguno","cantidad":0,"porcentaje":0,"user_request":""},
+                     ]
+
+
+
+        for aplicado in aplicados:
+            r = aplicado.ciudad
+            flag = False
+            if aplicado == aplicado_request:
+                flag = True
+
+            if r == "":
+                residencia[2]['cantidad'] += 1
+                residencia[2]['porcentaje'] = self.percent(aplicados.count(),residencia[2]['cantidad'])
+                if flag == True:
+                    residencia[2]['user_request'] = "Actualiza tus datos de residencia"
+
+            elif r == oferta.municipio:
+                residencia[0]['cantidad'] += 1
+                residencia[0]['porcentaje'] = self.percent(aplicados.count(),residencia[0]['cantidad'])
+                if flag == True:
+                    residencia[2]['user_request'] = "El "+str(residencia[0]['porcentaje'])+"% de los aspirantes reside en "+oferta.municipio+"."
+            else:
+                residencia[1]['cantidad'] += 1
+                residencia[1]['porcentaje'] = self.percent(aplicados.count(),residencia[1]['cantidad'])
+                if flag == True:
+                    residencia[2]['user_request'] = "El "+str(residencia[2]['porcentaje'])+"% de los aspirantes no reside en "+oferta.municipio+"."
+
 
 
         rangos = [{"inferior":18,"superior":24,"cantidad":0,"porcentaje":0,"user_request":""},
@@ -214,7 +243,7 @@ class ComparativaApiView(APIView):
                 rango['cantidad'] += 1
                 rango['porcentaje'] = self.percent(aplicados.count(),rango['cantidad'])
                 if flag == True:
-                    rango['user_request'] = "Actualice su edad en la pestaña 'Mi perfil'"
+                    rango['user_request'] = "Actualiza tu edad en la pestaña 'Mi perfil'"
 
 
 
@@ -261,18 +290,48 @@ class ComparativaApiView(APIView):
 
 
 
+        niveles = [{"nivel":"Básico","cantidad":0,"porcentaje":0,"user_request":""},
+                      {"nivel":"Medio","cantidad":0,"porcentaje":0,"user_request":""},
+                      {"nivel":"Universitario","cantidad":0,"porcentaje":0,"user_request":""},
+                      {"nivel":"de Postgrado","cantidad":0,"porcentaje":0,"user_request":""},
+                      {"nivel":"Nada","cantidad":0,"porcentaje":0,"user_request":""},
+                     ]
+
+
+
+        for aplicado in aplicados:
+            flag = False
+            if aplicado == aplicado_request:
+                flag = True
+
+            n = self.establecer_nivel(aplicado)
+
+            for nivel in niveles:
+                if nivel['nivel'] == n:
+                    nivel['cantidad'] += 1
+                    nivel['porcentaje'] = self.percent(aplicados.count(),nivel['cantidad'])
+                    if flag == True and nivel['nivel'] == "Nada":
+                        nivel['user_request'] = "Actualiza tus datos de formación"
+                    if flag == True and nivel['nivel'] != "Nada":
+                        nivel['user_request'] = "El "+nivel['porcentaje']+"% de los aspirates tiene formación a nivel "+nivel['nivel']+"."
+
+
+
+
+
+
         return Response({'residencia':{'total':aplicados.count(),
-                                       'si' : municipios_si,
-                                       'no' : municipios_no,
-                                       'si_porcentaje' : self.percent(aplicados.count(),municipios_si),
-                                       'no_porcentaje' : self.percent(aplicados.count(),municipios_no),
-                                       'ciudad' : oferta.municipio},
+                                 'residencia':residencia,
+                                },
                          'edad':{'total':aplicados.count(),
                                  'edad':rangos,
                                 },
                          'experiencia':{'total':aplicados.count(),
                                  'experiencia':rangos_experiencia,
-                                }
+                                },
+                         'nivel':{'total':aplicados.count(),
+                                 'nivel':niveles,
+                                },
                         })
 
     def percent(self,total,value):
@@ -287,3 +346,19 @@ class ComparativaApiView(APIView):
         for experiencia in experiencias:
             meses += int(experiencia.meses)
         return meses
+
+    def establecer_nivel(self,user):
+        formaciones = Formacion.objects.filter(user=user).values_list('nivel',flat=True)
+        if formaciones.count() == 0:
+            return "Nada"
+        for formacion in formaciones:
+            if formacion == "Educación Básica Primaria" or formacion == "Educación Básica Secundaria":
+                return "Básico"
+            elif formacion == "Bachillerato / Educación Media":
+                return "Medio"
+            elif formacion == "Universidad / Carrera técnica" or formacion == "Universidad / Carrera tecnológica" or formacion == "Universidad / Carrera Profesional":
+                return "Universitario"
+            elif formacion == "Postgrado / Especialización" or formacion == "Postgrado / Maestría" or formacion == "Postgrado / Doctorado":
+                return "de Postgrado"
+            else:
+                return "Nada"
