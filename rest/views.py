@@ -182,13 +182,14 @@ class ComparativaApiView(APIView):
         municipios_no = len(municipios)-municipios_si
 
 
-        rangos = [{"inferior":18,"superior":24,"cantidad":0,"user_request":""},
-                 {"inferior":25,"superior":29,"cantidad":0,"user_request":""},
-                 {"inferior":30,"superior":34,"cantidad":0,"user_request":""},
-                 {"inferior":35,"superior":39,"cantidad":0,"user_request":""},
-                 {"inferior":40,"superior":44,"cantidad":0,"user_request":""},
-                 {"inferior":45,"superior":49,"cantidad":0,"user_request":""},
-                 {"inferior":50,"superior":100,"cantidad":0,"user_request":""},
+        rangos = [{"inferior":18,"superior":24,"cantidad":0,"porcentaje":0,"user_request":""},
+                 {"inferior":25,"superior":29,"cantidad":0,"porcentaje":0,"user_request":""},
+                 {"inferior":30,"superior":34,"cantidad":0,"porcentaje":0,"user_request":""},
+                 {"inferior":35,"superior":39,"cantidad":0,"porcentaje":0,"user_request":""},
+                 {"inferior":40,"superior":44,"cantidad":0,"porcentaje":0,"user_request":""},
+                 {"inferior":45,"superior":49,"cantidad":0,"porcentaje":0,"user_request":""},
+                 {"inferior":50,"superior":100,"cantidad":0,"porcentaje":0,"user_request":""},
+                 {"inferior":0,"superior":0,"cantidad":0,"porcentaje":0,"user_request":""},
                  ]
 
         for aplicado in aplicados:
@@ -196,14 +197,66 @@ class ComparativaApiView(APIView):
             flag = False
             if aplicado == aplicado_request:
                 flag = True
+
             if nacimiento != None:
                 edad = self.calcular_edad(nacimiento)
                 for rango in rangos:
                     if edad >= rango['inferior'] and edad < rango['superior'] and flag == False:
                         rango['cantidad'] += 1
+                        rango['porcentaje'] = self.percent(aplicados.count(),rango['cantidad'])
                     if edad >= rango['inferior'] and edad < rango['superior'] and flag == True:
                         rango['cantidad'] += 1
-                        rango['user_request'] = "si"
+                        rango['porcentaje'] = self.percent(aplicados.count(),rango['cantidad'])
+                        rango['user_request'] = "El "+str(rango['porcentaje'])+"% de los aspirantes tiene entre "+str(rango['inferior'])+" y "+\
+                                                str(rango['superior'])+" años."
+            else:
+                rango = rangos[7]
+                rango['cantidad'] += 1
+                rango['porcentaje'] = self.percent(aplicados.count(),rango['cantidad'])
+                if flag == True:
+                    rango['user_request'] = "Actualice su edad en la pestaña 'Mi perfil'"
+
+
+
+
+
+        rangos_experiencia = [{"inferior":1,"superior":6,"cantidad":0,"porcentaje":0,"user_request":""},
+                 {"inferior":7,"superior":12,"cantidad":0,"porcentaje":0,"user_request":""},
+                 {"inferior":13,"superior":18,"cantidad":0,"porcentaje":0,"user_request":""},
+                 {"inferior":19,"superior":24,"cantidad":0,"porcentaje":0,"user_request":""},
+                 {"inferior":25,"superior":36,"cantidad":0,"porcentaje":0,"user_request":""},
+                 {"inferior":37,"superior":48,"cantidad":0,"porcentaje":0,"user_request":""},
+                 {"inferior":48,"superior":200,"cantidad":0,"porcentaje":0,"user_request":""},
+                 {"inferior":0,"superior":0,"cantidad":0,"porcentaje":0,"user_request":""}
+                 ]
+
+        for aplicado in aplicados:
+            experiencia = Experiencia.objects.filter(user=aplicado).count()
+
+            flag = False
+            if aplicado == aplicado_request:
+                flag = True
+
+            if experiencia > 0:
+                experiencia = self.calcular_experiencia(aplicado)
+
+                for rango in rangos_experiencia:
+                    if experiencia >= rango['inferior'] and experiencia < rango['superior'] and flag == False:
+                        rango['cantidad'] += 1
+                        rango['porcentaje'] = self.percent(aplicados.count(),rango['cantidad'])
+                    if experiencia >= rango['inferior'] and experiencia < rango['superior'] and flag == True:
+                        rango['cantidad'] += 1
+                        rango['porcentaje'] = self.percent(aplicados.count(),rango['cantidad'])
+                        rango['user_request'] = "El "+str(rango['porcentaje'])+"% de los aspirantes tiene de "+str(rango['inferior'])+" a "+\
+                                                str(rango['superior'])+" meses de experiencia."
+            else:
+                rango = rangos_experiencia[7]
+                rango['cantidad'] += 1
+                rango['porcentaje'] = self.percent(aplicados.count(),rango['cantidad'])
+                if flag == True:
+                    rango['user_request'] = "No tienes experiencia laboral registrada."
+
+
 
 
 
@@ -216,6 +269,9 @@ class ComparativaApiView(APIView):
                                        'ciudad' : oferta.municipio},
                          'edad':{'total':aplicados.count(),
                                  'edad':rangos,
+                                },
+                         'experiencia':{'total':aplicados.count(),
+                                 'experiencia':rangos_experiencia,
                                 }
                         })
 
@@ -224,3 +280,10 @@ class ComparativaApiView(APIView):
 
     def calcular_edad(self,date):
         return int((datetime.date(datetime.now()) - date).days/365.2425)
+
+    def calcular_experiencia(self,user):
+        experiencias = Experiencia.objects.filter(user)
+        meses = 0
+        for experiencia in experiencias:
+            meses += int(experiencia.meses)
+        return meses

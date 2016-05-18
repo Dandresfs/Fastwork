@@ -6,19 +6,30 @@ block body_content
         input(type="hidden",value="{{pk}}",id="id_oferta")
         h2 Requerimientos de la oferta:
 
-        div(class="row")
-            div(class="col-md-4 border-comparativa")
+        div(class="row row-margin-bottom")
+            div(class="col-md-6 border-comparativa")
                h4(class="text-center margin-top-title") Ciudad de residencia:
-               canvas(id="residencia")
-            div(class="col-md-2")
                div(id="residencia_div",class="margin-top-desc")
+               canvas(id="residencia")
 
-            div(class="col-md-4 border-comparativa")
+
+            div(class="col-md-6 border-comparativa")
                 h4(class="text-center margin-top-title") Edad:
+                div(id="edad_div",class="margin-top-desc")
                 canvas(id="edad")
-            div(class="col-md-2")
-               div(id="edad_div",class="margin-top-desc")
-        div(class="row-fin")
+
+        div(class="row row-margin-bottom")
+            div(class="col-md-6 border-comparativa")
+               h4(class="text-center margin-top-title") Experiencia laboral:
+               div(id="experiencia_div",class="margin-top-desc")
+               canvas(id="experiencia")
+
+
+            div(class="col-md-6 border-comparativa")
+                h4(class="text-center margin-top-title") Nivel de estudios:
+                div(id="nivel_div",class="margin-top-desc")
+                canvas(id="nivel")
+
 
 
         div(class="row")
