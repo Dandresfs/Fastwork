@@ -44,8 +44,8 @@ function render_residencia(data){
 }
 
 function render_edad(data){
-    console.log(data.edad[1]);
-
+    console.log(data);
+/*
     $("#edad_div").html("<ul style='list-style:disc'>" +
         "<li>"+data['rango']+"</li></ul>");
 
@@ -71,4 +71,5 @@ function render_edad(data){
         },
 
     });
+    */
 }

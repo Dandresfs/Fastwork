@@ -181,65 +181,29 @@ class ComparativaApiView(APIView):
         municipios_si = municipios.count(oferta.municipio)
         municipios_no = len(municipios)-municipios_si
 
-        r1 = 0
-        r2 = 0
-        r3 = 0
-        r4 = 0
-        r5 = 0
-        r6 = 0
-        r7 = 0
+
+        rangos = [{"inferior":18,"superior":24,"cantidad":0,"user_request":""},
+                 {"inferior":25,"superior":29,"cantidad":0,"user_request":""},
+                 {"inferior":30,"superior":34,"cantidad":0,"user_request":""},
+                 {"inferior":35,"superior":39,"cantidad":0,"user_request":""},
+                 {"inferior":40,"superior":44,"cantidad":0,"user_request":""},
+                 {"inferior":45,"superior":49,"cantidad":0,"user_request":""},
+                 {"inferior":50,"superior":100,"cantidad":0,"user_request":""},
+                 ]
 
         for aplicado in aplicados:
             nacimiento = aplicado.fecha_nacimiento
+            flag = False
+            if aplicado == aplicado_request:
+                flag = True
             if nacimiento != None:
                 edad = self.calcular_edad(nacimiento)
-                if edad >= 18 and edad < 25:
-                    r1 += 1
-                if edad >= 25 and edad < 30:
-                    r2 += 1
-                if edad >= 30 and edad < 35:
-                    r3 += 1
-                if edad >= 35 and edad < 40:
-                    r4 += 1
-                if edad >= 40 and edad < 45:
-                    r5 += 1
-                if edad >= 45 and edad < 50:
-                    r6 += 1
-                if edad >= 50:
-                    r7 += 1
-
-        if aplicado_request.fecha_nacimiento != None:
-            edad = self.calcular_edad(aplicado_request.fecha_nacimiento)
-
-            if edad >= 18 and edad < 25:
-                m = "18 y 24"
-                r = r1
-            if edad >= 25 and edad < 30:
-                m = "25 y 29"
-                r = r2
-            if edad >= 30 and edad < 35:
-                m = "30 y 34"
-                r = r3
-            if edad >= 35 and edad < 40:
-                m = "35 y 39"
-                r = r4
-            if edad >= 40 and edad < 45:
-                m = "40 y 44"
-                r = r5
-            if edad >= 45 and edad < 50:
-                m = "45 y 49"
-                r = r6
-            if edad >= 50:
-                m = "50 o mas"
-                r = r7
-
-            edad_porcentaje = self.percent(aplicados.exclude(fecha_nacimiento = None).count(),r)
-            rango_edad = "El "+str(edad_porcentaje)+"% de los aspirantes tiene entre " + m + " años."
-        else:
-            rango_edad = "Debes actualizar esta informacion en tu perfil"
-
-
-
+                for rango in rangos:
+                    if edad >= rango['inferior'] and edad < rango['superior'] and flag == False:
+                        rango['cantidad'] += 1
+                    if edad >= rango['inferior'] and edad < rango['superior'] and flag == True:
+                        rango['cantidad'] += 1
+                        rango['user_request'] = "si"
 
 
 
@@ -251,8 +215,8 @@ class ComparativaApiView(APIView):
                                        'no_porcentaje' : self.percent(aplicados.count(),municipios_no),
                                        'ciudad' : oferta.municipio},
                          'edad':{'total':aplicados.count(),
-                                 'edad':[r1,r2,r3,r4,r5,r6,r7],
-                                 'rango':rango_edad}
+                                 'edad':rangos,
+                                }
                         })
 
     def percent(self,total,value):

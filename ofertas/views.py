@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from ofertas.models import Categoria, Oferta
 from django.shortcuts import redirect, render
 from django.contrib.auth.mixins import LoginRequiredMixin
+from accounts.models import User
 
 class Ofertas(LoginRequiredMixin,TemplateView):
     template_name = 'ofertas/inicio.html'
@@ -78,7 +79,16 @@ class OfertaComparativa(LoginRequiredMixin,TemplateView):
 
     def get_context_data(self, **kwargs):
         oferta = Oferta.objects.get(id=self.kwargs['id_oferta'])
-        kwargs['municipio_residencia'] = oferta.municipio
+        kwargs['postulados'] = oferta.municipio
         kwargs['pk'] = self.kwargs['id_oferta']
         kwargs['total_aspirantes'] = oferta.aplicacion.all().count()
         return super(OfertaComparativa,self).get_context_data(**kwargs)
+
+class OfertaEliminar(LoginRequiredMixin,TemplateView):
+    template_name = 'ofertas/eliminar.html'
+    login_url = '/'
+
+    def get_context_data(self, **kwargs):
+        oferta = Oferta.objects.get(id=self.kwargs['id_oferta'])
+        kwargs['postulados'] = oferta.aplicacion.all()
+        return super(OfertaEliminar,self).get_context_data(**kwargs)
