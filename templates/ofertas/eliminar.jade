@@ -4,8 +4,8 @@ block titulo
 block body_content
     div(class="container-fluid ofertas")
         h2 Hojas de Vida:
+        |{% for postulado in postulados %}
         div(class="row")
             div(class="col-md-12")
-               |{% for postulado in postulados %}
                a(href="{{postulado.hv}}") {{postulado.fullname}} : {{postulado.hv}}
-               |{% endfor %}
+        |{% endfor %}
