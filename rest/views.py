@@ -282,7 +282,7 @@ class ComparativaApiView(APIView):
         return int((datetime.date(datetime.now()) - date).days/365.2425)
 
     def calcular_experiencia(self,user):
-        experiencias = Experiencia.objects.filter(user)
+        experiencias = Experiencia.objects.filter(user=user)
         meses = 0
         for experiencia in experiencias:
             meses += int(experiencia.meses)
