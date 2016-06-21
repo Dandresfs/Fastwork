@@ -15,6 +15,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import Http404
 from datetime import datetime
+from braces.views import LoginRequiredMixin
 
 
 def departamentos(request):
@@ -30,7 +31,8 @@ def departamentos(request):
                 dict[municipio] = municipio
         return HttpResponse(json.dumps(dict,sort_keys=True), content_type="application/json")
 
-class ExperienciaApiView(mixins.ListModelMixin,
+class ExperienciaApiView(LoginRequiredMixin,
+                         mixins.ListModelMixin,
                          mixins.CreateModelMixin,
                          generics.GenericAPIView):
 
@@ -48,7 +50,8 @@ class ExperienciaApiView(mixins.ListModelMixin,
         return self.create(request, *args, **kwargs)
 
 
-class ExperienciaDetailApiView(mixins.RetrieveModelMixin,
+class ExperienciaDetailApiView(LoginRequiredMixin,
+                               mixins.RetrieveModelMixin,
                                mixins.UpdateModelMixin,
                                mixins.DestroyModelMixin,
                                generics.GenericAPIView):
@@ -65,7 +68,8 @@ class ExperienciaDetailApiView(mixins.RetrieveModelMixin,
         return self.destroy(request, *args, **kwargs)
 
 
-class FormacionApiView(mixins.ListModelMixin,
+class FormacionApiView(LoginRequiredMixin,
+                       mixins.ListModelMixin,
                          mixins.CreateModelMixin,
                          generics.GenericAPIView):
 
@@ -83,7 +87,8 @@ class FormacionApiView(mixins.ListModelMixin,
         return self.create(request, *args, **kwargs)
 
 
-class FormacionDetailApiView(mixins.RetrieveModelMixin,
+class FormacionDetailApiView(LoginRequiredMixin,
+                             mixins.RetrieveModelMixin,
                                mixins.UpdateModelMixin,
                                mixins.DestroyModelMixin,
                                generics.GenericAPIView):
@@ -313,7 +318,7 @@ class ComparativaApiView(APIView):
                     if flag == True and nivel['nivel'] == "Nada":
                         nivel['user_request'] = "Actualiza tus datos de formación"
                     if flag == True and nivel['nivel'] != "Nada":
-                        nivel['user_request'] = "El "+nivel['porcentaje']+"% de los aspirates tiene formación a nivel "+nivel['nivel']+"."
+                        nivel['user_request'] = "El "+unicode(nivel['porcentaje'])+"% de los aspirates tiene formación a nivel "+nivel['nivel']+"."
 
 
 

@@ -13,6 +13,7 @@ from .forms import RegistrationForm, AccountForm
 from .models import User, PreUser
 from django.contrib.auth import login, authenticate
 
+
 class RegistrationView(CreateView):
     form_class = RegistrationForm
     model = User

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from accounts.extra import ContentTypeRestrictedFileField
+from functions.files import ascii_filename
 
 
 class UserManager(BaseUserManager):

@@ -17,7 +17,7 @@ class Oferta(models.Model):
     categoria = models.ForeignKey(Categoria)
     titulo = models.CharField(max_length=100)
     descripcion = models.TextField(max_length=10000)
-    fecha_contratacion = models.DateField(blank=True)
+    fecha_contratacion = models.DateField(editable=True,blank=True)
     vacantes = models.IntegerField()
     departamento = models.CharField(max_length=100)
     municipio = models.CharField(max_length=100)
