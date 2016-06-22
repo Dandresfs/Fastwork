@@ -46,6 +46,13 @@ block body_content
                      button(type="button",class="btn btn-lg btn-primary") {{cantidad_aplicadas}} Aspirante - Ver comparativa
                      |{% endif %}
                |{% endif %}
+
+               |{% if user.is_superuser %}
+               div(class="text-center",style="margin:15px;")
+                  a(href="seleccion")
+                     button(type="submit",class="btn btn-lg btn-danger") Seleccionar Aspirantes
+               |{% endif %}
+
                div(class="text-center",style="margin-top:20px;")
                   a(href="/ofertas/")
                      button(type="button",class="btn btn-lg btn-success") Volver a Ofertas

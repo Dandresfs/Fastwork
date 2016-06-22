@@ -3,7 +3,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from accounts.extra import ContentTypeRestrictedFileField
-from functions.files import ascii_filename
+from django.db.models import Sum
+
 
 
 class UserManager(BaseUserManager):
@@ -39,6 +40,7 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
+
     USERNAME_FIELD = 'email'
     objects = UserManager()
     email = models.EmailField(unique=True)
@@ -73,6 +75,21 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
     def get_short_name(self):
         return self.email
+
+    def get_experiencia(self):
+        return Experiencia.objects.filter(user=self).aggregate(Sum('meses'))['meses__sum']
+
+    def get_experiencia_cantidad(self):
+        texto = "meses"
+        meses = Experiencia.objects.filter(user=self).aggregate(Sum('meses'))['meses__sum']
+        if meses == 1:
+            texto = "mes"
+        if meses != None:
+            return unicode(meses)+" "+texto
+        else:
+            return ""
+
+from hv.models import Experiencia
 
 class PreUser(models.Model):
     email = models.EmailField(unique=True)

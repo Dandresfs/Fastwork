@@ -1,0 +1,19 @@
+extends ../base
+
+block filters
+   |{% load render_table from django_tables2 %}
+   |{% load django_tables2 crispy_forms_tags %}
+
+block titulo
+    | Seleccion
+block body_content
+    div(class="container-fluid",style="padding-top:30px;")
+        div(class="row")
+            div(class="col-xs-12 col-md-9")
+                | {% render_table table %}
+            div(class="col-xs-12 col-md-3")
+                form(action="",method="get",id="filter-form")
+                    | {% crispy filter.form %}
+                    input(class="btn btn-success",type="submit",value="Buscar",id="id_filter")
+
+block extra_script

@@ -46,7 +46,7 @@ LOCAL_APPS = [
     'hv',
     'rest',
     'empresa',
-    'ofertas',
+    'ofertas'
 ]
 
 THIRD_PARTY_APPS = [
@@ -54,7 +54,9 @@ THIRD_PARTY_APPS = [
     'social.apps.django_app.default',
     'crispy_forms',
     'rest_framework',
-    'mail_templated'
+    'mail_templated',
+    'django_tables2',
+    'django_filters'
 ]
 
 REST_FRAMEWORK = {
@@ -157,9 +159,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, '../static'),
-)
 
 
 MEDIA_URL = '/media/'
@@ -241,3 +240,5 @@ SOCIAL_AUTH_EMAIL_FORM_URL = '/login-email/'
 SOCIAL_AUTH_EMAIL_FORM_HTML = 'home.html'
 
 AUTH_USER_MODEL = "accounts.User"
+
+STATIC_ROOT = os.path.join(BASE_DIR, '../static')

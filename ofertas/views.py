@@ -3,7 +3,12 @@ from django.views.generic import TemplateView
 from ofertas.models import Categoria, Oferta
 from django.shortcuts import redirect, render
 from django.contrib.auth.mixins import LoginRequiredMixin
+from braces.views import SuperuserRequiredMixin
+from ofertas.tables import AspirantesTable
 from accounts.models import User
+from ofertas.utils import PagedFilteredTableView
+from ofertas.filters import AspiranteFilter
+from ofertas.forms import AspiranteFilterFormHelper
 
 class Ofertas(LoginRequiredMixin,TemplateView):
     template_name = 'ofertas/inicio.html'
@@ -92,3 +97,12 @@ class OfertaEliminar(LoginRequiredMixin,TemplateView):
         oferta = Oferta.objects.get(id=self.kwargs['id_oferta'])
         kwargs['postulados'] = oferta.aplicacion.all()
         return super(OfertaEliminar,self).get_context_data(**kwargs)
+
+class Seleccion(SuperuserRequiredMixin,PagedFilteredTableView):
+    model = User
+    table_class = AspirantesTable
+    template_name = 'ofertas/seleccionar.html'
+    login_url = '/'
+    paginate_by = 50
+    filter_class = AspiranteFilter
+    formhelper_class = AspiranteFilterFormHelper
