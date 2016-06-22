@@ -103,7 +103,7 @@ class Seleccion(SuperuserRequiredMixin,PagedFilteredTableView):
     table_class = AspirantesTable
     template_name = 'ofertas/seleccionar.html'
     login_url = '/'
-    paginate_by = 50
+    paginate_by = 1
     filter_class = AspiranteFilter
     formhelper_class = AspiranteFilterFormHelper
 

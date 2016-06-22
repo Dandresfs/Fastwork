@@ -522,3 +522,30 @@ ul li {
 .row-margin-bottom {
   margin-bottom: 50px;
 }
+.pagination {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.pagination li {
+  display: inline-block;
+}
+.pagination>li>a {
+  float: none;
+}
+.current {
+  margin: 0 10px;
+}
+.cardinality {
+  margin: 0 10px;
+  font-size: 10px;
+}
+.previous {
+  float: left;
+  position: relative;
+}
+.next {
+  float: right;
+  position: relative;
+}
