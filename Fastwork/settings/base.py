@@ -159,6 +159,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, '../static'),
+)
 
 
 MEDIA_URL = '/media/'
@@ -240,5 +243,3 @@ SOCIAL_AUTH_EMAIL_FORM_URL = '/login-email/'
 SOCIAL_AUTH_EMAIL_FORM_HTML = 'home.html'
 
 AUTH_USER_MODEL = "accounts.User"
-
-STATIC_ROOT = os.path.join(BASE_DIR, '../static')

@@ -106,3 +106,8 @@ class Seleccion(SuperuserRequiredMixin,PagedFilteredTableView):
     paginate_by = 50
     filter_class = AspiranteFilter
     formhelper_class = AspiranteFilterFormHelper
+
+    def get_queryset(self, **kwargs):
+        qs = super(Seleccion, self).get_queryset(**kwargs)
+        aplicados = Oferta.objects.filter(id=self.kwargs['id_oferta']).values_list('aplicacion__email',flat=True)
+        return qs.filter(email__in=aplicados)
