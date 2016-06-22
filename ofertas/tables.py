@@ -9,10 +9,10 @@ class AspirantesTable(tables.Table):
     email = tables.Column(verbose_name="Email")
     telefono_1 = tables.Column(verbose_name="Telefono")
     experiencia = tables.Column(verbose_name="Experiencia",accessor='get_experiencia_cantidad')
-    hv = tables.Column(verbose_name="Hoja de Vida")
+    hv = tables.Column(verbose_name="Hv")
 
     def render_hv(self,value):
-        return mark_safe('<a href="'+value.url+'" target="_blank">Hoja de vida</p>')
+        return mark_safe('<a href="'+value.url+'" target="_blank"><img height="42" width="42" src="/static/imagenes/file.png"></p>')
 
     class Meta:
         model = User
