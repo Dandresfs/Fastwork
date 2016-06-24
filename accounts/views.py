@@ -12,6 +12,7 @@ import string
 from .forms import RegistrationForm, AccountForm
 from .models import User, PreUser
 from django.contrib.auth import login, authenticate
+from accounts.tasks import send_mail_template
 
 
 class RegistrationView(CreateView):
@@ -60,7 +61,8 @@ def registration(request):
                               last_name=request.POST['last_name'],fullname=request.POST['first_name']+" "+request.POST['last_name'],
                               code="".join( [random.choice(string.letters) for i in xrange(15)] ))
                 new.save()
-                send_mail('email/confirmation.tpl', {'email': new.email,'username':new.username,'fullname':new.fullname,'code':new.code,'password':request.POST['password']}, DEFAULT_FROM_EMAIL, [new.email])
+                send_mail_template.delay('email/confirmation.tpl',{'email': new.email,'username':new.username,'fullname':new.fullname,'code':new.code,'password':request.POST['password']}, DEFAULT_FROM_EMAIL, [new.email])
+                #send_mail('email/confirmation.tpl', {'email': new.email,'username':new.username,'fullname':new.fullname,'code':new.code,'password':request.POST['password']}, DEFAULT_FROM_EMAIL, [new.email])
                 return render(request, 'home.html', {'email':new.email})
 
             elif(PreUser.objects.filter(email=email).count() != 0):
@@ -68,7 +70,7 @@ def registration(request):
                 update.password = request.POST['password']
                 update.code = "".join( [random.choice(string.letters) for i in xrange(15)] )
                 update.save()
-                send_mail('email/confirmation.tpl', {'email': update.email,'username':update.username,'fullname':update.fullname,'code':update.code,'password':request.POST['password']}, DEFAULT_FROM_EMAIL, [update.email])
+                send_mail_template.delay('email/confirmation.tpl', {'email': update.email,'username':update.username,'fullname':update.fullname,'code':update.code,'password':request.POST['password']}, DEFAULT_FROM_EMAIL, [update.email])
                 return render(request, 'home.html', {'email':update.email})
 
             elif User.objects.filter(email=email).count() != 0:
