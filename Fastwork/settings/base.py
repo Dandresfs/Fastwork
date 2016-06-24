@@ -3,6 +3,26 @@ Bolsa de Empleo Fast Work Colombia
 """
 
 import os
+from celery.schedules import crontab
+
+# CELERY STUFF
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'America/Bogota'
+
+
+CELERYBEAT_SCHEDULE = {
+    # Executes every Monday morning at 7:30 A.M
+    'add-every-monday-morning': {
+        'task': 'ofertas.tasks.add',
+        'schedule': crontab(hour=14, minute=22, day_of_week=5),
+        'args': (16, 16),
+    },
+}
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
