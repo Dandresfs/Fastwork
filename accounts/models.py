@@ -99,3 +99,7 @@ class PreUser(models.Model):
     last_name = models.CharField(max_length=100)
     fullname = models.CharField(max_length=100)
     code = models.CharField(max_length=255)
+    mail_send = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return self.email

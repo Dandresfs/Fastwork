@@ -3,4 +3,8 @@ from .models import User, PreUser
 
 # Register your models here.
 admin.site.register(User)
-admin.site.register(PreUser)
+
+class PreUserAdmin(admin.ModelAdmin):
+    list_display = ['email','password','mail_send']
+
+admin.site.register(PreUser,PreUserAdmin)

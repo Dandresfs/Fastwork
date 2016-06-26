@@ -15,11 +15,10 @@ CELERY_TIMEZONE = 'America/Bogota'
 
 
 CELERYBEAT_SCHEDULE = {
-    # Executes every Monday morning at 7:30 A.M
-    'add-every-monday-morning': {
-        'task': 'ofertas.tasks.add',
+    're-send-email': {
+        'task': 'accounts.tasks.re_send_mail',
         'schedule': crontab(),
-        'args': (16, 0),
+        'args': (),
     },
 }
 
@@ -44,10 +43,10 @@ ALLOWED_HOSTS = []
 
 ADMINS = [('DIEGO','sistemas@asoandes.org')]
 
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_HOST_USER = os.getenv('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
-EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST = 'r113.websiteservername.com'
+EMAIL_HOST_USER = 'no-responder@fastworkcolombia.com'
+EMAIL_HOST_PASSWORD = 'fastworkcolombia'
+EMAIL_PORT = 25
 DEFAULT_FROM_EMAIL = 'Fast Work Colombia<no-responder@fastworkcolombia.com>'
 EMAIL_USE_TLS = True
 
