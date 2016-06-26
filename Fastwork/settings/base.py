@@ -18,8 +18,8 @@ CELERYBEAT_SCHEDULE = {
     # Executes every Monday morning at 7:30 A.M
     'add-every-monday-morning': {
         'task': 'ofertas.tasks.add',
-        'schedule': crontab(hour=14, minute=22, day_of_week=5),
-        'args': (16, 16),
+        'schedule': crontab(),
+        'args': (16, 0),
     },
 }
 
@@ -41,6 +41,8 @@ SECRET_KEY = 'wpytn67x61&8b&#yvb70r*6la@1i-57eii*bl+b7p9is3@(k&e'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+ADMINS = [('DIEGO','sistemas@asoandes.org')]
 
 EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_HOST_USER = os.getenv('EMAIL_USER')

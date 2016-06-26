@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django.contrib.auth.forms import PasswordResetForm
 from django.shortcuts import redirect, render
 from django.views.generic import CreateView, UpdateView
@@ -61,7 +62,7 @@ def registration(request):
                               last_name=request.POST['last_name'],fullname=request.POST['first_name']+" "+request.POST['last_name'],
                               code="".join( [random.choice(string.letters) for i in xrange(15)] ))
                 new.save()
-                send_mail_template.delay('email/confirmation.tpl',{'email': new.email,'username':new.username,'fullname':new.fullname,'code':new.code,'password':request.POST['password']}, DEFAULT_FROM_EMAIL, [new.email])
+                send_mail_template.delay('email/confirmation.tpl',{'email': new.email,'username':new.username,'fullname':new.fullname,'code':new.code,'password':request.POST['password']}, [new.email])
                 #send_mail('email/confirmation.tpl', {'email': new.email,'username':new.username,'fullname':new.fullname,'code':new.code,'password':request.POST['password']}, DEFAULT_FROM_EMAIL, [new.email])
                 return render(request, 'home.html', {'email':new.email})
 
@@ -70,7 +71,7 @@ def registration(request):
                 update.password = request.POST['password']
                 update.code = "".join( [random.choice(string.letters) for i in xrange(15)] )
                 update.save()
-                send_mail_template.delay('email/confirmation.tpl', {'email': update.email,'username':update.username,'fullname':update.fullname,'code':update.code,'password':request.POST['password']}, DEFAULT_FROM_EMAIL, [update.email])
+                send_mail_template.delay('email/confirmation.tpl', {'email': update.email,'username':update.username,'fullname':update.fullname,'code':update.code,'password':request.POST['password']}, [update.email])
                 return render(request, 'home.html', {'email':update.email})
 
             elif User.objects.filter(email=email).count() != 0:
