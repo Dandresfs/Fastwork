@@ -7,6 +7,7 @@ class AspirantesTable(tables.Table):
     departamento = tables.Column(verbose_name="Departamento")
     ciudad = tables.Column(verbose_name="Ciudad")
     email = tables.Column(verbose_name="Email")
+    titulo = tables.Column(verbose_name="Titulo")
     telefono_1 = tables.Column(verbose_name="Telefono")
     experiencia = tables.Column(verbose_name="Experiencia",accessor='get_experiencia_cantidad')
     hv = tables.Column(verbose_name="Hv")
@@ -16,5 +17,5 @@ class AspirantesTable(tables.Table):
 
     class Meta:
         model = User
-        fields = ('fullname','departamento','ciudad','email','telefono_1','experiencia','hv')
+        fields = ('fullname','departamento','ciudad','email','titulo','telefono_1','experiencia','hv')
         attrs = {"class": "table table-bordered"}
