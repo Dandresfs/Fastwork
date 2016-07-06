@@ -433,7 +433,11 @@ class SeleccionView(BaseDatatableView):
         if column == 'fullname':
             return '{0} {1}'.format(row.first_name,row.last_name)
         if column == 'hv':
-            return row.hv.url
+            try:
+                url = row.hv.url
+            except:
+                url = ""
+            return url
         else:
             return super(SeleccionView,self).render_column(row, column)
 
