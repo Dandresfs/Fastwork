@@ -447,3 +447,7 @@ class SeleccionView(BaseDatatableView):
             q = Q(first_name__icontains=search) | Q(last_name__icontains=search) | Q(departamento__icontains=search) | Q(ciudad__icontains=search) | Q(titulo__icontains=search)
             qs = qs.filter(q)
         return qs
+
+    def get_initial_queryset(self):
+        ids_user = Oferta.objects.get(id=self.kwargs['id_oferta']).aplicacion.values_list('id',flat=True)
+        return User.objects.filter(id__in=ids_user)
