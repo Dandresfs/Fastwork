@@ -21,6 +21,7 @@ html(lang="es")
         link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
         link(rel="stylesheet",href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css")
         link(rel="stylesheet",href="https://cdn.jsdelivr.net/animatecss/3.5.1/animate.min.css")
+        link(rel="stylesheet",href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css")
         link(rel="stylesheet",href="{% static 'css/base.css' %}")
         block extra_style
     body
@@ -88,4 +89,36 @@ html(lang="es")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.5.2/jquery.timeago.min.js")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.2/Chart.min.js")
         script(src="{% static 'js/bootstrap-notify.min.js' %}")
+        script(src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js")
+        script(src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js")
+        script.
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            var csrftoken = getCookie('csrftoken');
+
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+            $.ajaxSetup({
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
         block extra_script

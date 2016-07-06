@@ -16,6 +16,10 @@ from rest_framework.response import Response
 from django.http import Http404
 from datetime import datetime
 from braces.views import LoginRequiredMixin
+from django_datatables_view.base_datatable_view import BaseDatatableView
+from accounts.models import User
+from ofertas.models import Seleccionado, Revisado
+from django.db.models import Q
 
 
 def departamentos(request):
@@ -367,3 +371,75 @@ class ComparativaApiView(APIView):
                 return "de Postgrado"
             else:
                 return "Nada"
+
+
+class SeleccionRevisadoView(LoginRequiredMixin,
+                             mixins.RetrieveModelMixin,
+                               mixins.UpdateModelMixin,
+                               mixins.DestroyModelMixin,
+                               generics.GenericAPIView):
+
+    def put(self, request, *args, **kwargs):
+        new = Revisado(oferta = Oferta.objects.get(id=request.POST['oferta']),
+                         usuario = User.objects.get(id=request.POST['usuario']))
+        new.save()
+        return HttpResponse(status=200)
+
+    def delete(self, request, *args, **kwargs):
+        delete = Revisado.objects.filter(oferta = Oferta.objects.get(id=request.POST['oferta']),
+                         usuario = User.objects.get(id=request.POST['usuario']))[0].delete()
+        return HttpResponse(status=200)
+
+
+
+class SeleccionSeleccionadoView(LoginRequiredMixin,
+                             mixins.RetrieveModelMixin,
+                               mixins.UpdateModelMixin,
+                               mixins.DestroyModelMixin,
+                               generics.GenericAPIView):
+
+    def put(self, request, *args, **kwargs):
+        new = Seleccionado(oferta = Oferta.objects.get(id=request.POST['oferta']),
+                         usuario = User.objects.get(id=request.POST['usuario']))
+        new.save()
+        return HttpResponse(status=200)
+
+    def delete(self, request, *args, **kwargs):
+        delete = Seleccionado.objects.filter(oferta = Oferta.objects.get(id=request.POST['oferta']),
+                         usuario = User.objects.get(id=request.POST['usuario']))[0].delete()
+        return HttpResponse(status=200)
+
+
+
+class SeleccionView(BaseDatatableView):
+    model = User
+    columns = ['fullname','departamento','ciudad','titulo','hv','id','email','first_name','last_name',
+               'telefono_1','telefono_2','fecha_nacimiento','revisado','seleccionado']
+    order_columns = ['fullname','departamento','ciudad','titulo','hv','id','email','first_name','last_name',
+                     'telefono_1','telefono_2','fecha_nacimiento']
+    max_display_length = 100
+
+    def render_column(self, row, column):
+        if column == 'revisado':
+            if(Revisado.objects.filter(usuario__id=row.id,oferta__id=self.kwargs['id_oferta']).count() == 0):
+                return "false"
+            else:
+                return "true"
+        if column == 'seleccionado':
+            if(Seleccionado.objects.filter(usuario__id=row.id,oferta__id=self.kwargs['id_oferta']).count() == 0):
+                return "false"
+            else:
+                return "true"
+        if column == 'fullname':
+            return '{0} {1}'.format(row.first_name,row.last_name)
+        if column == 'hv':
+            return row.hv.url
+        else:
+            return super(SeleccionView,self).render_column(row, column)
+
+    def filter_queryset(self, qs):
+        search = self.request.GET.get(u'search[value]', None)
+        if search:
+            q = Q(first_name__icontains=search) | Q(last_name__icontains=search) | Q(departamento__icontains=search) | Q(ciudad__icontains=search) | Q(titulo__icontains=search)
+            qs = qs.filter(q)
+        return qs

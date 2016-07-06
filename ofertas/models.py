@@ -34,3 +34,11 @@ class Oferta(models.Model):
 
     def __unicode__(self):
         return self.empresa.nombre_comercial
+
+class Revisado(models.Model):
+    oferta = models.ForeignKey(Oferta)
+    usuario = models.ForeignKey(User)
+
+class Seleccionado(models.Model):
+    oferta = models.ForeignKey(Oferta)
+    usuario = models.ForeignKey(User)

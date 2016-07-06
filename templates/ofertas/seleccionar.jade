@@ -1,18 +1,200 @@
 extends ../base
 
-block filters
-   |{% load django_tables2 crispy_forms_tags %}
-
 block titulo
     | Seleccion
 block body_content
+    input(id="id_oferta",value="{{id_oferta}}",hidden)
+    input(id="id_user",value="{{user.id}}",hidden)
     div(class="container-fluid",style="padding-top:30px;")
-        div(class="row")
-            div(class="col-xs-12 col-md-9")
-                | {% render_table table %}
-            div(class="col-xs-12 col-md-3")
-                form(action="",method="get",id="filter-form")
-                    | {% crispy filter.form %}
-                    input(class="btn btn-success",type="submit",value="Buscar",id="id_filter")
+        table(id="table",class="display responsive no-wrap table table-striped table-bordered",width="100%")
+            thead
+                tr
+                    th
+                    th Nombre
+                    th Departamento
+                    th Ciudad
+                    th Titulo
+                    th Hv
+                    th Revisado
+                    th Seleccionado
+            tbody
+                tr
+                    td
+                    td Nombre
+                    td Departamento
+                    td Ciudad
+                    td Titulo
+                    td Hv
+                    td Revisado
+                    th Seleccionado
+
 
 block extra_script
+    script.
+        $(document).ready(function () {
+            var id_oferta = $('#id_oferta').val();
+            var table = $('#table').DataTable({
+                "stateSave": true,
+                "searching": true,
+                "processing": true,
+                "serverSide": true,
+                "scrollX": true,
+                "ajax": "/rest/seleccion/"+id_oferta,
+                "language":{
+                    "url": "//cdn.datatables.net/plug-ins/1.10.8/i18n/Spanish.json"
+                },
+                "columns": [
+                    {
+                        "className":'details-control',
+                        "orderable":false,
+                        "data":null,
+                        "defaultContent": '',
+                    },
+                    {
+                        "data": 0,
+                        "orderable":true,
+                    },
+                    {
+                        "data": 1,
+                        "orderable":true,
+                    },
+                    {
+                        "data": 2,
+                        "orderable":true,
+                    },
+                    {
+                        "data": 3,
+                        "orderable":false,
+                    },
+                    {
+                        "data": 4,
+                        "render": function ( data, type, row, meta ) {
+                            if(data != ""){
+                                return '<a href="'+data+'"><img class="center-block" height="42" width="42" src="/static/imagenes/file.png"></a>';
+                            }
+                        },
+                        "orderable":false,
+                    },
+                    {
+                        "data": 5,
+                        "render": function ( data, type, row, meta ) {
+                            if(data != ""){
+                                if(row[12] == "true"){
+                                    return '<input class="rev" type="checkbox" id="rev_'+data+'" checked>';
+                                }
+                                else{
+                                    return '<input class="rev" type="checkbox" id="rev_'+data+'">';
+                                }
+                            }
+                        },
+                        "orderable":false,
+                    },
+                    {
+                        "data": 5,
+                        "render": function ( data, type, row, meta ) {
+                            if(data != ""){
+                                if(row[13] == "true"){
+                                    return '<input class="sel" type="checkbox" id="sel_'+data+'" checked>';
+                                }
+                                else{
+                                    return '<input class="sel" type="checkbox" id="sel_'+data+'">';
+                                }
+                            }
+                        },
+                        "orderable":false,
+                    },
+                ]
+
+            });
+
+            // Add event listener for opening and closing details
+            $('#table tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+
+                if ( row.child.isShown() ) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row
+                    row.child( format(row.data()) ).show();
+                    tr.addClass('shown');
+                }
+            });
+
+
+            $('#table').on('draw.dt', function () {
+                $('.rev').click(function(event){
+                    var state = $('#'+event.target.id)[0].checked;
+                    var oferta = $('#id_oferta').val();
+                    var usuario = event.target.id.split('_')[1];
+
+                    if(state){
+                        $.ajax({
+                            type: "PUT",
+                            url: "/rest/seleccion/revisado/",
+                            dataType: 'json',
+                            data: JSON.parse('{"oferta":'+oferta+',"usuario":"'+usuario+'"}')
+                        });
+                    }
+                    else{
+                        $.ajax({
+                            type: "DELETE",
+                            url: "/rest/seleccion/revisado/",
+                            dataType: 'json',
+                            data: JSON.parse('{"oferta":'+oferta+',"usuario":"'+usuario+'"}')
+                        });
+                    }
+
+                });
+
+                $('.sel').click(function(event){
+                    var state = $('#'+event.target.id)[0].checked;
+                    var oferta = $('#id_oferta').val();
+                    var usuario = event.target.id.split('_')[1];
+
+                    if(state){
+                        $.ajax({
+                            type: "PUT",
+                            url: "/rest/seleccion/seleccionado/",
+                            dataType: 'json',
+                            data: JSON.parse('{"oferta":'+oferta+',"usuario":"'+usuario+'"}')
+                        });
+                    }
+                    else{
+                        $.ajax({
+                            type: "DELETE",
+                            url: "/rest/seleccion/seleccionado/",
+                            dataType: 'json',
+                            data: JSON.parse('{"oferta":'+oferta+',"usuario":"'+usuario+'"}')
+                        });
+                    }
+                });
+
+            });
+
+
+        });
+
+
+        function format(d) {
+            // `d` is the original data object for the row
+            return '<div class="table-responsive"><table class="table table-striped" style="padding-left:50px;color:black;">'+
+
+                    '<tr>'+
+                        '<td colspan="2"><b>Email:</b> '+d[6]+'</td>'+
+                        '<td colspan="2"><b>Primer Nombre:</b> '+d[7]+'</td>'+
+                        '<td colspan="2"><b>Segundo Nombre:</b> '+d[8]+'</td>'+
+                    '</tr>'+
+
+                    '<tr>'+
+                        '<td colspan="2"><b>Fecha Nacimiento:</b> '+d[11]+'</td>'+
+                        '<td colspan="2"><b>Teléfono 1:</b> '+d[9]+'</td>'+
+                        '<td colspan="2"><b>Teléfono 2:</b> '+d[10]+'</td>'+
+                    '</tr>'+
+
+
+                    '</table></div>';
+        }
