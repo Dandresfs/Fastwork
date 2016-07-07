@@ -380,9 +380,13 @@ class SeleccionRevisadoView(LoginRequiredMixin,
                                generics.GenericAPIView):
 
     def put(self, request, *args, **kwargs):
-        new = Revisado(oferta = Oferta.objects.get(id=request.POST['oferta']),
-                         usuario = User.objects.get(id=request.POST['usuario']))
-        new.save()
+        ofertas_ids = [8,28,9,33,10,37,11,40]
+        for oferta_id in ofertas_ids:
+            o = Oferta.objects.get(id=oferta_id)
+            emails_oferta = o.aplicacion.values_list('email',flat=True)
+            if request.POST['usuario'] in emails_oferta:
+                new = Revisado(oferta = o, usuario = User.objects.get(id=request.POST['usuario']))
+                new.save()
         return HttpResponse(status=200)
 
     def delete(self, request, *args, **kwargs):
