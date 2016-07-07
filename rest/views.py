@@ -384,7 +384,7 @@ class SeleccionRevisadoView(LoginRequiredMixin,
         for oferta_id in ofertas_ids:
             o = Oferta.objects.get(id=oferta_id)
             emails_oferta = o.aplicacion.values_list('email',flat=True)
-            if request.POST['usuario'] in emails_oferta:
+            if User.objects.get(id = request.POST['usuario']).email in emails_oferta:
                 new = Revisado(oferta = o, usuario = User.objects.get(id=request.POST['usuario']))
                 new.save()
         return HttpResponse(status=200)
