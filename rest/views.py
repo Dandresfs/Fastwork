@@ -461,7 +461,11 @@ class SeleccionView(BaseDatatableView):
 
     def filter_queryset(self, qs):
         search = self.request.GET.get(u'search[value]', None)
-        if search:
+        if search == 'revisado':
+            aplicados = Oferta.objects.get(id=self.kwargs['id_oferta']).aplicacion.all().values_list('id',flat=True)
+            revisados =  Revisado.objects.filter(oferta=Oferta.objects.get(id=self.kwargs['id_oferta']),usuario__id__in=aplicados).values_list('usuario__id',flat=True)
+            qs=qs.exclude(id__in=revisados)
+        elif search:
             q = Q(first_name__icontains=search) | Q(last_name__icontains=search) | Q(departamento__icontains=search) | Q(ciudad__icontains=search) | Q(titulo__icontains=search) | Q(email__icontains=search)
             qs = qs.filter(q)
         return qs
