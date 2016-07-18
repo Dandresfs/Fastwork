@@ -380,13 +380,27 @@ class SeleccionRevisadoView(LoginRequiredMixin,
                                generics.GenericAPIView):
 
     def put(self, request, *args, **kwargs):
-        ofertas_ids = [8,28,9,33,10,37,11,40]
-        for oferta_id in ofertas_ids:
-            o = Oferta.objects.get(id=oferta_id)
-            emails_oferta = o.aplicacion.values_list('email',flat=True)
-            if User.objects.get(id = request.POST['usuario']).email in emails_oferta:
-                new = Revisado(oferta = o, usuario = User.objects.get(id=request.POST['usuario']))
-                new.save()
+        ofertas_ids = [8,28,9,33,10,37,11,40,61,63,64]
+        ofertas_ids2 = [45,52,65]
+        if int(request.POST['oferta']) in ofertas_ids:
+            for oferta_id in ofertas_ids:
+                o = Oferta.objects.get(id=oferta_id)
+                emails_oferta = o.aplicacion.values_list('email',flat=True)
+                if User.objects.get(id = request.POST['usuario']).email in emails_oferta:
+                    new = Revisado(oferta = o, usuario = User.objects.get(id=request.POST['usuario']))
+                    new.save()
+        elif int(request.POST['oferta']) in ofertas_ids2:
+            for oferta_id in ofertas_ids2:
+                o = Oferta.objects.get(id=oferta_id)
+                emails_oferta = o.aplicacion.values_list('email',flat=True)
+                if User.objects.get(id = request.POST['usuario']).email in emails_oferta:
+                    new = Revisado(oferta = o, usuario = User.objects.get(id=request.POST['usuario']))
+                    new.save()
+        else:
+            o = Oferta.objects.get(id=request.POST['oferta'])
+            new = Revisado(oferta = o, usuario = User.objects.get(id=request.POST['usuario']))
+            new.save()
+
         return HttpResponse(status=200)
 
     def delete(self, request, *args, **kwargs):
@@ -420,7 +434,7 @@ class SeleccionView(BaseDatatableView):
     columns = ['fullname','departamento','ciudad','titulo','hv','id','email','first_name','last_name',
                'telefono_1','telefono_2','fecha_nacimiento','revisado','seleccionado']
     order_columns = ['fullname','departamento','ciudad','titulo','hv','id','email','first_name','last_name',
-                     'telefono_1','telefono_2','fecha_nacimiento']
+                     'telefono_1','telefono_2','fecha_nacimiento','revisado']
     max_display_length = 100
 
     def render_column(self, row, column):

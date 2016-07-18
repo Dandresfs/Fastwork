@@ -39,6 +39,7 @@ block extra_script
                 "processing": true,
                 "serverSide": true,
                 "scrollX": true,
+                "order": [[ 1, "asc" ]],
                 "ajax": "/rest/seleccion/"+id_oferta,
                 "language":{
                     "url": "//cdn.datatables.net/plug-ins/1.10.8/i18n/Spanish.json"
@@ -52,7 +53,7 @@ block extra_script
                     },
                     {
                         "data": 0,
-                        "orderable":false,
+                        "orderable":true,
                     },
                     {
                         "data": 1,
@@ -90,7 +91,7 @@ block extra_script
                                 }
                             }
                         },
-                        "orderable":false,
+                        "orderable":true,
                     },
                     {
                         "data": 5,
