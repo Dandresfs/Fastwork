@@ -36,6 +36,9 @@ html(lang="es")
                 div(class="collapse navbar-collapse",id="fastwork-navbar")
                     ul(class="nav navbar-nav navbar-right")
                         | {% if user.is_authenticated %}
+                        li
+                            a(href="/misofertas/")
+                                button(type="button",class="btn btn-success navbar-btn",style="margin-top=0px;") Crear oferta de empleo
                         li(class="dropdown avatar")
                             a(href="#",class="dropdown-toggle",style="padding:5px 15px 0px 15px;",data-toggle="dropdown",role="button",aria-haspopup="true",aria-expanded="false")
                                 div(class="img-avatar")

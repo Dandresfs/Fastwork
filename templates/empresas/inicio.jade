@@ -1,0 +1,13 @@
+extends ../base
+block titulo
+    | Ofertas
+block body_content
+
+block extra_script
+    script(src="{% static 'js/ofertas.js' %}")
+    script
+        | $(document).ready(function() {
+        | if ($('#identificacion').val() == "None"){
+        | $.notify({icon: 'glyphicon glyphicon-user',message: 'Actualiza la información de tu perfil, haz click aqui!',url: "/accounts/"},{type: 'warning', url_target: "_self" ,placement: {from: "top",align: "center"}});
+        | }
+        | });

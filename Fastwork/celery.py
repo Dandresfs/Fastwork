@@ -5,7 +5,7 @@ import os
 from celery import Celery
 
 # set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Fastwork.settings.produccion')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Fastwork.settings.development')
 
 from django.conf import settings  # noqa
 

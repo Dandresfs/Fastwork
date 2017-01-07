@@ -4,8 +4,13 @@ from Fastwork.settings.base import *
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, '../db.sqlite3'),
-    }
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.getenv('FASTWORK_DB_NAME'),
+
+            'USER': os.getenv('FASTWORK_DB_USER'),
+            'PASSWORD': os.getenv('FASTWORK_DB_PASSWORD'),
+            'HOST': os.getenv('FASTWORK_DB_HOST'),
+            'PORT': os.getenv('FASTWORK_DB_PORT'),
+        }
 }

@@ -321,6 +321,10 @@ label {
 .navbar-btn-left {
   margin: 8px 8px 8px 20px;
 }
+.navbar-btn {
+  margin-top: 3px;
+  margin-bottom: 0px;
+}
 .btn-modal {
   margin: 10px;
 }

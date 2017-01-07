@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^hv/', include('hv.urls', namespace='hv')),
     url(r'^ofertas/', include('ofertas.urls', namespace='ofertas')),
     url(r'^rest/', include('rest.urls', namespace='rest')),
+    url(r'^misofertas/', include('empresa.urls', namespace='empresa')),
 ]
 
 if settings.DEBUG:

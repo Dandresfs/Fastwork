@@ -26,7 +26,7 @@ class Oferta(models.Model):
     experiencia = models.BigIntegerField()
     viajar = models.BooleanField(default=False)
     residencia = models.BooleanField(default=False)
-    publicacion = models.DateTimeField(auto_now_add=True, blank=True)
+    publicacion = models.DateTimeField()
     publicacion.editable = True
     actualizacion = models.BooleanField(default=False)
     cierre = models.DateTimeField(blank=True,null=True)

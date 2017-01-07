@@ -1,9 +1,11 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from accounts.models import User
 
 # Create your models here.
 class Empresa(models.Model):
+    propietario = models.ForeignKey(User,blank=True,null=True)
     nombre_comercial = models.CharField(max_length=100)
     razon_social = models.CharField(max_length=100)
     nit = models.CharField(max_length=100,blank=True,null=True)
