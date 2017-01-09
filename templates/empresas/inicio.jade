@@ -8,16 +8,23 @@ block body_content
             fieldset
                 legend MIS EMPRESAS:
             div(class="container-fluid")
-                div(class="row")
+                div(class="row",style="margin:0px;")
                     div(class="col-sm-12")
                         |{% if CANTIDAD_EMPRESAS == 0 %}
                         div(class="empresas-none")
                             p Actualmente no tienes ninguna empresa creada.
                         |{% else %}
                         |{% for empresa in EMPRESAS %}
+                        div(class="empresas-activo")
+                            a(href="#",style="color:#337ab7;")
+                                h4 {{empresa.nombre}} - NIT: {{empresa.nit}}
+                            p {{empresa.descripcion}}
                         |{% endfor %}
                         |{% endif %}
-                        button(type="button",class="btn btn-lg btn-success") Añadir empresa
+                        p Creditos disponibles: {{CANTIDAD_EMPRESAS_DISPONIBLE}} -
+                            a(href="crearempresa/comprar",style="color:#337ab7")  Comprar creditos
+                        a(href="crearempresa/")
+                            button(type="button",class="btn btn-lg btn-success") Añadir empresa
 
             fieldset
                 legend MIS OFERTAS DE EMPLEO:
@@ -31,4 +38,7 @@ block body_content
                         |{% for oferta in OFERTAS %}
                         |{% endfor %}
                         |{% endif %}
-                        button(type="button",class="btn btn-lg btn-success") Añadir oferta
+                        p Creditos disponibles: {{CANTIDAD_OFERTAS_DISPONIBLE}} -
+                            a(href="crearoferta/comprar",style="color:#337ab7")  Comprar creditos
+                        a(href="crearoferta/")
+                            button(type="button",class="btn btn-lg btn-success") Añadir oferta

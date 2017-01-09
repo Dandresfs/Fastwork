@@ -15,7 +15,7 @@ class Empresa(models.Model):
     sector = models.CharField(max_length=100,blank=True,null=True)
     cantidad_trabajadores = models.CharField(max_length=100,blank=True,null=True)
 
-    tipo = models.CharField(max_length=100,blank=True,null=True)
+    tipo = models.CharField(max_length=100)
     descripcion = models.TextField(max_length=1000)
     pagina_web = models.URLField(max_length=100,blank=True)
     logo = models.ImageField(upload_to="Empresas/Logos",blank=True)
