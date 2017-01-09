@@ -2,6 +2,17 @@ extends ../base
 block titulo
     | Ofertas
 block body_content
+   div(class="container-fluid")
+      div(class="row")
+         div(class="col-sm-10")
+            h4 MIS EMPRESAS:
+            |{% if CANTIDAD_EMPRESAS == 0 %}
+            p hola
+            |{% else %}
+            |{% for empresa in EMPRESAS %}
+            |{% endfor %}
+            |{% endif %}
+            button(type="button",class="btn btn-lg btn-success") Añadir empresa
 
 block extra_script
     script(src="{% static 'js/ofertas.js' %}")

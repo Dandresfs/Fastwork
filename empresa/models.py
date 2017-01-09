@@ -30,3 +30,10 @@ class Empresa(models.Model):
 
     def __unicode__(self):
         return self.nombre_comercial
+
+    def get_logo_url(self):
+        try:
+            url = self.logo.url
+        except:
+            url = ""
+        return url

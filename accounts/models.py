@@ -70,6 +70,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     hv = ContentTypeRestrictedFileField(upload_to='Accounts/Hv',blank=True,null=True,content_types=['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],max_upload_size=10485760)
 
+    cantidad_empresas = models.IntegerField(default=1)
+    cantidad_ofertas = models.IntegerField(default=0)
 
     def get_full_name(self):
         return self.email
