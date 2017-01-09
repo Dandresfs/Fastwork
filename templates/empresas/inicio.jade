@@ -4,21 +4,31 @@ block titulo
 block body_content
    div(class="container-fluid")
       div(class="row")
-         div(class="col-sm-10")
-            h4 MIS EMPRESAS:
-            |{% if CANTIDAD_EMPRESAS == 0 %}
-            p hola
-            |{% else %}
-            |{% for empresa in EMPRESAS %}
-            |{% endfor %}
-            |{% endif %}
-            button(type="button",class="btn btn-lg btn-success") Añadir empresa
+         div(class="col-sm-10 col-sm-offset-1")
+            fieldset
+                legend MIS EMPRESAS:
+            div(class="container-fluid")
+                div(class="row")
+                    div(class="col-sm-12")
+                        |{% if CANTIDAD_EMPRESAS == 0 %}
+                        div(class="empresas-none")
+                            p Actualmente no tienes ninguna empresa creada.
+                        |{% else %}
+                        |{% for empresa in EMPRESAS %}
+                        |{% endfor %}
+                        |{% endif %}
+                        button(type="button",class="btn btn-lg btn-success") Añadir empresa
 
-block extra_script
-    script(src="{% static 'js/ofertas.js' %}")
-    script
-        | $(document).ready(function() {
-        | if ($('#identificacion').val() == "None"){
-        | $.notify({icon: 'glyphicon glyphicon-user',message: 'Actualiza la información de tu perfil, haz click aqui!',url: "/accounts/"},{type: 'warning', url_target: "_self" ,placement: {from: "top",align: "center"}});
-        | }
-        | });
+            fieldset
+                legend MIS OFERTAS DE EMPLEO:
+            div(class="container-fluid")
+                div(class="row")
+                    div(class="col-sm-12")
+                        |{% if CANTIDAD_OFERTAS == 0 %}
+                        div(class="empresas-none")
+                            p No has creado ninguna oferta de empleo.
+                        |{% else %}
+                        |{% for oferta in OFERTAS %}
+                        |{% endfor %}
+                        |{% endif %}
+                        button(type="button",class="btn btn-lg btn-success") Añadir oferta

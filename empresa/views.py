@@ -10,11 +10,13 @@ class MisOfertasView(LoginRequiredMixin,TemplateView):
 
     def get_context_data(self, **kwargs):
         empresas = []
+        ofertas = []
 
         for empresa in Empresa.objects.filter(propietario__id = self.request.user.id):
             empresas.append({'nombre':empresa.nombre_comercial,'logo':empresa.get_logo_url(),'nit':empresa.nit})
 
         kwargs['CANTIDAD_EMPRESAS'] = len(empresas)
+        kwargs['CANTIDAD_OFERTAS'] = len(ofertas)
         kwargs['EMPRESAS'] = empresas
 
         return super(MisOfertasView,self).get_context_data(**kwargs)
