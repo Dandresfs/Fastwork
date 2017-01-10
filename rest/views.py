@@ -64,11 +64,11 @@ class MercadoPagoWebHookView(APIView):
                     "shipment": merchant_order_info["response"]["shipments"]
                 }
 
-        """
+
         x = Checkouts.objects.get(id = 1)
-        x.description = json.dumps(merchant_order_info["response"])
+        x.description = 'id:'+unicode(id)+'-payment:'+unicode(topic)
         x.save()
-        """
+
         return HttpResponse(status = 200)
 
 def departamentos(request):
