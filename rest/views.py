@@ -28,6 +28,8 @@ class MercadoPagoWebHookView(APIView):
     def get(self, request, format=None):
         return HttpResponse(status = 200)
 
+    def post(self, request, format=None):
+        return HttpResponse(status = 200)
 
 def departamentos(request):
     if request.method == 'GET':
