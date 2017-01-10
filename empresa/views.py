@@ -5,6 +5,7 @@ from empresa.models import Empresa, Checkouts
 from empresa.forms import CrearEmpresaForm, UpdateEmpresaForm, ComprarCreditoEmpresaForm
 import mercadopago
 import os
+import json
 # Create your views here.
 
 class MisOfertasView(LoginRequiredMixin,TemplateView):
@@ -109,13 +110,23 @@ class ComprarCreditoEmpresa(LoginRequiredMixin,FormView):
         url = preferenceResult["response"]["init_point"]
         response = preferenceResult["response"]
 
-        Checkouts.objects.create(user = self.request.user, id_mercadopago = response["items"]['id'], title = response["items"]['title'],
-                                 description = response["items"]['description'], caterory_id = response["items"]['caterory_id'],
-                                 quantity = response["items"]['quantity'], currency_id = response["items"]['currency_id'],
-                                 unit_price = response["items"]["unit_price"], name = response["payer"]["name"],
-                                 surname = response["payer"]["surname"], email = response["payer"]["email"],
-                                 url_success = response["back_urls"]["success"], url_pending = response["back_urls"]["pending"],
-                                 url_failure = response["back_urls"]["failure"], init_point = response["init_point"],
-                                 sandbox_init_point = response["sandbox_init_point"])
+        nuevo = Checkouts()
+        nuevo.user = self.request.user
+        nuevo.id_mercadopago = response['id']
+        nuevo.title = response['items'][0]['title']
+        nuevo.description = response["items"][0]['description']
+        nuevo.caterory_id = response["items"][0]['category_id']
+        nuevo.quantity = response["items"][0]['quantity']
+        nuevo.currency_id = response["items"][0]['currency_id']
+        nuevo.unit_price = response["items"][0]["unit_price"]
+        nuevo.name = response["payer"]["name"]
+        nuevo.surname = response["payer"]["surname"]
+        nuevo.email = response["payer"]["email"]
+        nuevo.url_success = response["back_urls"]["success"]
+        nuevo.url_pending = response["back_urls"]["pending"]
+        nuevo.url_failure = response["back_urls"]["failure"]
+        nuevo.init_point = response["init_point"]
+        nuevo.sandbox_init_point = response["sandbox_init_point"]
+        nuevo.save()
 
         return redirect(url)
