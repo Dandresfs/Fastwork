@@ -51,13 +51,13 @@ class MercadoPagoWebHookView(APIView):
                 payment_info = mp.get("/collections/notifications/" + id)
 
                 merchant_order_info = mp.get("/merchant_orders/" + unicode(payment_info["response"]["collection"]["merchant_order_id"]))
-            """
+
             elif topic == "merchant_order":
                 merchant_order_info = mp.get("/merchant_orders/" + id)
 
             if merchant_order_info == None:
                 raise ValueError("Error obtaining the merchant_order")
-
+            """
             if merchant_order_info["status"] == 200:
                 c = {
                     "payment": merchant_order_info["response"]["payments"],
