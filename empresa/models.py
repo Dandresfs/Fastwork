@@ -37,3 +37,25 @@ class Empresa(models.Model):
         except:
             url = ""
         return url
+
+class Checkouts(models.Model):
+    user = models.ForeignKey(User,blank=True,null=True)
+
+    id_mercadopago = models.CharField(max_length=256,blank=True,null=True)
+    title = models.CharField(max_length=256,blank=True,null=True)
+    description = models.CharField(max_length=256,blank=True,null=True)
+    caterory_id = models.CharField(max_length=256,blank=True,null=True)
+    quantity = models.IntegerField(blank=True)
+    currency_id = models.CharField(max_length=3,blank=True,null=True)
+    unit_price = models.IntegerField(blank=True,null=True)
+
+    name = models.CharField(max_length=256,blank=True,null=True)
+    surname = models.CharField(max_length=256,blank=True,null=True)
+    email = models.CharField(max_length=256,blank=True,null=True)
+
+    url_success = models.URLField(max_length=600,blank=True,null=True)
+    url_pending = models.URLField(max_length=600,blank=True,null=True)
+    url_failure = models.URLField(max_length=600,blank=True,null=True)
+
+    init_point = models.URLField(max_length=600,blank=True,null=True)
+    sandbox_init_point = models.URLField(max_length=600,blank=True,null=True)
