@@ -40,13 +40,13 @@ class MercadoPagoWebHookView(APIView):
             topic = request.query_params.get('topic')
         except:
             topic = None
-        """
+
         if id != None and topic != None:
             mp = mercadopago.MP("8942863325364576", "cJJkiF3u6BTROwzMCiFgXQCjjzqTHw5L")
 
 
             merchant_order_info = None
-
+            """
             if topic == "payment":
                 payment_info = mp.get("/collections/notifications/" + id)
                 merchant_order_info = mp.get("/merchant_orders/" + unicode(payment_info["response"]["collection"]["merchant_order_id"]))
