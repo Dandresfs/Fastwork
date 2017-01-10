@@ -22,6 +22,13 @@ from ofertas.models import Seleccionado, Revisado
 from django.db.models import Q
 
 
+
+class MercadoPagoWebHookView(APIView):
+
+    def get(self, request, format=None):
+        return HttpResponse(status = 200)
+
+
 def departamentos(request):
     if request.method == 'GET':
         departamentos = json.load(open(settings.STATICFILES_DIRS[0]+"/json/municipios.json"))

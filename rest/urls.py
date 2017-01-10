@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from .views import ExperienciaApiView, ExperienciaDetailApiView, FormacionApiView, FormacionDetailApiView,\
-    departamentos, OfertasApiView,ComparativaApiView, SeleccionView, SeleccionRevisadoView,SeleccionSeleccionadoView
+    departamentos, OfertasApiView,ComparativaApiView, SeleccionView, SeleccionRevisadoView,SeleccionSeleccionadoView,\
+    MercadoPagoWebHookView
 
 urlpatterns = [
     url(r'^departamentos/$', departamentos),
@@ -19,4 +20,6 @@ urlpatterns = [
     url(r'^seleccion/(?P<id_oferta>\d+)/$', SeleccionView.as_view()),
     url(r'^seleccion/revisado/$', SeleccionRevisadoView.as_view()),
     url(r'^seleccion/seleccionado/$', SeleccionSeleccionadoView.as_view()),
+
+    url(r'^mercadopago/$', MercadoPagoWebHookView.as_view()),
 ]

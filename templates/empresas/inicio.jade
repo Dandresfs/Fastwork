@@ -16,7 +16,7 @@ block body_content
                         |{% else %}
                         |{% for empresa in EMPRESAS %}
                         div(class="empresas-activo")
-                            a(href="#",style="color:#337ab7;")
+                            a(href="empresa/{{empresa.id}}/",style="color:#337ab7;")
                                 h4 {{empresa.nombre}} - NIT: {{empresa.nit}}
                             p {{empresa.descripcion}}
                         |{% endfor %}
