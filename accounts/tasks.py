@@ -1,12 +1,12 @@
 from __future__ import absolute_import, unicode_literals
 
-from celery import shared_task
+from Fastwork.celery import app
 from mail_templated import send_mail
 from Fastwork.settings.base import DEFAULT_FROM_EMAIL
 from accounts.models import PreUser
 
 
-@shared_task
+@app.task
 def send_mail_template(template,parameters,to_email):
     pre_user = PreUser.objects.get(email=parameters['email'])
     try:
@@ -19,7 +19,7 @@ def send_mail_template(template,parameters,to_email):
     return "Ok"
 
 
-@shared_task
+@app.task
 def re_send_mail():
     pre_users = PreUser.objects.filter(mail_send=False).order_by('-id')
     if pre_users.count() != 0:

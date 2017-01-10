@@ -43,10 +43,10 @@ ALLOWED_HOSTS = []
 
 ADMINS = [('DIEGO','sistemas@asoandes.org')]
 
-EMAIL_HOST = 'r113.websiteservername.com'
-EMAIL_HOST_USER = 'no-responder@fastworkcolombia.com'
-EMAIL_HOST_PASSWORD = 'fastworkcolombia'
-EMAIL_PORT = 25
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_HOST_USER = os.getenv('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.getenv('fastworkcolombia')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
 DEFAULT_FROM_EMAIL = 'Fast Work Colombia<no-responder@fastworkcolombia.com>'
 EMAIL_USE_TLS = True
 
