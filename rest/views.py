@@ -66,7 +66,7 @@ class MercadoPagoWebHookView(APIView):
 
         """
         x = Checkouts.objects.get(id = 1)
-        x.description = "id=" + unicode(id) + "-topic=" + unicode(topic)
+        x.description = unicode(merchant_order_info["response"])
         x.save()
         return HttpResponse(status = 200)
 
