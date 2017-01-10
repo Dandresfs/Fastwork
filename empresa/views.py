@@ -74,8 +74,8 @@ class ComprarCreditoEmpresa(LoginRequiredMixin,FormView):
         return {'user_id':self.request.user.id}
 
     def form_valid(self, form):
-        x = os.getenv('MERCADOPAGO_CLIENT_ID')
-        y = os.getenv('MERCADOPAGO_SECRET_KEY')
+        x = "8942863325364576"
+        y = "cJJkiF3u6BTROwzMCiFgXQCjjzqTHw5L"
         mp = mercadopago.MP(x,y)
 
         preference = {
