@@ -31,7 +31,7 @@ class MercadoPagoWebHookView(APIView):
         return HttpResponse(status = 300)
 
     def post(self, request, format=None):
-        """
+
         try:
             id = request.query_params.get('id')
         except:
@@ -49,7 +49,7 @@ class MercadoPagoWebHookView(APIView):
 
             if topic == "payment":
                 payment_info = mp.get("/collections/notifications/" + id)
-                merchant_order_info = mp.get("/merchant_orders/"+payment_info["response"]["collection"]["merchant_order_id"])
+                merchant_order_info = mp.get("/merchant_orders/" + unicode(payment_info["response"]["collection"]["merchant_order_id"]))
 
             elif topic == "merchant_order":
                 merchant_order_info = mp.get("/merchant_orders/" + id)
@@ -62,11 +62,11 @@ class MercadoPagoWebHookView(APIView):
                     "payment": merchant_order_info["response"]["payments"],
                     "shipment": merchant_order_info["response"]["shipments"]
                 }
-                Checkouts.objects.all()[0].update(description = unicode(c))
-        """
-        x = Checkouts.objects.get(id = 1)
-        x.description = unicode(request.query_params)
-        x.save()
+                x = Checkouts.objects.get(id = 1)
+                x.description = unicode(merchant_order_info["response"]["payments"])
+                x.save()
+
+
         return HttpResponse(status = 200)
 
 def departamentos(request):
