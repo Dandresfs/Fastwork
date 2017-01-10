@@ -64,7 +64,9 @@ class MercadoPagoWebHookView(APIView):
                 }
                 Checkouts.objects.all()[0].update(description = unicode(c))
         """
-        Checkouts.objects.all()[0].update(description = request.query_params)
+        x = Checkouts.objects.get(id = 1)
+        x.description = unicode(request.query_params)
+        x.save()
         return HttpResponse(status = 200)
 
 def departamentos(request):
