@@ -107,5 +107,15 @@ class ComprarCreditoEmpresa(LoginRequiredMixin,FormView):
 
         preferenceResult = mp.create_preference(preference)
         url = preferenceResult["response"]["init_point"]
+        response = preferenceResult["response"]
+
+        Checkouts.objects.create(user = self.request.user, id_mercadopago = response["items"]['id'], title = response["items"]['title'],
+                                 description = response["items"]['description'], caterory_id = response["items"]['caterory_id'],
+                                 quantity = response["items"]['quantity'], currency_id = response["items"]['currency_id'],
+                                 unit_price = response["items"]["unit_price"], name = response["payer"]["name"],
+                                 surname = response["payer"]["surname"], email = response["payer"]["email"],
+                                 url_success = response["back_urls"]["success"], url_pending = response["back_urls"]["pending"],
+                                 url_failure = response["back_urls"]["failure"], init_point = response["init_point"],
+                                 sandbox_init_point = response["sandbox_init_point"])
 
         return redirect(url)
