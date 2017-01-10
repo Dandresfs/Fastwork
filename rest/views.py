@@ -40,7 +40,7 @@ class MercadoPagoWebHookView(APIView):
             topic = request.query_params.get('topic')
         except:
             topic = None
-
+        """
         if id != None and topic != None:
             mp = mercadopago.MP("8942863325364576", "cJJkiF3u6BTROwzMCiFgXQCjjzqTHw5L")
 
@@ -62,11 +62,11 @@ class MercadoPagoWebHookView(APIView):
                     "payment": merchant_order_info["response"]["payments"],
                     "shipment": merchant_order_info["response"]["shipments"]
                 }
-                x = Checkouts.objects.get(id = 1)
-                x.description = unicode(merchant_order_info["response"]["payments"])
-                x.save()
 
-
+        """
+        x = Checkouts.objects.get(id = 1)
+        x.description = "id=" + unicode(id) + "-topic=" + unicode(topic)
+        x.save()
         return HttpResponse(status = 200)
 
 def departamentos(request):
