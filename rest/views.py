@@ -20,6 +20,8 @@ from django_datatables_view.base_datatable_view import BaseDatatableView
 from accounts.models import User
 from ofertas.models import Seleccionado, Revisado
 from django.db.models import Q
+import mercadopago
+from empresa.models import Checkouts
 
 
 
@@ -29,6 +31,39 @@ class MercadoPagoWebHookView(APIView):
         return HttpResponse(status = 200)
 
     def post(self, request, format=None):
+
+        try:
+            id = request.query_params.get('id')
+        except:
+            id = None
+        try:
+            topic = request.query_params.get('topic')
+        except:
+            topic = None
+
+        if id != None and topic != None:
+            mp = mercadopago.MP("8942863325364576", "cJJkiF3u6BTROwzMCiFgXQCjjzqTHw5L")
+
+
+            merchant_order_info = None
+
+            if topic == "payment":
+                payment_info = mp.get("/collections/notifications/" + id)
+                merchant_order_info = mp.get("/merchant_orders/"+payment_info["response"]["collection"]["merchant_order_id"])
+
+            elif topic == "merchant_order":
+                merchant_order_info = mp.get("/merchant_orders/" + id)
+
+            if merchant_order_info == None:
+                raise ValueError("Error obtaining the merchant_order")
+
+            if merchant_order_info["status"] == 200:
+                c = {
+                    "payment": merchant_order_info["response"]["payments"],
+                    "shipment": merchant_order_info["response"]["shipments"]
+                }
+                Checkouts.objects.all()[0].update(description = unicode(c))
+
         return HttpResponse(status = 200)
 
 def departamentos(request):

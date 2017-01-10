@@ -82,10 +82,11 @@ class ComprarCreditoEmpresa(LoginRequiredMixin,FormView):
         preference = {
             "items": [
                 {
-                    "title": "EMPRESA-" + str(self.request.user.id),
+                    "title": "Creditos para empresa",
                     "quantity": form.cleaned_data['cantidad'],
                     "currency_id": "COP",
-                    "unit_price": 100000
+                    "unit_price": 100000,
+                    "description": "Compra de " + str(form.cleaned_data['cantidad']) + " creditos para empresa."
                 }
             ],
             "payer": {
@@ -104,10 +105,15 @@ class ComprarCreditoEmpresa(LoginRequiredMixin,FormView):
                     "street_name": form.cleaned_data['direccion'],
                 }
             },
+            "back_urls": {
+                "success":"http://fastworkcolombia.com/misofertas/mp/success/",
+                "pending":"http://fastworkcolombia.com/misofertas/mp/pending/",
+                "failure":"http://fastworkcolombia.com/misofertas/mp/failure/",
+            }
         }
 
         preferenceResult = mp.create_preference(preference)
-        url = preferenceResult["response"]["init_point"]
+        url = preferenceResult["response"]["sandbox_init_point"]
         response = preferenceResult["response"]
 
         nuevo = Checkouts()
