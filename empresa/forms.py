@@ -326,3 +326,73 @@ class UpdateEmpresaForm(forms.ModelForm):
                                            ('Servicios temporales','Servicios temporales'),
             ]),
         }
+
+
+class ComprarCreditoEmpresaForm(forms.Form):
+
+    cantidad = forms.IntegerField(widget=forms.Select(choices = [('','----------'),
+                                                                 ('1','1 Credito'),
+                                                                 ('2','2 Creditos'),
+                                                                 ('3','3 Creditos'),
+                                                                 ('4','4 Creditos'),
+                                                                 ('5','5 Creditos'),] ))
+    nombres = forms.CharField(max_length=256,required=True)
+    apellidos = forms.CharField(max_length=256,required=True)
+    cedula = forms.IntegerField()
+    direccion = forms.CharField(max_length=256,required=True)
+    telefono = forms.CharField(max_length=256,required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(ComprarCreditoEmpresaForm, self).__init__(*args, **kwargs)
+
+        user = User.objects.get(id = kwargs['initial']['user_id'])
+
+        self.helper = FormHelper(self)
+
+        self.fields['nombres'].initial = user.first_name
+        self.fields['apellidos'].initial = user.last_name
+
+        self.helper.layout = Layout(
+            Fieldset(
+                'Información para factura',
+                Div(
+                    Div(
+                        'nombres',
+                        css_class='col-sm-4'
+                    ),
+                    Div(
+                        'apellidos',
+                        css_class='col-sm-4'
+                    ),
+                    Div(
+                        'cedula',
+                        css_class='col-sm-4'
+                    ),
+                    css_class='row'
+                ),
+                Div(
+                    Div(
+                        'direccion',
+                        css_class='col-sm-6'
+                    ),
+                    Div(
+                        'telefono',
+                        css_class='col-sm-6'
+                    ),
+                    css_class='row'
+                ),
+            ),
+            Fieldset(
+                'Creditos',
+                Div(
+                    Div(
+                        'cantidad',
+                        css_class='col-sm-6'
+                    ),
+                    css_class='row'
+                ),
+            ),
+            ButtonHolder(
+                Submit('submit', 'Guardar')
+            )
+        )

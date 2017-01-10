@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, CreateView, UpdateView
+from django.views.generic import TemplateView, CreateView, UpdateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from empresa.models import Empresa
-from empresa.forms import CrearEmpresaForm, UpdateEmpresaForm
+from empresa.models import Empresa, Checkouts
+from empresa.forms import CrearEmpresaForm, UpdateEmpresaForm, ComprarCreditoEmpresaForm
+import mercadopago
+from Fastwork.settings.base import MERCADOPAGO_CLIENT_ID, MERCADOPAGO_SECRET_KEY
 # Create your views here.
 
 class MisOfertasView(LoginRequiredMixin,TemplateView):
@@ -62,3 +64,46 @@ class UpdateEmpresaView(LoginRequiredMixin,UpdateView):
             return super(UpdateEmpresaView,self).dispatch(request,*args,**kwargs)
         else:
             return redirect('/misofertas/')
+
+class ComprarCreditoEmpresa(LoginRequiredMixin,FormView):
+    template_name = 'empresas/comprarcreditoempresa.html'
+    success_url = '/misofertas/'
+    form_class = ComprarCreditoEmpresaForm
+
+    def get_initial(self):
+        return {'user_id':self.request.user.id}
+
+    def form_valid(self, form):
+        mp = mercadopago.MP(MERCADOPAGO_CLIENT_ID,MERCADOPAGO_SECRET_KEY)
+
+        preference = {
+            "items": [
+                {
+                    "title": "EMPRESA-" + str(self.request.user.id),
+                    "quantity": form.cleaned_data['cantidad'],
+                    "currency_id": "COP",
+                    "unit_price": 100000
+                }
+            ],
+            "payer": {
+                "name": form.cleaned_data['nombres'],
+                "surname": form.cleaned_data['apellidos'],
+                "email": self.request.user.email,
+                "phone": {
+                    "area_code": "57",
+                    "number": form.cleaned_data['telefono']
+                },
+                "identification": {
+                    "type": "CC",
+                    "number": form.cleaned_data['cedula']
+                },
+                "address": {
+                    "street_name": form.cleaned_data['direccion'],
+                }
+            },
+        }
+
+        preferenceResult = mp.create_preference(preference)
+        url = preferenceResult["response"]["init_point"]
+
+        return redirect(url)
