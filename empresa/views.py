@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from empresa.models import Empresa, Checkouts
 from empresa.forms import CrearEmpresaForm, UpdateEmpresaForm, ComprarCreditoEmpresaForm
 import mercadopago
-from Fastwork.settings.base import MERCADOPAGO_CLIENT_ID, MERCADOPAGO_SECRET_KEY
+import os
 # Create your views here.
 
 class MisOfertasView(LoginRequiredMixin,TemplateView):
@@ -74,9 +74,9 @@ class ComprarCreditoEmpresa(LoginRequiredMixin,FormView):
         return {'user_id':self.request.user.id}
 
     def form_valid(self, form):
-        x = MERCADOPAGO_CLIENT_ID
-        y = MERCADOPAGO_SECRET_KEY
-        mp = mercadopago.MP(MERCADOPAGO_CLIENT_ID,MERCADOPAGO_SECRET_KEY)
+        x = os.getenv('MERCADOPAGO_CLIENT_ID')
+        y = os.getenv('MERCADOPAGO_SECRET_KEY')
+        mp = mercadopago.MP(x,y)
 
         preference = {
             "items": [
