@@ -57,7 +57,7 @@ class MercadoPagoWebHookView(APIView):
 
             if merchant_order_info == None:
                 raise ValueError("Error obtaining the merchant_order")
-            """
+
             if merchant_order_info["status"] == 200:
                 c = {
                     "payment": merchant_order_info["response"]["payments"],
@@ -66,8 +66,9 @@ class MercadoPagoWebHookView(APIView):
 
         """
         x = Checkouts.objects.get(id = 1)
-        x.description = unicode(merchant_order_info["response"])
+        x.description = json.dumps(merchant_order_info["response"])
         x.save()
+        """
         return HttpResponse(status = 200)
 
 def departamentos(request):
