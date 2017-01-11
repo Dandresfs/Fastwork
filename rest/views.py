@@ -69,16 +69,20 @@ class MercadoPagoWebHookView(APIView):
                 last_updated = merchant_order_info["response"]["last_updated"]
                 date_created = merchant_order_info["response"]["date_created"]
 
+                try:
+                    checkout = Checkouts.objects.get(id_mercadopago = preference_id)
+                except:
+                    pass
+                else:
+                    checkout.creation = dateparse.parse_datetime(date_created)
+                    checkout.last_updated = dateparse.parse_datetime(last_updated)
+                    checkout.creation = dateparse.parse_datetime(date_created)
+                    checkout.save()
+
                 for payment in merchant_order_info["response"]["payments"]:
-                    try:
-                        checkout = Checkouts.objects.get(id_mercadopago = preference_id)
-                    except:
-                        pass
-                    else:
-                        checkout.status = payment["status"]
-                        checkout.last_updated = dateparse.parse_datetime(last_updated)
-                        checkout.creation = dateparse.parse_datetime(date_created)
-                        checkout.save()
+
+                    checkout.status = payment["status"]
+                    checkout.save()
 
 
         return HttpResponse(status = 200)
