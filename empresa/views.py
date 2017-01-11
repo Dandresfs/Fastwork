@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from empresa.models import Empresa, Checkouts
 from empresa.forms import CrearEmpresaForm, UpdateEmpresaForm, ComprarCreditoEmpresaForm
 import mercadopago
+from Fastwork.settings.base import VALOR_EMPRESA
 import os
 import json
 # Create your views here.
@@ -26,6 +27,8 @@ class MisOfertasView(LoginRequiredMixin,TemplateView):
         kwargs['CANTIDAD_OFERTAS_DISPONIBLE'] = self.request.user.cantidad_ofertas - len(ofertas)
         kwargs['EMPRESAS'] = empresas
         kwargs['OFERTAS'] = ofertas
+        kwargs['nombres'] = self.request.user.first_name
+        kwargs['apellidos'] = self.request.user.last_name
 
         return super(MisOfertasView,self).get_context_data(**kwargs)
 
@@ -74,18 +77,24 @@ class ComprarCreditoEmpresa(LoginRequiredMixin,FormView):
     def get_initial(self):
         return {'user_id':self.request.user.id}
 
+    def percentage(self, percent, whole):
+        return (percent * whole) / 100.0
+
     def form_valid(self, form):
         x = "8942863325364576"
         y = "cJJkiF3u6BTROwzMCiFgXQCjjzqTHw5L"
         mp = mercadopago.MP(x,y)
 
+        valor_bruto = VALOR_EMPRESA * form.cleaned_data['cantidad']
+        descuento = self.percentage(1 * int(form.cleaned_data['cantidad']),valor_bruto)
+
         preference = {
             "items": [
                 {
                     "title": "Creditos para empresa",
-                    "quantity": form.cleaned_data['cantidad'],
+                    "quantity": 1,
                     "currency_id": "COP",
-                    "unit_price": 100000,
+                    "unit_price": valor_bruto-descuento,
                     "description": "Compra de " + str(form.cleaned_data['cantidad']) + " creditos para empresa."
                 }
             ],
@@ -113,7 +122,7 @@ class ComprarCreditoEmpresa(LoginRequiredMixin,FormView):
         }
 
         preferenceResult = mp.create_preference(preference)
-        url = preferenceResult["response"]["sandbox_init_point"]
+        url = preferenceResult["response"]["init_point"]
         response = preferenceResult["response"]
 
         nuevo = Checkouts()
