@@ -78,10 +78,9 @@ class MercadoPagoWebHookView(APIView):
                     checkout.creation = dateparse.parse_datetime(date_created)
                     checkout.save()
 
-                #    for payment in merchant_order_info["response"]["payments"]:
-
-                #        checkout.status = payment["status"]
-                #        checkout.save()
+                    for payment in merchant_order_info["response"]["payments"]:
+                        checkout.status = str(payment["status"])
+                        checkout.save()
 
 
         return HttpResponse(status = 200)
