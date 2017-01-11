@@ -45,7 +45,9 @@ class MercadoPagoWebHookView(APIView):
 
         if id != None and topic != None:
             mp = mercadopago.MP("8942863325364576", "cJJkiF3u6BTROwzMCiFgXQCjjzqTHw5L")
-
+            g = Checkouts.objects.get(id=11)
+            q.description = 'id:'+id+'-topic='+topic
+            q.save()
 
             merchant_order_info = None
 
@@ -61,12 +63,11 @@ class MercadoPagoWebHookView(APIView):
                 raise ValueError("Error obtaining the merchant_order")
 
             if merchant_order_info["status"] == 200:
+
                 preference_id = merchant_order_info["response"]["preference_id"]
                 last_updated = merchant_order_info["response"]["last_updated"]
                 date_created = merchant_order_info["response"]["date_created"]
-                g = Checkouts.objects.get(id=11)
-                q.description = 'id:'+id+'-topic='+topic
-                q.save()
+
                 for payment in merchant_order_info["response"]["payments"]:
                     try:
                         checkout = Checkouts.objects.get(id_mercadopago = preference_id)
