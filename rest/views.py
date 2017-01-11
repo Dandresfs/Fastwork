@@ -25,6 +25,7 @@ from empresa.models import Checkouts
 from django.http import JsonResponse
 from Fastwork.settings.base import VALOR_EMPRESA
 import locale
+from django.utils import dateparse
 
 class MercadoPagoWebHookView(APIView):
 
@@ -60,15 +61,20 @@ class MercadoPagoWebHookView(APIView):
                 raise ValueError("Error obtaining the merchant_order")
 
             if merchant_order_info["status"] == 200:
-                c = {
-                    "payment": merchant_order_info["response"]["payments"],
-                    "shipment": merchant_order_info["response"]["shipments"]
-                }
+                for payment in merchant_order_info["response"]["payments"]:
+                    preference_id = merchant_order_info["response"]["preference_id"]
+                    last_updated = merchant_order_info["response"]["last_updated"]
+                    date_created = merchant_order_info["response"]["date_created"]
+                    try:
+                        checkout = Checkouts.objects.get(id_mercadopago = preference_id)
+                    except:
+                        pass
+                    else:
+                        checkout.status = payment["status"]
+                        checkout.last_updated = dateparse.parse_datetime(last_updated)
+                        checkout.creation = dateparse.parse_datetime(date_created)
+                        checkout.save()
 
-
-        x = Checkouts.objects.get(id = 1)
-        x.description = 'id:'+unicode(id)+'-payment:'+unicode(topic)
-        x.save()
 
         return HttpResponse(status = 200)
 

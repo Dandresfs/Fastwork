@@ -39,7 +39,9 @@ class Empresa(models.Model):
         return url
 
 class Checkouts(models.Model):
+    #Atributos sistema
     user = models.ForeignKey(User,blank=True,null=True)
+    creation = models.DateTimeField(blank=True,null=True)
 
     id_mercadopago = models.CharField(max_length=256,blank=True,null=True)
     title = models.CharField(max_length=256,blank=True,null=True)
@@ -59,3 +61,6 @@ class Checkouts(models.Model):
 
     init_point = models.URLField(max_length=600,blank=True,null=True)
     sandbox_init_point = models.URLField(max_length=600,blank=True,null=True)
+
+    status = models.CharField(max_length=256,blank=True,null=True)
+    last_updated = models.DateTimeField(blank=True,null=True)
