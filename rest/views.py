@@ -45,9 +45,10 @@ class MercadoPagoWebHookView(APIView):
 
         if id != None and topic != None:
             mp = mercadopago.MP("8942863325364576", "cJJkiF3u6BTROwzMCiFgXQCjjzqTHw5L")
-            g = Checkouts.objects.get(id=11)
-            q.description = 'id:'+id+'-topic='+topic
-            q.save()
+
+            che = Checkouts.objects.all()[0]
+            che.description = 'id:'+id+'-topic='+topic
+            che.save()
 
             merchant_order_info = None
 
