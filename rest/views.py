@@ -64,7 +64,7 @@ class MercadoPagoWebHookView(APIView):
                 raise ValueError("Error obtaining the merchant_order")
 
             if merchant_order_info["status"] == 200:
-
+                pass
                 #preference_id = merchant_order_info["response"]["preference_id"]
                 #last_updated = merchant_order_info["response"]["last_updated"]
                 #date_created = merchant_order_info["response"]["date_created"]
