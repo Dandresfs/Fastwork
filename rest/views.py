@@ -80,8 +80,12 @@ class MercadoPagoWebHookView(APIView):
                             user = checkout.user
                             if checkout.tipo == "credito_empresa":
                                 user.cantidad_empresas += checkout.cantidad
+                                checkout.cantidad = 0
+                                checkout.save()
                             if checkout.tipo == "credito_oferta":
                                 user.cantidad_ofertas += checkout.cantidad
+                                checkout.cantidad = 0
+                                checkout.save()
                             user.save()
                         checkout.save()
 
