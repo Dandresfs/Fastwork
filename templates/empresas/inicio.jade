@@ -42,7 +42,7 @@ block body_content
                         p Creditos disponibles: {{CANTIDAD_OFERTAS_DISPONIBLE}}
                         a(href="crearoferta/")
                             button(type="button",class="btn btn-lg btn-success btn-sm") Añadir oferta
-                        button(type="button",class="btn btn-lg btn-primary btn-sm",style="margin-left:10px") Comprar creditos
+                        button(type="button",class="btn btn-lg btn-primary btn-sm",style="margin-left:10px",data-toggle="modal" data-target="#CreditosOferta") Comprar creditos
                         button(type="button",class="btn btn-lg btn-info btn-sm",style="margin-left:10px",data-toggle="modal" data-target="#CreditosOfertasHistorial") Historial de compras
 
    div(class="modal fade",id="CreditosEmpresa",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
@@ -100,6 +100,70 @@ block body_content
                                         div(class="text-center")
                                             img(src="{% static 'imagenes/logo-mercadopago.png' %}",height="60px")
                                             h2(id="id_valor_empresa") $ 100.000
+
+                                div(class="row")
+                                    div(class="col-sm-12")
+                                        p Los campos con (*) son obligatorios.
+
+                        div(class="modal-footer")
+                            button(type="button",class="btn btn-default closeExperienciaModal",data-dismiss="modal") Cerrar
+                            input(type="submit",class="btn btn-primary",value="Comprar",id="guardarExperienciaModal")
+
+   div(class="modal fade",id="CreditosOferta",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+        div(class="modal-dialog modal-lg",role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button",class="close closeExperienciaModal",data-dismiss="modal",aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title",id="myModalLabel") Creditos oferta
+                div(class="modal-body")
+                    form(role="form",id="experienciaForm",method="POST",action="/misofertas/crearoferta/comprar/")
+                        |{% csrf_token %}
+                        div(class="form-group")
+                            div(class="container-fluid")
+                                div(class="row")
+                                    div(class="col-sm-4")
+                                        label(for="nombres") Nombres*
+                                        input(type="text",value='{{nombres}}',class="form-control",id="id_nombres_oferta",name="nombres_oferta",data-validation="required",data-validation-error-msg="Escribe tu nombre")
+                                    div(class="col-sm-4")
+                                        label(for="nombres") Apellidos*
+                                        input(type="text",value='{{apellidos}}',class="form-control",id="id_apellidos_oferta",name="apellidos_oferta",data-validation="required",data-validation-error-msg="Escribe por lo menos un apellido")
+                                    div(class="col-sm-4")
+                                        label(for="nombres") Cedula*
+                                        input(type="text",class="form-control",id="id_cedula_oferta",name="cedula_oferta",data-validation="required",data-validation-error-msg="Escribe tu numero de cedula")
+
+                                div(class="row")
+                                    div(class="col-sm-6")
+                                        label(for="nombres") Dirección*
+                                        input(type="text",class="form-control",id="id_direccion_oferta",name="direccion_oferta",data-validation="required",data-validation-error-msg="Escribe tu direccion")
+
+
+                                    div(class="col-sm-6")
+                                        label(for="Cargo") Telefono*
+                                        input(type="text",class="form-control",id="id_telefono_oferta",name="telefono_oferta",data-validation="required",data-validation-error-msg="Escribe tu numero telefónico")
+                                div(class="row")
+                                    fieldset
+                                        legend
+
+                                div(class="row")
+                                    div(class="col-sm-6")
+                                        label(for="sector") Cantidad de creditos*
+                                        select(class="form-control",id="id_cantidad_oferta",name="cantidad_oferta",data-validation="required",data-validation-error-msg="Selecciona la cantidad de creditos")
+                                            option 1
+                                            option 2
+                                            option 3
+                                            option 4
+                                            option 5
+                                            option 6
+                                            option 7
+                                            option 8
+                                            option 9
+                                            option 10
+
+                                    div(class="col-sm-6")
+                                        div(class="text-center")
+                                            img(src="{% static 'imagenes/logo-mercadopago.png' %}",height="60px")
+                                            h2(id="id_valor_oferta") $ 185.000
 
                                 div(class="row")
                                     div(class="col-sm-12")
@@ -207,6 +271,106 @@ block body_content
                 div(class="modal-footer")
                     button(type="button",class="btn btn-default closeExperienciaModal",data-dismiss="modal") Cerrar
 
+
+   div(class="modal fade",id="CreditosOfertasHistorial",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+        div(class="modal-dialog",role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button",class="close closeExperienciaModal",data-dismiss="modal",aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title",id="myModalLabel") Historial de compras: Creditos para empresa
+                div(class="modal-body")
+                    div(class="container-fluid")
+                        div(class="row")
+                            div(class="col-md-12")
+                                |{% if CANTIDAD_COMPRAS_OFERTA == 0 %}
+                                div(class="payment-container")
+                                    p Tu historial se encuentra vacio.
+                                |{% else %}
+                                |{% for compra_empresa in COMPRAS_OFERTA %}
+                                |{% if compra_empresa.status == None or compra_empresa.status == '' or compra_empresa.status == 'pending' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-wait-ico")
+                                        a(href="{{compra_empresa.init_point}}",style="color:#337ab7;")
+                                            p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p No has completado el proceso de pago.
+                                |{% elif compra_empresa.status == 'approved' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-ok-ico")
+                                        p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p El pago fue aprobado y acreditado
+                                |{% elif compra_empresa.status == 'authorized' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-wait-ico")
+                                        p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p El pago ha sido autorizado pero aún no fue capturado.
+                                |{% elif compra_empresa.status == 'in_process' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-wait-ico")
+                                        p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p El pago esta siendo revisado
+
+                                |{% elif compra_empresa.status == 'in_mediation' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-wait-ico")
+                                        p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p Iniciaste un reclamo por este pago.
+                                |{% elif compra_empresa.status == 'rejected' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-error-ico")
+                                        a(href="{{compra_empresa.init_point}}",style="color:#337ab7;")
+                                            p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p El pago fue rechazado, puedes intentar pagar nuevamente.
+                                |{% elif compra_empresa.status == 'cancelled' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-error-ico")
+                                        p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p El pago fue cancelado o el tiempo expiró.
+                                |{% elif compra_empresa.status == 'refunded' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-refund-ico")
+                                        p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p El pago fue devuelto al usuario.
+                                |{% elif compra_empresa.status == 'charged_back' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-refund-ico")
+                                        p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p Fue hecho un contracargo en tu tarjeta.
+                                |{% endif %}
+                                |{% endfor %}
+                                |{% endif %}
+
+                div(class="modal-footer")
+                    button(type="button",class="btn btn-default closeExperienciaModal",data-dismiss="modal") Cerrar
+
+
 block extra_script
     script(src="{% static 'js/ajax_django.js' %}")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/jquery.form-validator.min.js")
@@ -219,8 +383,16 @@ block extra_script
                     url: "/rest/valores/empresas/?cantidad=" + $("#id_cantidad").val(),
                     success: function(data)
                     {
-                        console.log(data.valor);
                         $("#id_valor_empresa").text(data.valor);
+                    }
+            });
+
+            $.ajax({
+                    type: "GET",
+                    url: "/rest/valores/ofertas/?cantidad=" + $("#id_cantidad_oferta").val(),
+                    success: function(data)
+                    {
+                        $("#id_valor_oferta").text(data.valor);
                     }
             });
 
@@ -231,6 +403,18 @@ block extra_script
                     success: function(data)
                     {
                         $("#id_valor_empresa").text(data.valor);
+                    }
+                });
+            });
+
+
+            $("#id_cantidad_oferta").change(function() {
+                $.ajax({
+                    type: "GET",
+                    url: "/rest/valores/ofertas/?cantidad=" + $("#id_cantidad_oferta").val(),
+                    success: function(data)
+                    {
+                        $("#id_valor_oferta").text(data.valor);
                     }
                 });
             });

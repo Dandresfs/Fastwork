@@ -23,7 +23,7 @@ from django.db.models import Q
 import mercadopago
 from empresa.models import Checkouts
 from django.http import JsonResponse
-from Fastwork.settings.base import VALOR_EMPRESA
+from Fastwork.settings.base import VALOR_EMPRESA, VALOR_OFERTA
 import locale
 from django.utils import dateparse
 
@@ -78,7 +78,10 @@ class MercadoPagoWebHookView(APIView):
                         checkout.status = str(payment["status"])
                         if str(payment["status"]) == "approved":
                             user = checkout.user
-                            user.cantidad_empresas += checkout.cantidad
+                            if checkout.tipo == "credito_empresa":
+                                user.cantidad_empresas += checkout.cantidad
+                            if checkout.tipo == "credito_oferta":
+                                user.cantidad_ofertas += checkout.cantidad
                             user.save()
                         checkout.save()
 
@@ -101,6 +104,27 @@ class ValoresCreditoEmpresaView(APIView):
             cantidad = 1
 
         valor_bruto = VALOR_EMPRESA * int(cantidad)
+        descuento = self.percentage(1 * int(cantidad),valor_bruto)
+
+        return JsonResponse({'valor':locale.currency(valor_bruto - descuento,grouping=True).replace('+','')})
+
+
+class ValoresCreditoOfertaView(APIView):
+
+    def percentage(self, percent, whole):
+        return (percent * whole) / 100.0
+
+    def get(self, request, format=None):
+        locale.setlocale( locale.LC_ALL, '' )
+        try:
+            cantidad = request.query_params.get('cantidad')
+        except:
+            cantidad = 1
+
+        if cantidad == None:
+            cantidad = 1
+
+        valor_bruto = VALOR_OFERTA * int(cantidad)
         descuento = self.percentage(1 * int(cantidad),valor_bruto)
 
         return JsonResponse({'valor':locale.currency(valor_bruto - descuento,grouping=True).replace('+','')})
