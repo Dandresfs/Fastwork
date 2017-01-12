@@ -79,6 +79,7 @@ class MercadoPagoWebHookView(APIView):
                         if str(payment["status"]) == "approved":
                             user = checkout.user
                             user.cantidad_empresas += checkout.cantidad
+                            user.save()
                         checkout.save()
 
 
