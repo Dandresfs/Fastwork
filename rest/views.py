@@ -76,6 +76,9 @@ class MercadoPagoWebHookView(APIView):
 
                     for payment in merchant_order_info["response"]["payments"]:
                         checkout.status = str(payment["status"])
+                        if str(payment["status"]) == "approved":
+                            user = checkout.user
+                            user.cantidad_empresas += checkout.cantidad
                         checkout.save()
 
 

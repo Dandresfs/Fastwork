@@ -110,7 +110,8 @@ class ComprarCreditoEmpresa(LoginRequiredMixin,FormView):
                     "quantity": 1,
                     "currency_id": "COP",
                     "unit_price": valor_bruto-descuento,
-                    "description": "Compra de " + str(form.cleaned_data['cantidad']) + " creditos para empresa."
+                    "description": "Compra de " + str(form.cleaned_data['cantidad']) + " creditos para empresa.",
+                    "category_id": "credito_empresa",
                 }
             ],
             "payer": {
@@ -133,7 +134,8 @@ class ComprarCreditoEmpresa(LoginRequiredMixin,FormView):
                 "success":"http://fastworkcolombia.com/misofertas/",
                 "pending":"http://fastworkcolombia.com/misofertas/",
                 "failure":"http://fastworkcolombia.com/misofertas/",
-            }
+            },
+            "additional_info": str(form.cleaned_data['cantidad'])
         }
 
         preferenceResult = mp.create_preference(preference)
@@ -142,6 +144,8 @@ class ComprarCreditoEmpresa(LoginRequiredMixin,FormView):
 
         nuevo = Checkouts()
         nuevo.user = self.request.user
+        nuevo.tipo = "credito_empresa"
+        nuevo.cantidad = form.cleaned_data['cantidad']
         nuevo.id_mercadopago = response['id']
         nuevo.title = response['items'][0]['title']
         nuevo.description = response["items"][0]['description']
