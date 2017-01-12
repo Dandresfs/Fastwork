@@ -25,6 +25,7 @@ block body_content
                         a(href="crearempresa/")
                             button(type="button",class="btn btn-lg btn-success btn-sm") Añadir empresa
                         button(type="button",class="btn btn-lg btn-primary btn-sm",style="margin-left:10px",data-toggle="modal" data-target="#CreditosEmpresa") Comprar creditos
+                        button(type="button",class="btn btn-lg btn-info btn-sm",style="margin-left:10px",data-toggle="modal" data-target="#CreditosEmpresaHistorial") Historial de compras
 
             fieldset
                 legend MIS OFERTAS DE EMPLEO:
@@ -42,6 +43,7 @@ block body_content
                         a(href="crearoferta/")
                             button(type="button",class="btn btn-lg btn-success btn-sm") Añadir oferta
                         button(type="button",class="btn btn-lg btn-primary btn-sm",style="margin-left:10px") Comprar creditos
+                        button(type="button",class="btn btn-lg btn-info btn-sm",style="margin-left:10px",data-toggle="modal" data-target="#CreditosOfertasHistorial") Historial de compras
 
    div(class="modal fade",id="CreditosEmpresa",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
         div(class="modal-dialog modal-lg",role="document")
@@ -106,6 +108,104 @@ block body_content
                         div(class="modal-footer")
                             button(type="button",class="btn btn-default closeExperienciaModal",data-dismiss="modal") Cerrar
                             input(type="submit",class="btn btn-primary",value="Comprar",id="guardarExperienciaModal")
+
+   div(class="modal fade",id="CreditosEmpresaHistorial",tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+        div(class="modal-dialog",role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    button(type="button",class="close closeExperienciaModal",data-dismiss="modal",aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4(class="modal-title",id="myModalLabel") Historial de compras: Creditos para empresa
+                div(class="modal-body")
+                    div(class="container-fluid")
+                        div(class="row")
+                            div(class="col-md-12")
+                                |{% if CANTIDAD_COMPRAS_EMPRESA == 0 %}
+                                div(class="payment-container")
+                                    p Tu historial se encuentra vacio.
+                                |{% else %}
+                                |{% for compra_empresa in COMPRAS_EMPRESA %}
+                                |{% if compra_empresa.status == None or compra_empresa.status == '' or compra_empresa.status == 'pending' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-wait-ico")
+                                        a(href="{{compra_empresa.init_point}}",style="color:#337ab7;")
+                                            p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p No has completado el proceso de pago.
+                                |{% elif compra_empresa.status == 'approved' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-ok-ico")
+                                        p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p El pago fue aprobado y acreditado
+                                |{% elif compra_empresa.status == 'authorized' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-wait-ico")
+                                        p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p El pago ha sido autorizado pero aún no fue capturado.
+                                |{% elif compra_empresa.status == 'in_process' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-wait-ico")
+                                        p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p El pago esta siendo revisado
+
+                                |{% elif compra_empresa.status == 'in_mediation' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-wait-ico")
+                                        p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p Iniciaste un reclamo por este pago.
+                                |{% elif compra_empresa.status == 'rejected' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-error-ico")
+                                        a(href="{{compra_empresa.init_point}}",style="color:#337ab7;")
+                                            p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p El pago fue rechazado, puedes intentar pagar nuevamente.
+                                |{% elif compra_empresa.status == 'cancelled' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-error-ico")
+                                        p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p El pago fue cancelado o el tiempo expiró.
+                                |{% elif compra_empresa.status == 'refunded' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-refund-ico")
+                                        p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p El pago fue devuelto al usuario.
+                                |{% elif compra_empresa.status == 'charged_back' %}
+                                div(class="payment-container")
+                                    div
+                                        i(class="sprite-icons cobro-refund-ico")
+                                        p(style="display:inline;") {{compra_empresa.description}}
+                                    div
+                                        p Valor: {{compra_empresa.unit_price}} - {{compra_empresa.created}}
+                                        p Fue hecho un contracargo en tu tarjeta.
+                                |{% endif %}
+                                |{% endfor %}
+                                |{% endif %}
+
+                div(class="modal-footer")
+                    button(type="button",class="btn btn-default closeExperienciaModal",data-dismiss="modal") Cerrar
 
 block extra_script
     script(src="{% static 'js/ajax_django.js' %}")

@@ -554,5 +554,42 @@ tr.shown td.details-control {
   padding: 0px 0px 15px 15px;
 }
 .empresas-none p {
-  padding: 15px;
+  padding: 15;
+}
+.sprite-icons {
+  background-image: url("../imagenes/mercadopago-icons.png");
+  background-repeat: no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+}
+.cobro-refund-ico {
+  width: 30px;
+  height: 30px;
+  background-position: -60px -302px;
+}
+.cobro-ok-ico {
+  width: 30px;
+  height: 30px;
+  background-position: -60px -63px;
+}
+.cobro-wait-ico {
+  width: 30px;
+  height: 30px;
+  background-position: -60px -33px;
+}
+.cobro-error-ico {
+  width: 30px;
+  height: 30px;
+  background-position: -60px -93px;
+}
+.cobro-warning-ico {
+  width: 30px;
+  height: 30px;
+  background-position: -60px -123px;
+}
+.payment-container {
+  background: #f1f1f1;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
