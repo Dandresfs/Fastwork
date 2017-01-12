@@ -16,21 +16,27 @@ class Oferta(models.Model):
     empresa = models.ForeignKey(Empresa)
     categoria = models.ForeignKey(Categoria)
     titulo = models.CharField(max_length=100)
-    descripcion = models.TextField(max_length=10000)
-    fecha_contratacion = models.DateField(editable=True,blank=True)
-    vacantes = models.IntegerField()
     departamento = models.CharField(max_length=100)
     municipio = models.CharField(max_length=100)
+
+    fecha_contratacion = models.DateField(editable=True,blank=True)
+    cierre = models.DateField(blank=True,null=True)
+
+    vacantes = models.IntegerField()
     salario = models.CharField(max_length=100)
-    educacion = models.CharField(max_length=100)
     experiencia = models.BigIntegerField()
+
     viajar = models.BooleanField(default=False)
+    educacion = models.CharField(max_length=100)
     residencia = models.BooleanField(default=False)
+
+    descripcion = models.TextField(max_length=10000)
+
     publicacion = models.DateTimeField()
     publicacion.editable = True
     actualizacion = models.BooleanField(default=False)
-    cierre = models.DateTimeField(blank=True,null=True)
     aplicacion = models.ManyToManyField(User,blank=True)
+
 
     def __unicode__(self):
         return self.empresa.nombre_comercial

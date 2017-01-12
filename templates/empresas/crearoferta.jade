@@ -9,9 +9,24 @@ block body_content
             div(class="col-sm-10 col-sm-offset-1")
                 form(action="",method="POST",enctype="multipart/form-data")
                     | {% crispy form %}
+
 block extra_script
-    script
-        | $("#id_ciudad").remoteChained({
-        |        parents : "#id_departamento",
-        |        url : "/rest/departamentos/"
-        | });
+    script.
+        $(document).ready(function(){
+            $('#id_fecha_contratacion').datetimepicker({
+                viewMode: 'years',
+                format: 'DD/MM/YYYY',
+                locale: 'es'
+            });
+
+            $('#id_cierre').datetimepicker({
+                viewMode: 'years',
+                format: 'DD/MM/YYYY',
+                locale: 'es'
+            });
+
+            $("#id_municipio").remoteChained({
+                    parents : "#id_departamento",
+                    url : "/rest/departamentos/"
+            });
+        });

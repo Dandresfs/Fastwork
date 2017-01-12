@@ -37,6 +37,14 @@ block body_content
                             p No has creado ninguna oferta de empleo.
                         |{% else %}
                         |{% for oferta in OFERTAS %}
+                        div(class="empresas-activo")
+                            a(href="oferta/{{oferta.id}}/",style="color:#337ab7;")
+                                h4 {{oferta.titulo}} - NIT: {{empresa.nit}}
+                            div
+                                p(class="inline") Categoria: {{oferta.categoria}}  -
+                                p(class="inline",style="padding-left:5px;") {{oferta.departamento}},{{oferta.municipio}}
+                            div(class="row")
+                                p {{oferta.descripcion}}
                         |{% endfor %}
                         |{% endif %}
                         p Creditos disponibles: {{CANTIDAD_OFERTAS_DISPONIBLE}}

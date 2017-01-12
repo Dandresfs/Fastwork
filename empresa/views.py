@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, CreateView, UpdateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from empresa.models import Empresa, Checkouts
-from empresa.forms import CrearEmpresaForm, UpdateEmpresaForm, ComprarCreditoEmpresaForm, ComprarCreditoOfertaForm, CrearOfertaForm
+from empresa.forms import CrearEmpresaForm, UpdateEmpresaForm, ComprarCreditoEmpresaForm, ComprarCreditoOfertaForm, CrearOfertaForm, UpdateOfertaForm
 import mercadopago
 from Fastwork.settings.base import VALOR_EMPRESA, VALOR_OFERTA
 from empresa.models import Checkouts
@@ -32,7 +32,8 @@ class MisOfertasView(LoginRequiredMixin,TemplateView):
                              'descripcion':empresa.descripcion,'id':empresa.id})
 
         for oferta in Oferta.objects.filter(empresa__propietario__id = self.request.user.id):
-            ofertas.append({'titulo':oferta.titulo,'descripcion':oferta.descripcion})
+            ofertas.append({'titulo':oferta.titulo,'descripcion':oferta.descripcion,'id':oferta.id,'categoria':oferta.categoria,
+                            'departamento':oferta.departamento,'municipio':oferta.municipio})
 
         for checkout in Checkouts.objects.filter(user__id = self.request.user.id,tipo = "credito_empresa"):
             compras_empresa.append({'description':checkout.description,'unit_price':locale.currency(checkout.unit_price,grouping=True).replace('+',''),
@@ -109,6 +110,30 @@ class UpdateEmpresaView(LoginRequiredMixin,UpdateView):
 
         if long(kwargs['id_empresa']) in empresas_id:
             return super(UpdateEmpresaView,self).dispatch(request,*args,**kwargs)
+        else:
+            return redirect('/misofertas/')
+
+class UpdateOfertaView(LoginRequiredMixin,UpdateView):
+    template_name = 'empresas/crearoferta.html'
+    success_url = '/misofertas/'
+    pk_url_kwarg = 'id_oferta'
+    model = Oferta
+    form_class = UpdateOfertaForm
+
+    def get_context_data(self, **kwargs):
+        kwargs['empresa'] = self.object.empresa.nombre_comercial
+        kwargs['categoria'] = self.object.categoria
+        kwargs['titulo'] = self.object.titulo
+        kwargs['departamento'] = self.object.departamento
+        kwargs['municipio'] = self.object.municipio
+        return super(UpdateOfertaView,self).get_context_data(**kwargs)
+
+    def dispatch(self, request, *args, **kwargs):
+
+        ofertas_id = Oferta.objects.filter(empresa__propietario__id = self.request.user.id).values_list('id',flat=True)
+
+        if long(kwargs['id_oferta']) in ofertas_id:
+            return super(UpdateOfertaView,self).dispatch(request,*args,**kwargs)
         else:
             return redirect('/misofertas/')
 
@@ -193,7 +218,6 @@ class ComprarCreditoEmpresa(LoginRequiredMixin,FormView):
         nuevo.save()
 
         return redirect(url)
-
 
 class ComprarCreditoOferta(LoginRequiredMixin,FormView):
     template_name = 'empresas/comprarcreditoempresa.html'

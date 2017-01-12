@@ -1,0 +1,1 @@
+celery -A Fastwork worker -l info
