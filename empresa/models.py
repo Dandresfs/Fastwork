@@ -42,7 +42,7 @@ class Checkouts(models.Model):
     #Atributos sistema
     user = models.ForeignKey(User,blank=True,null=True)
     creation = models.DateTimeField(blank=True,null=True)
-    tipo = models.CharField(blank=True,null=True)
+    tipo = models.CharField(max_length=100,blank=True,null=True)
     cantidad = models.IntegerField(blank=True,null=True)
 
     id_mercadopago = models.CharField(max_length=256,blank=True,null=True)
