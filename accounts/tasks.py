@@ -16,7 +16,7 @@ def send_mail_template(template,parameters,to_email):
     else:
         pre_user.mail_send = True
     pre_user.save()
-    return "Ok"
+    return 'enviado: '+unicode(parameters['email'])
 
 
 @app.task
@@ -28,10 +28,10 @@ def re_send_mail():
             send_mail('email/confirmation.tpl', {'email': pre_user.email,'username':pre_user.username,'fullname':pre_user.fullname,'code':pre_user.code,'password':pre_user.password}, DEFAULT_FROM_EMAIL ,[pre_user.email])
         except:
             pre_user.mail_send = False
-            mensaje = "error"
+            mensaje = "error" + unicode(pre_user.email)
         else:
             pre_user.mail_send = True
-            mensaje = "enviado"
+            mensaje = "enviado" + unicode(pre_user.email)
         pre_user.save()
     else:
         mensaje = "no hay pre usuarios"
